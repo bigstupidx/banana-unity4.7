@@ -1,0 +1,15 @@
+# Unity .gitignore file
+
+# All this can be ignored:
+/Library/
+/Builds/
+/Temp/
+*.csproj
+*.pidb
+*.sln
+*.userprefs
+*.unityproj
+.DS_Store
+/Build/
+*.pidb.meta
+*.pidb
