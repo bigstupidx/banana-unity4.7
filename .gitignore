@@ -13,3 +13,6 @@
 /Build/
 *.pidb.meta
 *.pidb
+/raw/
+bin/
+obj/
