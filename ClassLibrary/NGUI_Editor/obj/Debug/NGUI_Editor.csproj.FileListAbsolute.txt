@@ -1,0 +1,8 @@
+E:\DefenseFrenzy\ClassLibrary\NGUI_Editor\obj\Debug\NGUI_Editor.csprojResolveAssemblyReference.cache
+E:\DefenseFrenzy\ClassLibrary\NGUI_Editor\bin\Debug\NGUI_Editor.dll
+E:\DefenseFrenzy\ClassLibrary\NGUI_Editor\bin\Debug\NGUI_Editor.pdb
+E:\DefenseFrenzy\ClassLibrary\NGUI_Editor\bin\Debug\NGUI.dll
+E:\DefenseFrenzy\ClassLibrary\NGUI_Editor\bin\Debug\UnityEditor.dll
+E:\DefenseFrenzy\ClassLibrary\NGUI_Editor\bin\Debug\UnityEngine.dll
+E:\DefenseFrenzy\ClassLibrary\NGUI_Editor\obj\Debug\NGUI_Editor.dll
+E:\DefenseFrenzy\ClassLibrary\NGUI_Editor\obj\Debug\NGUI_Editor.pdb

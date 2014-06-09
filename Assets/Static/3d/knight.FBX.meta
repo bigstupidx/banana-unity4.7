@@ -1,0 +1,470 @@
+fileFormatVersion: 2
+guid: afc26b8036b216d41b5084ee2125d469
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: _billboard_ST
+    100002: _colbox_trickster
+    100004: anchor_fx_blood_01
+    100006: anchor_fx_blood_02
+    100008: anchor_fx_blood_03
+    100010: anchor_targetPosition
+    100012: anchor_weaponL
+    100014: anchor_weaponR
+    100016: anchor_weaponRange
+    100018: Bip01
+    100020: Bip01 Footsteps
+    100022: Bip01 Head
+    100024: Bip01 HeadNub
+    100026: Bip01 L Calf
+    100028: Bip01 L Clavicle
+    100030: Bip01 L Finger0
+    100032: Bip01 L Finger01
+    100034: Bip01 L Finger0Nub
+    100036: Bip01 L Finger1
+    100038: Bip01 L Finger11
+    100040: Bip01 L Finger1Nub
+    100042: Bip01 L Finger2
+    100044: Bip01 L Finger21
+    100046: Bip01 L Finger2Nub
+    100048: Bip01 L Foot
+    100050: Bip01 L Forearm
+    100052: Bip01 L Hand
+    100054: Bip01 L Thigh
+    100056: Bip01 L Toe0
+    100058: Bip01 L Toe0Nub
+    100060: Bip01 L UpperArm
+    100062: Bip01 Neck
+    100064: Bip01 Pelvis
+    100066: Bip01 R Calf
+    100068: Bip01 R Clavicle
+    100070: Bip01 R Finger0
+    100072: Bip01 R Finger01
+    100074: Bip01 R Finger0Nub
+    100076: Bip01 R Finger1
+    100078: Bip01 R Finger11
+    100080: Bip01 R Finger1Nub
+    100082: Bip01 R Finger2
+    100084: Bip01 R Finger21
+    100086: Bip01 R Finger2Nub
+    100088: Bip01 R Foot
+    100090: Bip01 R Forearm
+    100092: Bip01 R Hand
+    100094: Bip01 R Thigh
+    100096: Bip01 R Toe0
+    100098: Bip01 R Toe0Nub
+    100100: Bip01 R UpperArm
+    100102: Bip01 Spine
+    100104: Bip01 Spine1
+    100106: control_shoulder_left
+    100108: control_shoulder_right
+    100110: CTL_arrow
+    100112: CTL_bow_string
+    100114: CTL_quiver
+    100116: //RootNode
+    100118: MC_Back
+    100120: MC_Back_01
+    100122: MC_Back_02
+    100124: MC_Back_03
+    100126: MC_Back_04
+    100128: MC_Back_05
+    100130: MC_Back_06
+    100132: MC_Back_07
+    100134: MC_Back_08
+    100136: MC_Back_09
+    100138: MC_Back_10
+    100140: MC_Back__naked
+    100142: MC_Back__placeholder
+    100144: MC_Back_default
+    100146: MC_Feet
+    100148: MC_Feet_01
+    100150: MC_Feet_02
+    100152: MC_Feet_03
+    100154: MC_Feet_04
+    100156: MC_Feet_05
+    100158: MC_Feet_06
+    100160: MC_Feet_07
+    100162: MC_Feet_08
+    100164: MC_Feet_09
+    100166: MC_Feet_10
+    100168: MC_Feet__naked
+    100170: MC_Feet__placeholder
+    100172: MC_Feet_default
+    100174: MC_Hands
+    100176: MC_Hands_01
+    100178: MC_Hands_02
+    100180: MC_Hands_03
+    100182: MC_Hands_04
+    100184: MC_Hands_05
+    100186: MC_Hands_06
+    100188: MC_Hands_07
+    100190: MC_Hands_08
+    100192: MC_Hands_09
+    100194: MC_Hands_10
+    100196: MC_Hands__naked
+    100198: MC_Hands__placeholder
+    100200: MC_Hands_default
+    100202: MC_Head
+    100204: MC_Head_01
+    100206: MC_Head_02
+    100208: MC_Head_03
+    100210: MC_Head_04
+    100212: MC_Head_05
+    100214: MC_Head_06
+    100216: MC_Head_07
+    100218: MC_Head_08
+    100220: MC_Head_09
+    100222: MC_Head_10
+    100224: MC_Head__naked
+    100226: MC_Head__placeholder
+    100228: MC_Head_default
+    100230: MC_Torso
+    100232: MC_Torso_01
+    100234: MC_Torso_02
+    100236: MC_Torso_03
+    100238: MC_Torso_04
+    100240: MC_Torso_05
+    100242: MC_Torso_06
+    100244: MC_Torso_07
+    100246: MC_Torso_08
+    100248: MC_Torso_09
+    100250: MC_Torso_10
+    100252: MC_Torso__naked
+    100254: MC_Torso__placeholder
+    100256: MC_Torso_default
+    100258: Omni01
+    100260: ori_constr_shoulder_left
+    100262: ori_constr_shoulder_right
+    100264: prince_modular
+    100266: projectile_node
+    100268: quiver_arrow_guide
+    100270: root_camera
+    100272: root_shadow
+    400000: _billboard_ST
+    400002: _colbox_trickster
+    400004: anchor_fx_blood_01
+    400006: anchor_fx_blood_02
+    400008: anchor_fx_blood_03
+    400010: anchor_targetPosition
+    400012: anchor_weaponL
+    400014: anchor_weaponR
+    400016: anchor_weaponRange
+    400018: Bip01
+    400020: Bip01 Footsteps
+    400022: Bip01 Head
+    400024: Bip01 HeadNub
+    400026: Bip01 L Calf
+    400028: Bip01 L Clavicle
+    400030: Bip01 L Finger0
+    400032: Bip01 L Finger01
+    400034: Bip01 L Finger0Nub
+    400036: Bip01 L Finger1
+    400038: Bip01 L Finger11
+    400040: Bip01 L Finger1Nub
+    400042: Bip01 L Finger2
+    400044: Bip01 L Finger21
+    400046: Bip01 L Finger2Nub
+    400048: Bip01 L Foot
+    400050: Bip01 L Forearm
+    400052: Bip01 L Hand
+    400054: Bip01 L Thigh
+    400056: Bip01 L Toe0
+    400058: Bip01 L Toe0Nub
+    400060: Bip01 L UpperArm
+    400062: Bip01 Neck
+    400064: Bip01 Pelvis
+    400066: Bip01 R Calf
+    400068: Bip01 R Clavicle
+    400070: Bip01 R Finger0
+    400072: Bip01 R Finger01
+    400074: Bip01 R Finger0Nub
+    400076: Bip01 R Finger1
+    400078: Bip01 R Finger11
+    400080: Bip01 R Finger1Nub
+    400082: Bip01 R Finger2
+    400084: Bip01 R Finger21
+    400086: Bip01 R Finger2Nub
+    400088: Bip01 R Foot
+    400090: Bip01 R Forearm
+    400092: Bip01 R Hand
+    400094: Bip01 R Thigh
+    400096: Bip01 R Toe0
+    400098: Bip01 R Toe0Nub
+    400100: Bip01 R UpperArm
+    400102: Bip01 Spine
+    400104: Bip01 Spine1
+    400106: control_shoulder_left
+    400108: control_shoulder_right
+    400110: CTL_arrow
+    400112: CTL_bow_string
+    400114: CTL_quiver
+    400116: //RootNode
+    400118: MC_Back
+    400120: MC_Back_01
+    400122: MC_Back_02
+    400124: MC_Back_03
+    400126: MC_Back_04
+    400128: MC_Back_05
+    400130: MC_Back_06
+    400132: MC_Back_07
+    400134: MC_Back_08
+    400136: MC_Back_09
+    400138: MC_Back_10
+    400140: MC_Back__naked
+    400142: MC_Back__placeholder
+    400144: MC_Back_default
+    400146: MC_Feet
+    400148: MC_Feet_01
+    400150: MC_Feet_02
+    400152: MC_Feet_03
+    400154: MC_Feet_04
+    400156: MC_Feet_05
+    400158: MC_Feet_06
+    400160: MC_Feet_07
+    400162: MC_Feet_08
+    400164: MC_Feet_09
+    400166: MC_Feet_10
+    400168: MC_Feet__naked
+    400170: MC_Feet__placeholder
+    400172: MC_Feet_default
+    400174: MC_Hands
+    400176: MC_Hands_01
+    400178: MC_Hands_02
+    400180: MC_Hands_03
+    400182: MC_Hands_04
+    400184: MC_Hands_05
+    400186: MC_Hands_06
+    400188: MC_Hands_07
+    400190: MC_Hands_08
+    400192: MC_Hands_09
+    400194: MC_Hands_10
+    400196: MC_Hands__naked
+    400198: MC_Hands__placeholder
+    400200: MC_Hands_default
+    400202: MC_Head
+    400204: MC_Head_01
+    400206: MC_Head_02
+    400208: MC_Head_03
+    400210: MC_Head_04
+    400212: MC_Head_05
+    400214: MC_Head_06
+    400216: MC_Head_07
+    400218: MC_Head_08
+    400220: MC_Head_09
+    400222: MC_Head_10
+    400224: MC_Head__naked
+    400226: MC_Head__placeholder
+    400228: MC_Head_default
+    400230: MC_Torso
+    400232: MC_Torso_01
+    400234: MC_Torso_02
+    400236: MC_Torso_03
+    400238: MC_Torso_04
+    400240: MC_Torso_05
+    400242: MC_Torso_06
+    400244: MC_Torso_07
+    400246: MC_Torso_08
+    400248: MC_Torso_09
+    400250: MC_Torso_10
+    400252: MC_Torso__naked
+    400254: MC_Torso__placeholder
+    400256: MC_Torso_default
+    400258: Omni01
+    400260: ori_constr_shoulder_left
+    400262: ori_constr_shoulder_right
+    400264: prince_modular
+    400266: projectile_node
+    400268: quiver_arrow_guide
+    400270: root_camera
+    400272: root_shadow
+    2300000: _billboard_ST
+    2300002: _colbox_trickster
+    3300000: _billboard_ST
+    3300002: _colbox_trickster
+    4300000: MC_Head_default
+    4300002: MC_Hands_default
+    4300004: MC_Head_01
+    4300006: MC_Feet_01
+    4300008: MC_Hands_01
+    4300010: MC_Feet_02
+    4300012: MC_Hands_02
+    4300014: MC_Head_02
+    4300016: MC_Head_03
+    4300018: MC_Hands_03
+    4300020: MC_Feet_03
+    4300022: MC_Torso_default
+    4300024: MC_Torso_01
+    4300026: MC_Torso_02
+    4300028: MC_Torso_03
+    4300030: MC_Torso_04
+    4300032: MC_Head_04
+    4300034: MC_Hands_04
+    4300036: MC_Feet_04
+    4300038: MC_Head_05
+    4300040: MC_Hands_05
+    4300042: MC_Feet_05
+    4300044: MC_Torso_05
+    4300046: MC_Feet_06
+    4300048: MC_Torso_06
+    4300050: MC_Hands_06
+    4300052: MC_Feet_08
+    4300054: MC_Head_08
+    4300056: MC_Torso_08
+    4300058: MC_Hands_08
+    4300060: MC_Torso_09
+    4300062: MC_Head_09
+    4300064: MC_Hands_09
+    4300066: MC_Feet_09
+    4300068: MC_Head_10
+    4300070: MC_Torso_10
+    4300072: MC_Feet_10
+    4300074: MC_Hands_10
+    4300076: MC_Torso_07
+    4300078: MC_Feet_07
+    4300080: MC_Hands_07
+    4300082: MC_Head_07
+    4300084: _billboard_ST
+    4300086: MC_Back_default
+    4300088: MC_Back__placeholder
+    4300090: MC_Back__naked
+    4300092: MC_Back_01
+    4300094: MC_Back_02
+    4300096: MC_Back_03
+    4300098: MC_Back_04
+    4300100: MC_Back_05
+    4300102: MC_Back_06
+    4300104: MC_Back_07
+    4300106: MC_Back_08
+    4300108: MC_Back_09
+    4300110: MC_Back_10
+    4300112: _colbox_trickster
+    4300114: MC_Head_06
+    4300116: MC_Feet_default
+    4300118: MC_Feet__placeholder
+    4300120: MC_Feet__naked
+    4300122: MC_Hands__placeholder
+    4300124: MC_Hands__naked
+    4300126: MC_Head__placeholder
+    4300128: MC_Head__naked
+    4300130: MC_Torso__placeholder
+    4300132: MC_Torso__naked
+    9500000: //RootNode
+    13700000: MC_Back_01
+    13700002: MC_Back_02
+    13700004: MC_Back_03
+    13700006: MC_Back_04
+    13700008: MC_Back_05
+    13700010: MC_Back_06
+    13700012: MC_Back_07
+    13700014: MC_Back_08
+    13700016: MC_Back_09
+    13700018: MC_Back_10
+    13700020: MC_Back__naked
+    13700022: MC_Back__placeholder
+    13700024: MC_Back_default
+    13700026: MC_Feet_01
+    13700028: MC_Feet_02
+    13700030: MC_Feet_03
+    13700032: MC_Feet_04
+    13700034: MC_Feet_05
+    13700036: MC_Feet_06
+    13700038: MC_Feet_07
+    13700040: MC_Feet_08
+    13700042: MC_Feet_09
+    13700044: MC_Feet_10
+    13700046: MC_Feet__naked
+    13700048: MC_Feet__placeholder
+    13700050: MC_Feet_default
+    13700052: MC_Hands_01
+    13700054: MC_Hands_02
+    13700056: MC_Hands_03
+    13700058: MC_Hands_04
+    13700060: MC_Hands_05
+    13700062: MC_Hands_06
+    13700064: MC_Hands_07
+    13700066: MC_Hands_08
+    13700068: MC_Hands_09
+    13700070: MC_Hands_10
+    13700072: MC_Hands__naked
+    13700074: MC_Hands__placeholder
+    13700076: MC_Hands_default
+    13700078: MC_Head_01
+    13700080: MC_Head_02
+    13700082: MC_Head_03
+    13700084: MC_Head_04
+    13700086: MC_Head_05
+    13700088: MC_Head_06
+    13700090: MC_Head_07
+    13700092: MC_Head_08
+    13700094: MC_Head_09
+    13700096: MC_Head_10
+    13700098: MC_Head__naked
+    13700100: MC_Head__placeholder
+    13700102: MC_Head_default
+    13700104: MC_Torso_01
+    13700106: MC_Torso_02
+    13700108: MC_Torso_03
+    13700110: MC_Torso_04
+    13700112: MC_Torso_05
+    13700114: MC_Torso_06
+    13700116: MC_Torso_07
+    13700118: MC_Torso_08
+    13700120: MC_Torso_09
+    13700122: MC_Torso_10
+    13700124: MC_Torso__naked
+    13700126: MC_Torso__placeholder
+    13700128: MC_Torso_default
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 3
+    addColliders: 0
+    importBlendShapes: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 2
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: Bip01
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 

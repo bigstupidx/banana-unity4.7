@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9B486F8C-18E3-4B67-8266-6D61FB4F5DA2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NGUI_Editor</RootNamespace>
+    <AssemblyName>NGUI_Editor</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;UNITY_EDITOR;UNITY_4_3</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NGUI">
+      <HintPath>..\..\Assets\NGUI\NGUI.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UnityEditor">
+      <HintPath>..\UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>..\UnityEngine.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="source\Editor\ActiveAnimationEditor.cs" />
+    <Compile Include="source\Editor\BMFontReader.cs" />
+    <Compile Include="source\Editor\ComponentSelector.cs" />
+    <Compile Include="source\Editor\EventDelegateEditor.cs" />
+    <Compile Include="source\Editor\FreeType.cs" />
+    <Compile Include="source\Editor\NGUIContextMenu.cs" />
+    <Compile Include="source\Editor\NGUIEditorTools.cs" />
+    <Compile Include="source\Editor\NGUIHandles.cs" />
+    <Compile Include="source\Editor\NGUIHelp.cs" />
+    <Compile Include="source\Editor\NGUIJson.cs" />
+    <Compile Include="source\Editor\NGUIMenu.cs" />
+    <Compile Include="source\Editor\NGUISelectionTools.cs" />
+    <Compile Include="source\Editor\NGUISettings.cs" />
+    <Compile Include="source\Editor\NGUISnap.cs" />
+    <Compile Include="source\Editor\NGUITransformInspector.cs" />
+    <Compile Include="source\Editor\PropertyBindingEditor.cs" />
+    <Compile Include="source\Editor\PropertyReferenceDrawer.cs" />
+    <Compile Include="source\Editor\SpriteSelector.cs" />
+    <Compile Include="source\Editor\TweenAlphaEditor.cs" />
+    <Compile Include="source\Editor\TweenColorEditor.cs" />
+    <Compile Include="source\Editor\TweenFOVEditor.cs" />
+    <Compile Include="source\Editor\TweenHeightEditor.cs" />
+    <Compile Include="source\Editor\TweenOrthoSizeEditor.cs" />
+    <Compile Include="source\Editor\TweenPositionEditor.cs" />
+    <Compile Include="source\Editor\TweenRotationEditor.cs" />
+    <Compile Include="source\Editor\TweenScaleEditor.cs" />
+    <Compile Include="source\Editor\TweenTransformEditor.cs" />
+    <Compile Include="source\Editor\TweenVolumeEditor.cs" />
+    <Compile Include="source\Editor\TweenWidthEditor.cs" />
+    <Compile Include="source\Editor\UI2DSpriteEditor.cs" />
+    <Compile Include="source\Editor\UIAnchorEditor.cs" />
+    <Compile Include="source\Editor\UIAtlasInspector.cs" />
+    <Compile Include="source\Editor\UIAtlasMaker.cs" />
+    <Compile Include="source\Editor\UIButtonColorEditor.cs" />
+    <Compile Include="source\Editor\UIButtonEditor.cs" />
+    <Compile Include="source\Editor\UIButtonKeysEditor.cs" />
+    <Compile Include="source\Editor\UIButtonMessageEditor.cs" />
+    <Compile Include="source\Editor\UICameraEditor.cs" />
+    <Compile Include="source\Editor\UICameraTool.cs" />
+    <Compile Include="source\Editor\UICreateNewUIWizard.cs" />
+    <Compile Include="source\Editor\UICreateWidgetWizard.cs" />
+    <Compile Include="source\Editor\UIDragObjectEditor.cs" />
+    <Compile Include="source\Editor\UIDrawCallInspector.cs" />
+    <Compile Include="source\Editor\UIDrawCallViewer.cs" />
+    <Compile Include="source\Editor\UIEventTriggerEditor.cs" />
+    <Compile Include="source\Editor\UIFontInspector.cs" />
+    <Compile Include="source\Editor\UIFontMaker.cs" />
+    <Compile Include="source\Editor\UIForwardEventsEditor.cs" />
+    <Compile Include="source\Editor\UIGridEditor.cs" />
+    <Compile Include="source\Editor\UIImageButtonInspector.cs" />
+    <Compile Include="source\Editor\UIInputEditor.cs" />
+    <Compile Include="source\Editor\UIKeyNavigationEditor.cs" />
+    <Compile Include="source\Editor\UILabelInspector.cs" />
+    <Compile Include="source\Editor\UILocalizeEditor.cs" />
+    <Compile Include="source\Editor\UIPanelInspector.cs" />
+    <Compile Include="source\Editor\UIPanelTool.cs" />
+    <Compile Include="source\Editor\UIPlayAnimationEditor.cs" />
+    <Compile Include="source\Editor\UIPlayTweenEditor.cs" />
+    <Compile Include="source\Editor\UIPopupListInspector.cs" />
+    <Compile Include="source\Editor\UIProgressBarEditor.cs" />
+    <Compile Include="source\Editor\UIRectEditor.cs" />
+    <Compile Include="source\Editor\UIRootEditor.cs" />
+    <Compile Include="source\Editor\UIScrollBarEditor.cs" />
+    <Compile Include="source\Editor\UIScrollViewEditor.cs" />
+    <Compile Include="source\Editor\UISliderEditor.cs" />
+    <Compile Include="source\Editor\UISpriteAnimationInspector.cs" />
+    <Compile Include="source\Editor\UISpriteInspector.cs" />
+    <Compile Include="source\Editor\UIStretchEditor.cs" />
+    <Compile Include="source\Editor\UITableEditor.cs" />
+    <Compile Include="source\Editor\UITextureInspector.cs" />
+    <Compile Include="source\Editor\UITexturePacker.cs" />
+    <Compile Include="source\Editor\UIToggleInspector.cs" />
+    <Compile Include="source\Editor\UITweenerEditor.cs" />
+    <Compile Include="source\Editor\UIWidgetContainerEditor.cs" />
+    <Compile Include="source\Editor\UIWidgetInspector.cs" />
+    <Compile Include="source\Editor\UIWrapContentEditor.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
