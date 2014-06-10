@@ -33,4 +33,13 @@ public class Utils {
 	{
 		return (Random.Range(0, 100) & 1) == 0;
 	}
+
+	public static IEnumerator WaitForRealSeconds(float time)
+	{
+		float start = Time.realtimeSinceStartup;
+		while (Time.realtimeSinceStartup < start + time)
+		{
+			yield return null;
+		}
+	}
 }
