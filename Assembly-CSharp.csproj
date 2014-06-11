@@ -47,10 +47,13 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Actor.cs" />
+     <Compile Include="Assets\Scripts\Arrow.cs" />
      <Compile Include="Assets\Scripts\GameState.cs" />
      <Compile Include="Assets\Scripts\Global.cs" />
      <Compile Include="Assets\Scripts\ObsecuredInt.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
+     <Compile Include="Assets\Scripts\Projectile.cs" />
+     <Compile Include="Assets\Scripts\ProjectilesManager.cs" />
      <Compile Include="Assets\Scripts\StateInGameMenu.cs" />
      <Compile Include="Assets\Scripts\StateMainMenu.cs" />
      <Compile Include="Assets\Scripts\StateManager.cs" />

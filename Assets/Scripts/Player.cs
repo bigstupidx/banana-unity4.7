@@ -19,7 +19,10 @@ public class Player : Actor {
 	private float m_walkAccelerate;
 	private bool m_isAttacking;
 	private bool m_willAttack;
+	private float m_attackDirection;
 	private int m_currentWeapon;
+	private TrailRenderer m_currentWeaponTrail;
+	private Arrow m_holdingArrow;
 
 	private float m_originalSpineZRotation;
 	private float m_bendSpineTarget;
@@ -29,6 +32,9 @@ public class Player : Actor {
 	private Vector2 m_lastTouchPosition;
 
 	public Transform Spine;
+	public Transform RightHand;
+	public GameObject[] Weapons;
+	public RuntimeAnimatorController[] Animations;
 
 	public static Player Instance
 	{
@@ -45,16 +51,27 @@ public class Player : Actor {
 
 	public void Reset()
 	{
-		m_currentWeapon = WEAPON_BOW;
+		UseWeapon(WEAPON_BOW);
 		m_walkAccelerate = 0.0f;
+		m_attackDirection = 0.0f;
 		m_isAttacking = false;
 		m_willAttack = false;
 
 		m_bendSpineTarget = 0.0f;
+		m_currentWeaponTrail = null;
+		if (m_holdingArrow != null) {
+			GameObject.Destroy(m_holdingArrow.gameObject);
+		}
+		m_holdingArrow = null;
 
 		m_hasTouchBegan = false;
 
 		m_animator.CrossFade ("Idle", 0.25f, 0, 0.0f);
+
+		Weapons [0].SetActive (true);
+		for (int i=1; i<Weapons.Length; ++i) {
+			Weapons[i].SetActive(false);
+		}
 
 		m_HP = 10;
 		m_HP++;
@@ -67,28 +84,56 @@ public class Player : Actor {
 		}
 
 		if (m_isAttacking) {
+			if (m_currentWeaponTrail != null) {
+				m_currentWeaponTrail.enabled = true;
+			}
 
-			float delta = GetAnimationTime() - m_lastAnimationLoop;
-
-			if( delta >= 0.8f )
+			if( m_animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") )
 			{
-				if( !m_willAttack )
+				float delta = GetAnimationTime() - m_lastAnimationLoop;
+
+				if( delta >= 0.8f )
 				{
-					m_animator.SetBool("Attack", false);
-					ResetAnimationCounter();
-					m_isAttacking = false;
-				}
-			}
-			else if( delta >= 0.5f )
-			{
-				// TODO
-			}
-			else
-			{
-				m_willAttack = false;
-			}
+					if( !m_willAttack )
+					{
+						if( m_holdingArrow != null )
+						{
+							m_holdingArrow.Detach();
+						}
+						m_holdingArrow = null;
 
-			SetAnimationCounter();
+						if (m_currentWeaponTrail != null) {
+							m_currentWeaponTrail.enabled = false;
+						}
+
+						m_animator.SetBool("Attack", false);
+						ResetAnimationCounter();
+						m_isAttacking = false;
+					}
+				}
+				else if( delta >= 0.5f )
+				{
+					if( m_holdingArrow != null )
+					{
+						m_holdingArrow.Detach();
+					}
+					m_holdingArrow = null;
+				}
+				else
+				{
+					m_willAttack = false;
+				}
+
+				if( delta >= 0.0f && delta <= 0.8f )
+				{
+					if( IsRangeWeapon && delta < 0.5f && m_holdingArrow == null )
+					{
+						m_holdingArrow = ProjectilesManager.Instance.Create<Arrow>(ProjectilesManager.ARROW, RightHand);
+					}
+				}
+
+				SetAnimationCounter();
+			}
 
 			if( IsRangeWeapon )
 			{
@@ -97,9 +142,15 @@ public class Player : Actor {
 			}
 			else
 			{
+				FaceTo(Mathf.Sign(m_attackDirection) * 90.0f, 10);
+				
 				m_bendSpineTarget += -m_bendSpineTarget * Time.deltaTime * 5;
 			}
 		} else {
+
+			if (m_currentWeaponTrail != null) {
+				m_currentWeaponTrail.enabled = false;
+			}
 
 			float accelerateDist = Mathf.Abs(m_walkAccelerate);
 			m_animator.SetFloat ("Walk", accelerateDist);
@@ -147,12 +198,12 @@ public class Player : Actor {
 
 		int gestureId = GESTURE_NONE;
 		Vector2 gestureDelta = Vector2.zero;
+		Vector2 currentTouchPosition = Vector2.zero;
 		bool gotTouchCycle = false;
 
 		if( Input.touchCount > 0 )
 		{
 			Touch touch = Input.GetTouch(0);
-
 			if( touch.phase != TouchPhase.Canceled && touch.phase != TouchPhase.Ended )
 			{
 				if( m_hasTouchBegan )
@@ -170,9 +221,12 @@ public class Player : Actor {
 					m_touchBeginTime = Time.realtimeSinceStartup;
 					m_lastTouchPosition = touch.position;
 				}
+
+				currentTouchPosition = touch.position;
 			}
 			else
 			{
+				currentTouchPosition = touch.position;
 				gotTouchCycle = m_hasTouchBegan;
 				m_hasTouchBegan = false;
 			}
@@ -202,16 +256,19 @@ public class Player : Actor {
 				m_touchBeginTime = Time.realtimeSinceStartup;
 				m_lastTouchPosition = Input.mousePosition;
 			}
+
+			currentTouchPosition = Input.mousePosition;
 		}
 		else
 		{
+			currentTouchPosition = Input.mousePosition;
 			gotTouchCycle = m_hasTouchBegan;
 			m_hasTouchBegan = false;
 		}
 #endif
 
 		if (gotTouchCycle && Time.realtimeSinceStartup - m_touchBeginTime <= Global.GESTURE_TIME) {
-			gestureDelta = (Vector2)Input.mousePosition - m_lastTouchPosition;
+			gestureDelta = currentTouchPosition - m_lastTouchPosition;
 
 			float distX = Mathf.Abs(gestureDelta.x);
 			float distY = Mathf.Abs(gestureDelta.y);
@@ -227,14 +284,18 @@ public class Player : Actor {
 			else 
 			{
 				gestureId = GESTURE_SWIPE;
+				m_attackDirection = gestureDelta.x;
 			}
 		}
 
 		switch (gestureId) {
 		case GESTURE_DRAG:
-			if( gestureDelta.x == 0.0f )
+			if( Mathf.Abs(gestureDelta.x) < Global.GESTURE_DISTANCE_THRESHOLD )
 			{
-				m_walkAccelerate += Mathf.Sign(m_walkAccelerate) * 0.5f;
+				if( Mathf.Abs(m_walkAccelerate) > 0.2f )
+				{
+					m_walkAccelerate += Mathf.Sign(m_walkAccelerate) * 0.5f;
+				}
 			}
 			else
 			{
@@ -249,12 +310,19 @@ public class Player : Actor {
 
 		case GESTURE_TAP:
 		case GESTURE_SWIPE_DOWN:
-			m_currentWeapon = WEAPON_BOW;
-			Attack();
+			if( IsRangeWeapon || !m_isAttacking )
+			{
+				UseWeapon(WEAPON_BOW);
+				Attack();
+			}
 			break;
 
 		case GESTURE_SWIPE:
-
+			if( !IsRangeWeapon || !m_isAttacking )
+			{
+				UseWeapon(WEAPON_SWORD);
+				Attack();
+			}
 			break;
 		}
 	}
@@ -265,9 +333,12 @@ public class Player : Actor {
 			ResetAnimationCounter();
 		}
 
-		m_animator.SetBool("Attack", true);
-		m_animator.SetFloat ("Walk", 0.0f);
-		m_isAttacking = true;
+		if (!m_isAttacking) {
+			m_animator.SetBool ("Attack", true);
+			m_animator.SetFloat ("Walk", 0.0f);
+			m_isAttacking = true;
+		}
+
 		m_willAttack = true;
 	}
 
@@ -283,5 +354,25 @@ public class Player : Actor {
 		euler.z += m_bendSpineTarget;
 		quat.eulerAngles = euler;
 		Spine.localRotation = quat;
+	}
+
+	private void UseWeapon(int weapon)
+	{
+		m_currentWeapon = weapon;
+
+		for( int i=0; i<Weapons.Length; ++i )
+		{
+			if( i == m_currentWeapon )
+			{
+				Weapons[i].SetActive(true);
+			}
+			else
+			{
+				Weapons[i].SetActive(false);
+			}
+		}
+
+		m_animator.runtimeAnimatorController = Animations [m_currentWeapon];
+		m_currentWeaponTrail = Weapons [m_currentWeapon].GetComponentInChildren<TrailRenderer> ();
 	}
 }

@@ -20,6 +20,8 @@ public class Global {
 	public static float WALL_MIN_X = WALL_LEFT_X;
 	public static float WALL_MAX_X = WALL_RIGHT_X;
 
+	public const float PROJECTILE_Z = -5;
+
 	public static void Init()
 	{
 		WALL_MIN_X = -(Screen.width * Camera.main.orthographicSize) / Screen.height;

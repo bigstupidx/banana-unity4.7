@@ -3,12 +3,14 @@ using System;
 
 public struct ObsecuredInt {
 
-	public static string KEY = "";
-	public static byte[] CRYPT = new byte[16];
-
 	public ObsecuredInt(int value)
 	{
 		Value = value;
+	}
+
+	public ObsecuredInt(string gut)
+	{
+		m_gut = gut;
 	}
 
 	public static implicit operator ObsecuredInt(int value)
@@ -26,36 +28,38 @@ public struct ObsecuredInt {
 		return new ObsecuredInt (orig.Value + 1);
 	}
 
-	private static void GenerateKey()
-	{
-		int i;
-		for (i=0; i<10; ++i) {
-			KEY += (UnityEngine.Random.Range(0, 26) + 'A');
-		}
-
-		for (i=0; i<CRYPT.Length; ++i) {
-			CRYPT[i] = (byte)UnityEngine.Random.Range (0, 255);
-		}
-	}
-
 	public int Value
 	{
 		get
 		{
-			byte[] data = Convert.FromBase64String(m_gut);
+			byte[] combined = Convert.FromBase64String(m_gut);
+			int keyLength = (int)(combined[0] ^ 0x69);
+			byte[] key = new byte[keyLength];
+			System.Array.Copy(combined, 1, key, 0, keyLength);
+
+			int dataLength = (int)(combined[1 + keyLength] ^ 0x13);
+			byte[] data = new byte[dataLength];
+
+			if( dataLength != combined.Length - (1 + keyLength + 1) )
+			{
+				return 0;
+			}
+
+			System.Array.Copy(combined, 1 + keyLength + 1, data, 0, dataLength);
+
 			for( int i=0; i<data.Length; ++i )
 			{
-				data[i] ^= CRYPT[i & 15];
-			}
-			string origin = System.Text.ASCIIEncoding.ASCII.GetString(data);
-			if( origin.StartsWith(KEY) )
-			{
-				string val = origin.Remove(0, KEY.Length);
-				int res;
-				if( int.TryParse(val, out res) )
+				for( int j=0; j<keyLength; ++j )
 				{
-					return res;
+					data[i] ^= key[(i + j) % keyLength];
 				}
+			}
+
+			string origin = System.Text.ASCIIEncoding.ASCII.GetString(data);				
+			int res;
+			if( int.TryParse(origin, out res) )
+			{
+				return res;
 			}
 
 			return 0;
@@ -63,16 +67,38 @@ public struct ObsecuredInt {
 
 		set
 		{
-			if (KEY.Length < 1) {
-				GenerateKey();
+			int i, j;
+			int keyLength = UnityEngine.Random.Range(4, 8);
+			byte[] key = new byte[keyLength];
+			for (i=0; i<keyLength; ++i) {
+				key[i] = (byte)UnityEngine.Random.Range (0, 255);
 			}
 
-			byte[] data = System.Text.ASCIIEncoding.ASCII.GetBytes(KEY + value.ToString ());
-			for( int i=0; i<data.Length; ++i )
+			byte[] data = System.Text.ASCIIEncoding.ASCII.GetBytes(value.ToString ());
+			for( i=0; i<data.Length; ++i )
 			{
-				data[i] ^= CRYPT[i & 15];
+				for( j=0; j<keyLength; j++ )
+				{
+					data[i] ^= key[(i+j) % keyLength];
+				}
 			}
-			m_gut = Convert.ToBase64String(data);
+
+			byte[] combined = new byte[1 + keyLength + 1 + data.Length];
+			combined[0] = (byte)(keyLength ^ 0x69);
+			System.Array.Copy(key, 0, combined, 1, keyLength);
+			combined[1 + keyLength] = (byte)(data.Length ^ 0x13);
+			System.Array.Copy(data, 0, combined, 1 + keyLength + 1, data.Length);
+
+			m_gut = Convert.ToBase64String(combined);
+		}
+	}
+
+	public string Gut
+	{
+		get { return m_gut; }
+		set
+		{
+			Value = (new ObsecuredInt(value)).Value;
 		}
 	}
 
