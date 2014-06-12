@@ -28,10 +28,55 @@ public struct ObsecuredInt {
 		return new ObsecuredInt (orig.Value + 1);
 	}
 
+	public static ObsecuredInt operator--(ObsecuredInt orig)
+	{
+		return new ObsecuredInt (orig.Value - 1);
+	}
+
+	public static bool operator <= (ObsecuredInt lhs, int rhs)
+	{
+		return lhs.Value <= rhs;
+	}
+
+	public static bool operator >= (ObsecuredInt lhs, int rhs)
+	{
+		return lhs.Value >= rhs;
+	}
+
+	public static bool operator < (ObsecuredInt lhs, int rhs)
+	{
+		return lhs.Value < rhs;
+	}
+	
+	public static bool operator > (ObsecuredInt lhs, int rhs)
+	{
+		return lhs.Value > rhs;
+	}
+
+	public static bool operator == (ObsecuredInt lhs, int rhs)
+	{
+		return lhs.Value == rhs;
+	}
+
+	public static bool operator != (ObsecuredInt lhs, int rhs)
+	{
+		return lhs.Value != rhs;
+	}
+	
+	public override int GetHashCode()
+	{
+		return m_gut.GetHashCode ();
+	}
+
 	public int Value
 	{
 		get
 		{
+			if( m_gut == null )
+			{
+				return 0;
+			}
+
 			byte[] combined = Convert.FromBase64String(m_gut);
 			int keyLength = (int)(combined[0] ^ 0x69);
 			byte[] key = new byte[keyLength];

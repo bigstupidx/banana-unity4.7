@@ -25,6 +25,11 @@ public class Arrow : Projectile {
 				GameObject.Destroy(gameObject);
 				return;
 			}
+
+			Vector3 trailScale = Trail.transform.localScale;
+			trailScale.y += 2 * Time.deltaTime;
+			trailScale.x += 0.1f * Time.deltaTime;
+			Trail.transform.localScale = trailScale;
 		}
 	}
 
@@ -32,7 +37,7 @@ public class Arrow : Projectile {
 	{
 		Trail.SetActive (true);
 
-		transform.parent = null;
+		transform.parent = ProjectilesManager.Instance.Root;
 		transform.localRotation = Quaternion.Euler(90, 0, 0);
 		m_isDetached = true;
 

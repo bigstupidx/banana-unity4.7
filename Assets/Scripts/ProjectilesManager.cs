@@ -5,6 +5,10 @@ public class ProjectilesManager : MonoBehaviour {
 
 	private static ProjectilesManager g_instance = null;
 
+	// The scene root of projectiles
+	public Transform Root;
+
+	// Templates
 	public const int ARROW = 0;
 
 	public GameObject[] Templates;

@@ -66,7 +66,7 @@ public class Player : Actor {
 
 		m_hasTouchBegan = false;
 
-		m_animator.CrossFade ("Idle", 0.25f, 0, 0.0f);
+		m_animator.CrossFade (ANIM_IDLE, 0.25f, 0, 0.0f);
 
 		Weapons [0].SetActive (true);
 		for (int i=1; i<Weapons.Length; ++i) {
@@ -88,7 +88,7 @@ public class Player : Actor {
 				m_currentWeaponTrail.enabled = true;
 			}
 
-			if( m_animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") )
+			if( IsCurrentAnim(ANIM_ATTACK) )
 			{
 				float delta = GetAnimationTime() - m_lastAnimationLoop;
 
@@ -106,12 +106,12 @@ public class Player : Actor {
 							m_currentWeaponTrail.enabled = false;
 						}
 
-						m_animator.SetBool("Attack", false);
+						m_animator.SetBool(VAR_ATTACK, false);
 						ResetAnimationCounter();
 						m_isAttacking = false;
 					}
 				}
-				else if( delta >= 0.5f )
+				else if( delta >= 0.3f )
 				{
 					if( m_holdingArrow != null )
 					{
@@ -126,7 +126,7 @@ public class Player : Actor {
 
 				if( delta >= 0.0f && delta <= 0.8f )
 				{
-					if( IsRangeWeapon && delta < 0.5f && m_holdingArrow == null )
+					if( IsRangeWeapon && delta < 0.3f && m_holdingArrow == null )
 					{
 						m_holdingArrow = ProjectilesManager.Instance.Create<Arrow>(ProjectilesManager.ARROW, RightHand);
 					}
@@ -153,7 +153,7 @@ public class Player : Actor {
 			}
 
 			float accelerateDist = Mathf.Abs(m_walkAccelerate);
-			m_animator.SetFloat ("Walk", accelerateDist);
+			m_animator.SetFloat (VAR_WALK, accelerateDist);
 
 			if( accelerateDist > 0.0001f )
 			{
@@ -329,13 +329,13 @@ public class Player : Actor {
 
 	private void Attack()
 	{
-		if (!m_animator.GetBool ("Attack")) {
+		if (!m_animator.GetBool (VAR_ATTACK)) {
 			ResetAnimationCounter();
 		}
 
 		if (!m_isAttacking) {
-			m_animator.SetBool ("Attack", true);
-			m_animator.SetFloat ("Walk", 0.0f);
+			m_animator.SetBool (VAR_ATTACK, true);
+			m_animator.SetFloat (VAR_WALK, 0.0f);
 			m_isAttacking = true;
 		}
 
