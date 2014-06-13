@@ -16,13 +16,14 @@ public class EnemyMelee : Actor {
 	protected float m_climbDecideTimeout = 0.0f;
 
 	private int m_patrolDirection = 0;
+	private bool m_hasAttackDoneDamage;
 
 	protected override void Awake()
 	{
 		base.Awake ();
 		EnemiesManager.Instance.AddEnemy (this);
 		
-		m_HP = 10;
+		m_HP = 1;
 	}
 
 	// Update is called once per frame
@@ -39,7 +40,14 @@ public class EnemyMelee : Actor {
 		if (m_HP <= 0) {
 			m_state = EState.DYING;
 			m_animator.CrossFade(ANIM_DYING, 0.0f, 0, 0.0f);
+			m_animator.speed = 1.0f;
 		} else {
+			if( Player.Instance.IsDying )
+			{
+				m_animator.enabled = false;
+				return;
+			}
+		
 			switch (m_state) {
 			case EState.PATROL:
 				Patrol();
@@ -151,37 +159,82 @@ public class EnemyMelee : Actor {
 		FaceTo (playerPos, 5);
 
 		if (CanAttackMelee (Player.Instance)) {
-			m_animator.speed = m_speedFactor;
-			m_animator.SetBool (VAR_ATTACK, true);
-		} else {
-			m_animator.SetBool (VAR_ATTACK, false);
+			m_animator.speed = m_speedFactor;			
 			
-			Vector3 pos = transform.localPosition;
-			m_patrolDirection = pos.x < playerPos.x ? 1 : -1;
-
-			// Check if being blocked by others ?
-			foreach( Actor ally in EnemiesManager.Instance.Enemies )
-			{				
-				if( ally == this )
+			if( IsCurrentAnim(ANIM_ATTACK) )
+			{
+				float delta = GetAnimationTime() - m_lastAnimationLoop;
+				if( !m_hasAttackDoneDamage && delta > 0.4f && delta < 0.95f )
 				{
-					continue;
+					Player.Instance.TakeHit(1);					
+					m_hasAttackDoneDamage = true;
 				}
 				
-				if( ( ally.IsHorizontalOverlapWith(this) ) &&
-				   (( m_patrolDirection > 0 && ally.transform.localPosition.x > transform.localPosition.x )
-				 || ( m_patrolDirection < 0 && ally.transform.localPosition.x < transform.localPosition.x )) )
+				if( delta >= 0.95f )
 				{
-					m_animator.SetFloat(VAR_WALK, 0.0f);
-					return;
+					m_hasAttackDoneDamage = false;
 				}
+			
+				SetAnimationCounter();
 			}
-
-			m_animator.SetFloat (VAR_WALK, 1.0f);
-
-			pos.x += m_patrolDirection * MoveSpeed * m_speedFactor * Time.deltaTime;
-			m_animator.speed = MoveSpeed * m_speedFactor;
-
-			transform.localPosition = pos;
+			else			
+			{
+				m_animator.SetBool (VAR_ATTACK, true);
+				ResetAnimationCounter();
+				m_hasAttackDoneDamage = false;
+			}
+		} else {			
+			
+			if( !IsCurrentAnim(ANIM_ATTACK) )
+			{
+				Vector3 pos = transform.localPosition;
+				m_patrolDirection = pos.x < playerPos.x ? 1 : -1;
+	
+				// Check if being blocked by others ?
+				foreach( Actor ally in EnemiesManager.Instance.Enemies )
+				{				
+					if( ally == this || ally.IsDying || !ally.IsOnWall )
+					{
+						continue;
+					}
+					
+					if( ( ally.IsHorizontalOverlapWith(this) ) &&
+					   (( m_patrolDirection > 0 && ally.transform.localPosition.x > transform.localPosition.x )
+					 || ( m_patrolDirection < 0 && ally.transform.localPosition.x < transform.localPosition.x )) )
+					{
+						m_animator.SetFloat(VAR_WALK, 0.0f);
+						return;
+					}
+				}
+	
+				m_animator.SetFloat (VAR_WALK, 1.0f);
+	
+				pos.x += m_patrolDirection * MoveSpeed * m_speedFactor * Time.deltaTime;
+				m_animator.speed = MoveSpeed * m_speedFactor;
+	
+				transform.localPosition = pos;
+			}
+			else
+			{
+				m_animator.SetBool (VAR_ATTACK, false);
+				m_animator.speed = m_speedFactor;
+			}
 		}
+	}
+	
+	public override bool IsDying {
+		get {
+			return m_HP <= 0;
+		}
+	}
+	
+	public override bool IsOnWall
+	{
+		get { return m_state == EState.ON_WALL; }
+	}
+	
+	public override bool IsNearWall
+	{
+		get { return m_state == EState.PUSH_UP; }
 	}
 }

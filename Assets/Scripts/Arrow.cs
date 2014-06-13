@@ -4,10 +4,13 @@ using System.Collections;
 public class Arrow : Projectile {
 
 	private const float ARROW_SPEED = 20;
+	private const float ARROW_WIDTH = 0.1f;
 
 	public GameObject Trail;
 
 	private bool m_isDetached = false;
+	
+	private float m_nextY;
 
 	void Update()
 	{
@@ -17,7 +20,21 @@ public class Arrow : Projectile {
 
 		if (m_isDetached) {
 			Vector3 pos = transform.localPosition;
-			pos.y -= ARROW_SPEED * Time.deltaTime;
+			m_nextY = pos.y - ARROW_SPEED * Time.deltaTime;
+			
+			// Test hit with enemies
+			foreach( Actor enemy in EnemiesManager.Instance.Enemies )
+			{
+				if( TestHit(enemy) )
+				{
+					GameObject.Destroy(this.gameObject);
+					enemy.TakeHit(1);
+					return;
+				}
+			}
+			
+			// Fly
+			pos.y = m_nextY;
 			transform.localPosition = pos;
 
 			if( pos.y <= Global.HELL_Y )
@@ -44,5 +61,22 @@ public class Arrow : Projectile {
 		Vector3 pos = transform.localPosition;
 		pos.z = Global.PROJECTILE_Z;
 		transform.localPosition = pos;
+	}
+	
+	public bool TestHit(Actor other)
+	{
+		if( other.IsDying || other.IsOnWall )
+		{
+			return false;
+		}
+	
+		Vector3 myPos = transform.localPosition;		
+		Vector2 otherPos = other.FeetPosition;
+		
+		return Utils.TestRectsHit(
+			myPos.x - ARROW_WIDTH, m_nextY,
+			myPos.x + ARROW_WIDTH, myPos.y,
+			otherPos.x - other.BoundingSize.x * 0.5f, otherPos.y,
+			otherPos.x + other.BoundingSize.x * 0.5f, otherPos.y + other.BoundingSize.y);
 	}
 }

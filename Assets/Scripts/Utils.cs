@@ -42,4 +42,26 @@ public class Utils {
 			yield return null;
 		}
 	}
+	
+	public static bool IsTouchOnGUI(Vector3 pos)
+	{
+		// This grabs the camera attached to the NGUI UI_Root object.
+		Camera nguiCam = UICamera.mainCamera;
+		
+		if( nguiCam != null )
+		{	
+			// pos is the Vector3 representing the screen position of the input
+			Ray inputRay = nguiCam.ScreenPointToRay( pos );    
+			RaycastHit hit;
+			
+			return Physics.Raycast( inputRay.origin, inputRay.direction, out hit, Mathf.Infinity, Global.UI_LAYER_MASK );			
+		}
+		
+		return false;
+	}
+	
+	public static bool TestRectsHit(float ax1, float ay1, float ax2, float ay2, float bx1, float by1, float bx2, float by2)
+	{
+		return !(ax1 > bx2 || ay1 > by2 || ax2 < bx1 || by2 < by1);
+	}
 }

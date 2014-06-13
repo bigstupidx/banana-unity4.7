@@ -22,6 +22,11 @@ public struct ObsecuredInt {
 	{
 		return new ObsecuredInt (lhs.Value + add);
 	}
+	
+	public static ObsecuredInt operator-(ObsecuredInt lhs, int sub)
+	{
+		return new ObsecuredInt (lhs.Value - sub);
+	}
 
 	public static ObsecuredInt operator++(ObsecuredInt orig)
 	{
@@ -31,7 +36,7 @@ public struct ObsecuredInt {
 	public static ObsecuredInt operator--(ObsecuredInt orig)
 	{
 		return new ObsecuredInt (orig.Value - 1);
-	}
+	}	
 
 	public static bool operator <= (ObsecuredInt lhs, int rhs)
 	{
@@ -66,6 +71,11 @@ public struct ObsecuredInt {
 	public override int GetHashCode()
 	{
 		return m_gut.GetHashCode ();
+	}
+	
+	public override bool Equals(object other)
+	{
+		return false;
 	}
 
 	public int Value

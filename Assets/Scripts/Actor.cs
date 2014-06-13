@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Actor : MonoBehaviour {
+public abstract class Actor : MonoBehaviour {
 
 	protected static int ANIM_IDLE = Animator.StringToHash("Base Layer.Idle");
 	protected static int ANIM_ATTACK = Animator.StringToHash("Base Layer.Attack");
@@ -113,6 +113,26 @@ public class Actor : MonoBehaviour {
 	public bool IsHorizontalOverlapWith(Actor other)
 	{
 		return (Mathf.Abs(transform.localPosition.x - other.transform.localPosition.x) < (BoundingSize.x + other.BoundingSize.x) * 0.5f);
+	}
+	
+	public virtual void TakeHit(int damage)
+	{
+		m_HP -= damage;
+	}
+	
+	public abstract bool IsDying
+	{
+		get;
+	}
+	
+	public abstract bool IsOnWall
+	{
+		get;
+	}
+	
+	public abstract bool IsNearWall
+	{
+		get;
 	}
 
 	void OnDrawGizmos() {

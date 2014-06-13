@@ -13,16 +13,20 @@ public class Player : Actor {
 	private const int WEAPON_SWORD = 1;
 	private const int WEAPON_CROSSBOW = 2;
 	private const int WEAPON_AXE = 3;
+	
+	private const float ATTACK_RANGE = 1.0f;
 
 	private static Player g_instance = null;
 
 	private float m_walkAccelerate;
 	private bool m_isAttacking;
 	private bool m_willAttack;
+	private bool m_hasAttackDoneDamage;
 	private float m_attackDirection;
 	private int m_currentWeapon;
 	private TrailRenderer m_currentWeaponTrail;
 	private Arrow m_holdingArrow;
+	private bool m_isDying;	
 
 	private float m_originalSpineZRotation;
 	private float m_bendSpineTarget;
@@ -56,6 +60,7 @@ public class Player : Actor {
 		m_attackDirection = 0.0f;
 		m_isAttacking = false;
 		m_willAttack = false;
+		m_hasAttackDoneDamage = false;
 
 		m_bendSpineTarget = 0.0f;
 		m_currentWeaponTrail = null;
@@ -67,19 +72,32 @@ public class Player : Actor {
 		m_hasTouchBegan = false;
 
 		m_animator.CrossFade (ANIM_IDLE, 0.25f, 0, 0.0f);
+		m_isDying = false;
 
 		Weapons [0].SetActive (true);
 		for (int i=1; i<Weapons.Length; ++i) {
 			Weapons[i].SetActive(false);
 		}
 
-		m_HP = 10;
+		m_HP = 1;
 		m_HP++;
 	}
 
 	void Update()
 	{
 		if (Mathf.Approximately (Time.timeScale, 0.0f)) {
+			return;
+		}
+		
+		if( m_isDying )
+		{
+			return;
+		}
+		
+		if( m_HP <= 0 )
+		{
+			m_isDying = true;
+			m_animator.CrossFade(ANIM_DYING, 0.0f, 0, 0.0f);
 			return;
 		}
 
@@ -108,8 +126,10 @@ public class Player : Actor {
 
 						m_animator.SetBool(VAR_ATTACK, false);
 						ResetAnimationCounter();
-						m_isAttacking = false;
+						m_isAttacking = false;						
 					}
+					
+					m_hasAttackDoneDamage = false;
 				}
 				else if( delta >= 0.3f )
 				{
@@ -118,10 +138,24 @@ public class Player : Actor {
 						m_holdingArrow.Detach();
 					}
 					m_holdingArrow = null;
+					
+					if( !IsRangeWeapon && !m_hasAttackDoneDamage )
+					{
+						foreach( Actor enemy in EnemiesManager.Instance.Enemies )
+						{
+							if( TestAttackHit(enemy) )
+							{
+								enemy.TakeHit(1);
+							}
+						}
+						
+						m_hasAttackDoneDamage = true;
+					}
 				}
 				else
 				{
 					m_willAttack = false;
+					m_hasAttackDoneDamage = false;
 				}
 
 				if( delta >= 0.0f && delta <= 0.8f )
@@ -142,7 +176,7 @@ public class Player : Actor {
 			}
 			else
 			{
-				FaceTo(Mathf.Sign(m_attackDirection) * 90.0f, 10);
+				FaceTo(m_attackDirection * 90.0f, 10);
 				
 				m_bendSpineTarget += -m_bendSpineTarget * Time.deltaTime * 5;
 			}
@@ -204,31 +238,35 @@ public class Player : Actor {
 		if( Input.touchCount > 0 )
 		{
 			Touch touch = Input.GetTouch(0);
-			if( touch.phase != TouchPhase.Canceled && touch.phase != TouchPhase.Ended )
+			
+			if( !Utils.IsTouchOnGUI((Vector3)touch.position) )
 			{
-				if( m_hasTouchBegan )
+				if( touch.phase != TouchPhase.Canceled && touch.phase != TouchPhase.Ended )
 				{
-					if( Time.realtimeSinceStartup - m_touchBeginTime > Global.GESTURE_TIME )
+					if( m_hasTouchBegan )
 					{
-						gestureId = GESTURE_DRAG;
-						gestureDelta = touch.position - m_lastTouchPosition;
+						if( Time.realtimeSinceStartup - m_touchBeginTime > Global.GESTURE_TIME )
+						{
+							gestureId = GESTURE_DRAG;
+							gestureDelta = touch.position - m_lastTouchPosition;
+							m_lastTouchPosition = touch.position;
+						}
+					}
+					else
+					{
+						m_hasTouchBegan = true;
+						m_touchBeginTime = Time.realtimeSinceStartup;
 						m_lastTouchPosition = touch.position;
 					}
+	
+					currentTouchPosition = touch.position;
 				}
 				else
 				{
-					m_hasTouchBegan = true;
-					m_touchBeginTime = Time.realtimeSinceStartup;
-					m_lastTouchPosition = touch.position;
+					currentTouchPosition = touch.position;
+					gotTouchCycle = m_hasTouchBegan;
+					m_hasTouchBegan = false;
 				}
-
-				currentTouchPosition = touch.position;
-			}
-			else
-			{
-				currentTouchPosition = touch.position;
-				gotTouchCycle = m_hasTouchBegan;
-				m_hasTouchBegan = false;
 			}
 		}
 		else
@@ -240,24 +278,28 @@ public class Player : Actor {
 		}
 
 #if UNITY_EDITOR
-		if (Input.GetMouseButton (0)) {
-			if( m_hasTouchBegan )
+		if (Input.GetMouseButton (0)) 
+		{
+			if( !Utils.IsTouchOnGUI(Input.mousePosition) )
 			{
-				if( Time.realtimeSinceStartup - m_touchBeginTime > Global.GESTURE_TIME )
+				if( m_hasTouchBegan )
 				{
-					gestureId = GESTURE_DRAG;
-					gestureDelta = (Vector2)Input.mousePosition - m_lastTouchPosition;
+					if( Time.realtimeSinceStartup - m_touchBeginTime > Global.GESTURE_TIME )
+					{
+						gestureId = GESTURE_DRAG;
+						gestureDelta = (Vector2)Input.mousePosition - m_lastTouchPosition;
+						m_lastTouchPosition = Input.mousePosition;
+					}
+				}
+				else
+				{
+					m_hasTouchBegan = true;
+					m_touchBeginTime = Time.realtimeSinceStartup;
 					m_lastTouchPosition = Input.mousePosition;
 				}
-			}
-			else
-			{
-				m_hasTouchBegan = true;
-				m_touchBeginTime = Time.realtimeSinceStartup;
-				m_lastTouchPosition = Input.mousePosition;
-			}
-
-			currentTouchPosition = Input.mousePosition;
+				
+				currentTouchPosition = Input.mousePosition;
+			}			
 		}
 		else
 		{
@@ -283,8 +325,11 @@ public class Player : Actor {
 			}
 			else 
 			{
-				gestureId = GESTURE_SWIPE;
-				m_attackDirection = gestureDelta.x;
+				if( gestureDelta.x != 0.0f )
+				{
+					gestureId = GESTURE_SWIPE;
+					m_attackDirection = Mathf.Sign(gestureDelta.x);
+				}
 			}
 		}
 
@@ -374,5 +419,42 @@ public class Player : Actor {
 
 		m_animator.runtimeAnimatorController = Animations [m_currentWeapon];
 		m_currentWeaponTrail = Weapons [m_currentWeapon].GetComponentInChildren<TrailRenderer> ();
+	}
+	
+	public override bool IsDying 
+	{
+		get { return m_isDying; }
+	}
+	
+	public override bool IsOnWall
+	{
+		get { return true; }
+	}
+	
+	public override bool IsNearWall
+	{
+		get { return false; }
+	}
+	
+	public bool TestAttackHit(Actor other)
+	{
+		if( other.IsDying )
+		{
+			return false;
+		}
+		
+		if( other.IsOnWall || other.IsNearWall ) 
+		{
+			Vector3 myPos = FeetPosition;		
+			Vector2 otherPos = other.FeetPosition;
+			
+			return Utils.TestRectsHit(
+				myPos.x, myPos.y + BoundingSize.y * 0.5f,
+				myPos.x + m_attackDirection * (BoundingSize.x + ATTACK_RANGE), myPos.y + BoundingSize.y,
+				otherPos.x - other.BoundingSize.x * 0.5f, otherPos.y,
+				otherPos.x + other.BoundingSize.x * 0.5f, otherPos.y + other.BoundingSize.y);
+		}
+		
+		return false;
 	}
 }
