@@ -79,7 +79,7 @@ public class Player : Actor {
 			Weapons[i].SetActive(false);
 		}
 
-		m_HP = 1;
+		m_HP = 100;
 		m_HP++;
 	}
 
@@ -143,7 +143,7 @@ public class Player : Actor {
 					{
 						foreach( Actor enemy in EnemiesManager.Instance.Enemies )
 						{
-							if( TestAttackHit(enemy) )
+							if( TestAttackHit(m_attackDirection, enemy) )
 							{
 								enemy.TakeHit(1);
 							}
@@ -221,6 +221,11 @@ public class Player : Actor {
 
 	void LateUpdate()
 	{		
+		if( Mathf.Approximately(Time.timeScale, 0.0f) )
+		{
+			return;
+		}
+				
 		BendSpine();
 	}
 
@@ -337,7 +342,7 @@ public class Player : Actor {
 		case GESTURE_DRAG:
 			if( Mathf.Abs(gestureDelta.x) < Global.GESTURE_DISTANCE_THRESHOLD )
 			{
-				if( Mathf.Abs(m_walkAccelerate) > 0.2f )
+				if( Mathf.Abs(m_walkAccelerate) > 0.1f )
 				{
 					m_walkAccelerate += Mathf.Sign(m_walkAccelerate) * 0.5f;
 				}
@@ -436,7 +441,12 @@ public class Player : Actor {
 		get { return false; }
 	}
 	
-	public bool TestAttackHit(Actor other)
+	public override bool IsClimbing
+	{
+		get { return false; }
+	}
+	
+	public bool TestAttackHit(float dir, Actor other)
 	{
 		if( other.IsDying )
 		{
@@ -448,9 +458,19 @@ public class Player : Actor {
 			Vector3 myPos = FeetPosition;		
 			Vector2 otherPos = other.FeetPosition;
 			
+			float myx1 = myPos.x;
+			float myx2 = myPos.x + dir * (BoundingSize.x + ATTACK_RANGE);
+			
+			if( myx1 > myx2 )
+			{
+				float temp = myx1;
+				myx1 = myx2;
+				myx2 = temp;
+			}
+			
 			return Utils.TestRectsHit(
-				myPos.x, myPos.y + BoundingSize.y * 0.5f,
-				myPos.x + m_attackDirection * (BoundingSize.x + ATTACK_RANGE), myPos.y + BoundingSize.y,
+				myx1, myPos.y + BoundingSize.y * 0.5f,
+				myx2, myPos.y + BoundingSize.y,
 				otherPos.x - other.BoundingSize.x * 0.5f, otherPos.y,
 				otherPos.x + other.BoundingSize.x * 0.5f, otherPos.y + other.BoundingSize.y);
 		}

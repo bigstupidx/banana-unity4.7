@@ -20,10 +20,13 @@ public class EnemyMelee : Actor {
 
 	protected override void Awake()
 	{
-		base.Awake ();
-		EnemiesManager.Instance.AddEnemy (this);
-		
+		base.Awake ();				
 		m_HP = 1;
+	}
+	
+	void Start()	
+	{
+		EnemiesManager.Instance.AddEnemy (this);
 	}
 
 	// Update is called once per frame
@@ -38,6 +41,11 @@ public class EnemyMelee : Actor {
 		}
 
 		if (m_HP <= 0) {
+			if( m_state == EState.ON_WALL )
+			{
+				m_dyingFallRotation = new Vector3(0, Random.Range(-10, 10) * 10, Random.Range(-10, 10) * 10);
+			}
+		
 			m_state = EState.DYING;
 			m_animator.CrossFade(ANIM_DYING, 0.0f, 0, 0.0f);
 			m_animator.speed = 1.0f;
@@ -73,16 +81,7 @@ public class EnemyMelee : Actor {
 		}
 
 		if (m_state == EState.DYING) {
-			Vector3 pos = transform.localPosition;
-			pos.y -= Global.DYING_FALL_SPEED * Time.deltaTime;
-			pos.z = Global.DYING_Z;
-			transform.localPosition = pos;
-
-			if (pos.y < Global.HELL_Y) {
-				GameObject.Destroy (gameObject);
-				EnemiesManager.Instance.RemoveEnemy (this);
-				return;
-			}
+			FallOnDying();
 		}
 	}
 
@@ -94,14 +93,7 @@ public class EnemyMelee : Actor {
 		if (m_patrolDirection == 0) {
 			m_patrolDirection = pos.x < 0 ? 1 : -1;
 		}
-
-		FaceTo (m_patrolDirection * 90, 5);
-		pos.x += m_patrolDirection * MoveSpeed * Time.deltaTime * m_speedFactor;	
-		m_animator.SetFloat (VAR_WALK, 1.0f);
-		m_animator.speed = m_speedFactor * MoveSpeed * 0.75f;
-
-		transform.localPosition = pos;
-
+		
 		if ((m_patrolDirection < 0 && pos.x < Global.WALL_LEFT_X) 
 		    || (m_patrolDirection > 0 && pos.x > Global.WALL_RIGHT_X))
 		{
@@ -110,29 +102,66 @@ public class EnemyMelee : Actor {
 
 		if (m_climbDecideTimeout <= 0.0f) {
 			if( pos.x >= Global.WALL_MIN_X && pos.x <= Global.WALL_MAX_X )
-			{
+			{			
 				m_state = EState.CLIMB;
 				m_animator.SetTrigger(VAR_CLIMB);
 			}
 		}
 		else {
+			FaceTo (m_patrolDirection * 90, 5);
+			pos.x += m_patrolDirection * MoveSpeed * Time.deltaTime * m_speedFactor;	
+			m_animator.SetFloat (VAR_WALK, 1.0f);
+			m_animator.speed = m_speedFactor * MoveSpeed * 0.75f;
+			
+			transform.localPosition = pos;
+			
 			m_climbDecideTimeout -= Time.deltaTime;
 		}
 	}
 
 	protected virtual void Climb()
 	{
-		Vector3 pos = transform.localPosition;
-		pos.y += ClimbSpeed * m_speedFactor * Time.deltaTime;
-		pos.z = Global.CLIMB_Z + (pos.y * 0.1f);
-
-		m_animator.speed = ClimbSpeed * m_speedFactor * 0.4f;
-		transform.localPosition = pos;
-
-		if (IsClimbingReachWall) {
-			m_state = EState.PUSH_UP;
-			m_animator.SetTrigger(VAR_PUSH_UP);
+		if( !IsCurrentAnim(ANIM_CLIMB) )
+		{
+			return;
 		}
+	
+		FaceTo (0, 5);
+		
+		bool stopClimbing = false;
+		foreach( Actor ally in EnemiesManager.Instance.Enemies )
+		{
+			if( ally == this || (!ally.IsClimbing && !ally.IsNearWall && !ally.IsOnWall) )
+			{
+				continue;
+			}
+			
+			if( this.IsOverlapWith(ally) && FeetPosition.y < ally.FeetPosition.y )
+			{
+				stopClimbing = true;
+				break;
+			}
+		}
+	
+		Vector3 pos = transform.localPosition;
+		pos.z = Global.CLIMB_Z + (pos.y * 0.1f);
+		
+		if( !stopClimbing )
+		{			
+			pos.y += ClimbSpeed * m_speedFactor * Time.deltaTime;				
+			m_animator.speed = ClimbSpeed * m_speedFactor * 0.4f;			
+	
+			if (IsClimbingReachWall) {
+				m_state = EState.PUSH_UP;
+				m_animator.SetTrigger(VAR_PUSH_UP);
+			}
+		}
+		else		
+		{
+			m_animator.speed = 0.1f;
+		}
+		
+		transform.localPosition = pos;
 	}
 
 	protected virtual void PushUp()
@@ -154,7 +183,7 @@ public class EnemyMelee : Actor {
 	protected virtual void OnWall()
 	{
 		StandOnWall ();
-
+		
 		Vector3 playerPos = Player.Instance.transform.localPosition;
 		FaceTo (playerPos, 5);
 
@@ -236,5 +265,10 @@ public class EnemyMelee : Actor {
 	public override bool IsNearWall
 	{
 		get { return m_state == EState.PUSH_UP; }
+	}
+	
+	public override bool IsClimbing
+	{
+		get { return m_state == EState.CLIMB; }
 	}
 }

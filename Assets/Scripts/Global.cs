@@ -22,7 +22,7 @@ public class Global {
 
 	public const float PROJECTILE_Z = -5;
 
-	public const float DYING_FALL_SPEED = 10;
+	public const float DYING_FALL_SPEED = 20;
 	public const float DYING_Z = -20;
 	public const float PATROL_Z = -10;
 	public const float CLIMB_Z = -8;

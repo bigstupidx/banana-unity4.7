@@ -6,6 +6,7 @@ public abstract class Actor : MonoBehaviour {
 	protected static int ANIM_IDLE = Animator.StringToHash("Base Layer.Idle");
 	protected static int ANIM_ATTACK = Animator.StringToHash("Base Layer.Attack");
 	protected static int ANIM_DYING = Animator.StringToHash("Base Layer.Dying");
+	protected static int ANIM_CLIMB = Animator.StringToHash("Base Layer.Climb");	
 	protected static int VAR_WALK = Animator.StringToHash("Walk");
 	protected static int VAR_ATTACK = Animator.StringToHash("Attack");
 	protected static int VAR_CLIMB = Animator.StringToHash("Climb");
@@ -19,14 +20,18 @@ public abstract class Actor : MonoBehaviour {
 	protected float m_speedFactor = 1.0f;
 
 	public Vector2 BoundingSize  = Vector2.one;
-	public bool IsHumanoidRig = false;
 
 	public float MoveSpeed = 1;
 	public float ClimbSpeed = 1;
+	
+	protected Vector3 m_dyingFallRotation;
+	private float m_dyingFallGravity;
 
 	protected virtual void Awake()
 	{
 		m_animator = this.GetComponent<Animator> ();		
+		m_dyingFallRotation = Vector3.zero;
+		m_dyingFallGravity = 0.0f;		
 	}
 
 	protected void SetAnimationCounter()
@@ -67,17 +72,20 @@ public abstract class Actor : MonoBehaviour {
 		get 
 		{ 
 			Vector3 rootPos = m_animator.rootPosition;
-			return IsHumanoidRig ? (Vector2)rootPos : new Vector2(rootPos.x, rootPos.y - BoundingSize.y * 0.5f);
+			return m_animator.isHuman ? (Vector2)rootPos : new Vector2(rootPos.x, rootPos.y - BoundingSize.y * 0.5f);
 		}
 
 		set
 		{
 			Vector3 pos = (Vector3)value;
-			if( !IsHumanoidRig )
+			if( !m_animator.isHuman )
 			{
 				pos.y += BoundingSize.y * 0.5f;
 			}
-			m_animator.rootPosition = pos;
+			Vector3 delta = pos - m_animator.rootPosition;
+			delta.z = 0.0f;
+			pos = transform.localPosition + delta;
+			transform.localPosition = pos;
 		}
 	}
 
@@ -115,9 +123,35 @@ public abstract class Actor : MonoBehaviour {
 		return (Mathf.Abs(transform.localPosition.x - other.transform.localPosition.x) < (BoundingSize.x + other.BoundingSize.x) * 0.5f);
 	}
 	
+	public bool IsOverlapWith(Actor other)
+	{
+		Vector2 myFeet = FeetPosition;
+		Vector2 otherFeet = other.FeetPosition;
+		return (Mathf.Abs(myFeet.x - otherFeet.x) < (BoundingSize.x + other.BoundingSize.x))
+			&& (Mathf.Abs(myFeet.y - otherFeet.y) < (BoundingSize.y + other.BoundingSize.y));
+	}
+	
 	public virtual void TakeHit(int damage)
 	{
 		m_HP -= damage;
+	}
+	
+	public void FallOnDying()
+	{
+		m_dyingFallGravity += Global.DYING_FALL_SPEED * Time.deltaTime;
+	
+		Vector3 pos = transform.localPosition;
+		pos.y -= m_dyingFallGravity * Time.deltaTime;
+		pos.z = Global.DYING_Z;
+		transform.localPosition = pos;
+		
+		if (pos.y < Global.HELL_Y) {
+			GameObject.Destroy (gameObject);
+			EnemiesManager.Instance.RemoveEnemy (this);
+			return;
+		}
+		
+		transform.Rotate(m_dyingFallRotation * Time.deltaTime);
 	}
 	
 	public abstract bool IsDying
@@ -131,6 +165,11 @@ public abstract class Actor : MonoBehaviour {
 	}
 	
 	public abstract bool IsNearWall
+	{
+		get;
+	}
+	
+	public abstract bool IsClimbing
 	{
 		get;
 	}

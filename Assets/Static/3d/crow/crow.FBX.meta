@@ -1,0 +1,106 @@
+fileFormatVersion: 2
+guid: 52967e1b75de9b94f87798f499187ccf
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: anchor_fx_blood_01
+    100002: anchor_fx_blood_02
+    100004: anchor_fx_blood_03
+    100006: Bip
+    100008: Bone04
+    100010: Bone06
+    100012: Bone10
+    100014: Bone12
+    100016: //RootNode
+    100018: Feet
+    100020: Head
+    100022: L_01
+    100024: L_02
+    100026: L_03
+    100028: L_bridge
+    100030: Legs
+    100032: objCrow
+    100034: R_01
+    100036: R_02
+    100038: R_03
+    100040: R_bridge
+    100042: Tail
+    400000: anchor_fx_blood_01
+    400002: anchor_fx_blood_02
+    400004: anchor_fx_blood_03
+    400006: Bip
+    400008: Bone04
+    400010: Bone06
+    400012: Bone10
+    400014: Bone12
+    400016: //RootNode
+    400018: Feet
+    400020: Head
+    400022: L_01
+    400024: L_02
+    400026: L_03
+    400028: L_bridge
+    400030: Legs
+    400032: objCrow
+    400034: R_01
+    400036: R_02
+    400038: R_03
+    400040: R_bridge
+    400042: Tail
+    4300000: objCrow
+    9500000: //RootNode
+    13700000: objCrow
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 1
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .0299999993
+    meshCompression: 3
+    addColliders: 0
+    importBlendShapes: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 2
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: Bip
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 

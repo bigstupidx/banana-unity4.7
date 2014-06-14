@@ -1,0 +1,177 @@
+fileFormatVersion: 2
+guid: c4f749c0beef9d44f8b3d542e73a050b
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: 1m70
+    100002: Bip
+    100004: Bone04
+    100006: Bone06
+    100008: Bone10
+    100010: Bone12
+    100012: //RootNode
+    100014: Feet
+    100016: Head
+    100018: L_01
+    100020: L_02
+    100022: L_03
+    100024: L_bridge
+    100026: Legs
+    100028: objCrow
+    100030: R_01
+    100032: R_02
+    100034: R_03
+    100036: R_bridge
+    100038: root_camera
+    100040: Tail
+    400000: 1m70
+    400002: Bip
+    400004: Bone04
+    400006: Bone06
+    400008: Bone10
+    400010: Bone12
+    400012: //RootNode
+    400014: Feet
+    400016: Head
+    400018: L_01
+    400020: L_02
+    400022: L_03
+    400024: L_bridge
+    400026: Legs
+    400028: objCrow
+    400030: R_01
+    400032: R_02
+    400034: R_03
+    400036: R_bridge
+    400038: root_camera
+    400040: Tail
+    2300000: 1m70
+    3300000: 1m70
+    4300000: objCrow
+    4300002: 1m70
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: objCrow
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 27
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 0
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: 1m70
+        weight: 1
+      - path: Bip
+        weight: 1
+      - path: Bip/Head
+        weight: 1
+      - path: Bip/L_01
+        weight: 1
+      - path: Bip/L_01/L_02
+        weight: 1
+      - path: Bip/L_01/L_02/L_03
+        weight: 1
+      - path: Bip/L_01/L_02/L_03/Bone04
+        weight: 1
+      - path: Bip/L_01/L_02/L_bridge
+        weight: 1
+      - path: Bip/L_01/L_02/L_bridge/Bone06
+        weight: 1
+      - path: Bip/Legs
+        weight: 1
+      - path: Bip/Legs/Feet
+        weight: 1
+      - path: Bip/R_01
+        weight: 1
+      - path: Bip/R_01/R_02
+        weight: 1
+      - path: Bip/R_01/R_02/R_03
+        weight: 1
+      - path: Bip/R_01/R_02/R_03/Bone10
+        weight: 1
+      - path: Bip/R_01/R_02/R_bridge
+        weight: 1
+      - path: Bip/R_01/R_02/R_bridge/Bone12
+        weight: 1
+      - path: Bip/Tail
+        weight: 1
+      - path: objCrow
+        weight: 1
+      - path: root_camera
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 2
+    tangentImportMode: 2
+  importAnimation: 1
+  copyAvatar: 1
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: Bip
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 52967e1b75de9b94f87798f499187ccf,
+    type: 3}
+  animationType: 2
+  additionalBone: 0
+  userData: 

@@ -61,7 +61,7 @@ public class Utils {
 	}
 	
 	public static bool TestRectsHit(float ax1, float ay1, float ax2, float ay2, float bx1, float by1, float bx2, float by2)
-	{
+	{	
 		return !(ax1 > bx2 || ay1 > by2 || ax2 < bx1 || by2 < by1);
 	}
 }

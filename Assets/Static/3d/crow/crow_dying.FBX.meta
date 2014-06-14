@@ -1,0 +1,220 @@
+fileFormatVersion: 2
+guid: 97b76bf98c45f8240ac3c246e0567dba
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: 1m70
+    100002: Bip
+    100004: Bone04
+    100006: Bone06
+    100008: Bone10
+    100010: Bone12
+    100012: Box01
+    100014: Box02
+    100016: Box03
+    100018: Box04
+    100020: Box05
+    100022: Camera01
+    100024: Camera02
+    100026: //RootNode
+    100028: Feet
+    100030: Head
+    100032: L_01
+    100034: L_02
+    100036: L_03
+    100038: L_bridge
+    100040: Legs
+    100042: objCrow
+    100044: R_01
+    100046: R_02
+    100048: R_03
+    100050: R_bridge
+    100052: root_camera
+    100054: Tail
+    400000: 1m70
+    400002: Bip
+    400004: Bone04
+    400006: Bone06
+    400008: Bone10
+    400010: Bone12
+    400012: Box01
+    400014: Box02
+    400016: Box03
+    400018: Box04
+    400020: Box05
+    400022: Camera01
+    400024: Camera02
+    400026: //RootNode
+    400028: Feet
+    400030: Head
+    400032: L_01
+    400034: L_02
+    400036: L_03
+    400038: L_bridge
+    400040: Legs
+    400042: objCrow
+    400044: R_01
+    400046: R_02
+    400048: R_03
+    400050: R_bridge
+    400052: root_camera
+    400054: Tail
+    2300000: 1m70
+    2300002: Box01
+    2300004: Box02
+    2300006: Box03
+    2300008: Box04
+    2300010: Box05
+    3300000: 1m70
+    3300002: Box01
+    3300004: Box02
+    3300006: Box03
+    3300008: Box04
+    3300010: Box05
+    4300000: objCrow
+    4300002: 1m70
+    4300004: Box01
+    4300006: Box02
+    4300008: Box03
+    4300010: Box04
+    4300012: Box05
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: objCrow
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 32
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 0
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: 1m70
+        weight: 1
+      - path: Bip
+        weight: 1
+      - path: Bip/Head
+        weight: 1
+      - path: Bip/L_01
+        weight: 1
+      - path: Bip/L_01/L_02
+        weight: 1
+      - path: Bip/L_01/L_02/L_03
+        weight: 1
+      - path: Bip/L_01/L_02/L_03/Bone04
+        weight: 1
+      - path: Bip/L_01/L_02/L_bridge
+        weight: 1
+      - path: Bip/L_01/L_02/L_bridge/Bone06
+        weight: 1
+      - path: Bip/Legs
+        weight: 1
+      - path: Bip/Legs/Feet
+        weight: 1
+      - path: Bip/R_01
+        weight: 1
+      - path: Bip/R_01/R_02
+        weight: 1
+      - path: Bip/R_01/R_02/R_03
+        weight: 1
+      - path: Bip/R_01/R_02/R_03/Bone10
+        weight: 1
+      - path: Bip/R_01/R_02/R_bridge
+        weight: 1
+      - path: Bip/R_01/R_02/R_bridge/Bone12
+        weight: 1
+      - path: Bip/Tail
+        weight: 1
+      - path: Box01
+        weight: 1
+      - path: Box02
+        weight: 1
+      - path: Box03
+        weight: 1
+      - path: Box04
+        weight: 1
+      - path: Box05
+        weight: 1
+      - path: Camera01
+        weight: 1
+      - path: Camera02
+        weight: 1
+      - path: objCrow
+        weight: 1
+      - path: root_camera
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 2
+    tangentImportMode: 2
+  importAnimation: 1
+  copyAvatar: 1
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: Bip
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 52967e1b75de9b94f87798f499187ccf,
+    type: 3}
+  animationType: 2
+  additionalBone: 0
+  userData: 

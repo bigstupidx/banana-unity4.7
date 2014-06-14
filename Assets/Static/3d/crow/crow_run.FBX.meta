@@ -1,0 +1,181 @@
+fileFormatVersion: 2
+guid: f8bf6c31b8382e84f9dd992f34b82d77
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: 1m70
+    100002: Bip
+    100004: //RootNode
+    100006: Feet
+    100008: Head
+    100010: L_01
+    100012: L_02
+    100014: L_03
+    100016: L_bridge
+    100018: L_bridge_roll
+    100020: L_roll
+    100022: Legs
+    100024: objCrow
+    100026: R_01
+    100028: R_02
+    100030: R_03
+    100032: R_bridge
+    100034: R_bridge_roll
+    100036: R_roll
+    100038: root_camera
+    100040: root_camera 1
+    100042: Tail
+    400000: 1m70
+    400002: Bip
+    400004: //RootNode
+    400006: Feet
+    400008: Head
+    400010: L_01
+    400012: L_02
+    400014: L_03
+    400016: L_bridge
+    400018: L_bridge_roll
+    400020: L_roll
+    400022: Legs
+    400024: objCrow
+    400026: R_01
+    400028: R_02
+    400030: R_03
+    400032: R_bridge
+    400034: R_bridge_roll
+    400036: R_roll
+    400038: root_camera
+    400040: root_camera 1
+    400042: Tail
+    2300000: 1m70
+    3300000: 1m70
+    4300000: objCrow
+    4300002: 1m70
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: objCrow
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 38
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 0
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: 1m70
+        weight: 1
+      - path: Bip
+        weight: 1
+      - path: Bip/Head
+        weight: 1
+      - path: Bip/L_01
+        weight: 1
+      - path: Bip/L_01/L_02
+        weight: 1
+      - path: Bip/L_01/L_02/L_03
+        weight: 1
+      - path: Bip/L_01/L_02/L_03/L_roll
+        weight: 1
+      - path: Bip/L_01/L_02/L_bridge
+        weight: 1
+      - path: Bip/L_01/L_02/L_bridge/L_bridge_roll
+        weight: 1
+      - path: Bip/Legs
+        weight: 1
+      - path: Bip/Legs/Feet
+        weight: 1
+      - path: Bip/R_01
+        weight: 1
+      - path: Bip/R_01/R_02
+        weight: 1
+      - path: Bip/R_01/R_02/R_03
+        weight: 1
+      - path: Bip/R_01/R_02/R_03/R_roll
+        weight: 1
+      - path: Bip/R_01/R_02/R_bridge
+        weight: 1
+      - path: Bip/R_01/R_02/R_bridge/R_bridge_roll
+        weight: 1
+      - path: Bip/Tail
+        weight: 1
+      - path: objCrow
+        weight: 1
+      - path: root_camera
+        weight: 1
+      - path: root_camera 1
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 2
+    tangentImportMode: 2
+  importAnimation: 1
+  copyAvatar: 1
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: Bip
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 52967e1b75de9b94f87798f499187ccf,
+    type: 3}
+  animationType: 2
+  additionalBone: 0
+  userData: 

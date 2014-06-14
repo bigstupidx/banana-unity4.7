@@ -1,0 +1,346 @@
+fileFormatVersion: 2
+guid: aefc1d6ed81684549a0fb0637b72eb46
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: Bone01
+    100002: Bone01(mirrored)
+    100004: Bone02
+    100006: Bone02(mirrored)
+    100008: Bone03
+    100010: Bone03(mirrored)
+    100012: Bone04
+    100014: Bone04(mirrored)
+    100016: Bone05
+    100018: Bone05(mirrored)
+    100020: Bone06
+    100022: Bone06(mirrored)
+    100024: Bone07
+    100026: Bone07(mirrored)
+    100028: Bone08
+    100030: Bone08(mirrored)
+    100032: Bone09
+    100034: Bone09(mirrored)
+    100036: Bone10
+    100038: Bone10(mirrored)
+    100040: Bone11
+    100042: Bone11(mirrored)
+    100044: Bone12
+    100046: Bone12(mirrored)
+    100048: Bone13
+    100050: Bone13(mirrored)
+    100052: Bone14
+    100054: Bone14(mirrored)
+    100056: Bone15
+    100058: Bone15(mirrored)
+    100060: Bone16
+    100062: Bone16(mirrored)
+    100064: Bone18
+    100066: Bone19
+    100068: Bone20
+    100070: Bone21
+    100072: Bone22
+    100074: Bone22(mirrored)
+    100076: Bone23
+    100078: Bone23(mirrored)
+    100080: char_spider
+    100082: Dummy01
+    100084: Dummy02
+    100086: Dummy03
+    100088: Dummy04
+    100090: Dummy05
+    100092: Dummy06
+    100094: Dummy07
+    100096: Dummy08
+    100098: Dummy09
+    100100: Dummy10
+    100102: Dummy11
+    100104: Dummy12
+    100106: IK Chain01
+    100108: IK Chain02
+    100110: IK Chain03
+    100112: IK Chain04
+    100114: IK Chain05
+    100116: IK Chain06
+    100118: IK Chain07
+    100120: IK Chain08
+    100122: root_camera
+    100124: root_character
+    100126: //RootNode
+    400000: Bone01
+    400002: Bone01(mirrored)
+    400004: Bone02
+    400006: Bone02(mirrored)
+    400008: Bone03
+    400010: Bone03(mirrored)
+    400012: Bone04
+    400014: Bone04(mirrored)
+    400016: Bone05
+    400018: Bone05(mirrored)
+    400020: Bone06
+    400022: Bone06(mirrored)
+    400024: Bone07
+    400026: Bone07(mirrored)
+    400028: Bone08
+    400030: Bone08(mirrored)
+    400032: Bone09
+    400034: Bone09(mirrored)
+    400036: Bone10
+    400038: Bone10(mirrored)
+    400040: Bone11
+    400042: Bone11(mirrored)
+    400044: Bone12
+    400046: Bone12(mirrored)
+    400048: Bone13
+    400050: Bone13(mirrored)
+    400052: Bone14
+    400054: Bone14(mirrored)
+    400056: Bone15
+    400058: Bone15(mirrored)
+    400060: Bone16
+    400062: Bone16(mirrored)
+    400064: Bone18
+    400066: Bone19
+    400068: Bone20
+    400070: Bone21
+    400072: Bone22
+    400074: Bone22(mirrored)
+    400076: Bone23
+    400078: Bone23(mirrored)
+    400080: char_spider
+    400082: Dummy01
+    400084: Dummy02
+    400086: Dummy03
+    400088: Dummy04
+    400090: Dummy05
+    400092: Dummy06
+    400094: Dummy07
+    400096: Dummy08
+    400098: Dummy09
+    400100: Dummy10
+    400102: Dummy11
+    400104: Dummy12
+    400106: IK Chain01
+    400108: IK Chain02
+    400110: IK Chain03
+    400112: IK Chain04
+    400114: IK Chain05
+    400116: IK Chain06
+    400118: IK Chain07
+    400120: IK Chain08
+    400122: root_camera
+    400124: root_character
+    400126: //RootNode
+    4300000: char_spider
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: char_spider
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 1
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 0
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: char_spider
+        weight: 1
+      - path: IK Chain01
+        weight: 1
+      - path: IK Chain02
+        weight: 1
+      - path: IK Chain03
+        weight: 1
+      - path: IK Chain04
+        weight: 1
+      - path: IK Chain05
+        weight: 1
+      - path: IK Chain06
+        weight: 1
+      - path: IK Chain07
+        weight: 1
+      - path: IK Chain08
+        weight: 1
+      - path: root_camera
+        weight: 1
+      - path: root_character
+        weight: 1
+      - path: root_character/Bone01
+        weight: 1
+      - path: root_character/Bone01/Bone02
+        weight: 1
+      - path: root_character/Bone01/Bone02/Bone03
+        weight: 1
+      - path: root_character/Bone01/Bone02/Bone03/Bone04
+        weight: 1
+      - path: root_character/Bone01(mirrored)
+        weight: 1
+      - path: root_character/Bone01(mirrored)/Bone02(mirrored)
+        weight: 1
+      - path: root_character/Bone01(mirrored)/Bone02(mirrored)/Bone03(mirrored)
+        weight: 1
+      - path: root_character/Bone01(mirrored)/Bone02(mirrored)/Bone03(mirrored)/Bone04(mirrored)
+        weight: 1
+      - path: root_character/Bone05
+        weight: 1
+      - path: root_character/Bone05/Bone06
+        weight: 1
+      - path: root_character/Bone05/Bone06/Bone07
+        weight: 1
+      - path: root_character/Bone05/Bone06/Bone07/Bone08
+        weight: 1
+      - path: root_character/Bone05(mirrored)
+        weight: 1
+      - path: root_character/Bone05(mirrored)/Bone06(mirrored)
+        weight: 1
+      - path: root_character/Bone05(mirrored)/Bone06(mirrored)/Bone07(mirrored)
+        weight: 1
+      - path: root_character/Bone05(mirrored)/Bone06(mirrored)/Bone07(mirrored)/Bone08(mirrored)
+        weight: 1
+      - path: root_character/Bone09
+        weight: 1
+      - path: root_character/Bone09/Bone10
+        weight: 1
+      - path: root_character/Bone09/Bone10/Bone11
+        weight: 1
+      - path: root_character/Bone09/Bone10/Bone11/Bone12
+        weight: 1
+      - path: root_character/Bone09(mirrored)
+        weight: 1
+      - path: root_character/Bone09(mirrored)/Bone10(mirrored)
+        weight: 1
+      - path: root_character/Bone09(mirrored)/Bone10(mirrored)/Bone11(mirrored)
+        weight: 1
+      - path: root_character/Bone09(mirrored)/Bone10(mirrored)/Bone11(mirrored)/Bone12(mirrored)
+        weight: 1
+      - path: root_character/Bone13
+        weight: 1
+      - path: root_character/Bone13/Bone14
+        weight: 1
+      - path: root_character/Bone13/Bone14/Bone15
+        weight: 1
+      - path: root_character/Bone13/Bone14/Bone15/Bone16
+        weight: 1
+      - path: root_character/Bone13(mirrored)
+        weight: 1
+      - path: root_character/Bone13(mirrored)/Bone14(mirrored)
+        weight: 1
+      - path: root_character/Bone13(mirrored)/Bone14(mirrored)/Bone15(mirrored)
+        weight: 1
+      - path: root_character/Bone13(mirrored)/Bone14(mirrored)/Bone15(mirrored)/Bone16(mirrored)
+        weight: 1
+      - path: root_character/Bone18
+        weight: 1
+      - path: root_character/Bone18/Bone19
+        weight: 1
+      - path: root_character/Bone18/Dummy01
+        weight: 1
+      - path: root_character/Bone18/Dummy02
+        weight: 1
+      - path: root_character/Bone20
+        weight: 1
+      - path: root_character/Bone20/Bone21
+        weight: 1
+      - path: root_character/Bone20/Bone22
+        weight: 1
+      - path: root_character/Bone20/Bone22/Bone23
+        weight: 1
+      - path: root_character/Bone20/Bone22(mirrored)
+        weight: 1
+      - path: root_character/Bone20/Bone22(mirrored)/Bone23(mirrored)
+        weight: 1
+      - path: root_character/Dummy03
+        weight: 1
+      - path: root_character/Dummy04
+        weight: 1
+      - path: root_character/Dummy05
+        weight: 1
+      - path: root_character/Dummy06
+        weight: 1
+      - path: root_character/Dummy07
+        weight: 1
+      - path: root_character/Dummy08
+        weight: 1
+      - path: root_character/Dummy09
+        weight: 1
+      - path: root_character/Dummy10
+        weight: 1
+      - path: root_character/Dummy11
+        weight: 1
+      - path: root_character/Dummy12
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 1
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: root_character
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: f1ce8bf43ab4a3145929998264431fff,
+    type: 3}
+  animationType: 2
+  additionalBone: 0
+  userData: 
