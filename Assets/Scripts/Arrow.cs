@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Arrow : Projectile {
+public class Arrow : MonoBehaviour {
 
 	private const float ARROW_SPEED = 20;
 	private const float ARROW_WIDTH = 0.1f;
@@ -20,6 +20,14 @@ public class Arrow : Projectile {
 
 		if (m_isDetached) {
 			Vector3 pos = transform.localPosition;
+			
+			if( pos.y <= Global.HELL_Y )
+			{
+				m_isDetached = false;
+				GameObject.Destroy(gameObject);				
+				return;
+			}
+			
 			m_nextY = pos.y - ARROW_SPEED * Time.deltaTime;
 			
 			// Test hit with enemies
@@ -29,6 +37,16 @@ public class Arrow : Projectile {
 				{
 					GameObject.Destroy(this.gameObject);
 					enemy.TakeHit(1);
+					
+					Vector3 projectilePos = (Vector3)enemy.FeetPosition;
+					projectilePos.y += enemy.BoundingSize.y;
+					if( projectilePos.y > pos.y )
+					{
+						projectilePos.y = pos.y;
+					}
+					projectilePos.z = Global.PROJECTILE_Z;
+					
+					ProjectilesManager.Instance.Create(ProjectilesManager.POW2, projectilePos);
 					return;
 				}
 			}
@@ -36,12 +54,6 @@ public class Arrow : Projectile {
 			// Fly
 			pos.y = m_nextY;
 			transform.localPosition = pos;
-
-			if( pos.y <= Global.HELL_Y )
-			{
-				GameObject.Destroy(gameObject);
-				return;
-			}
 
 			Vector3 trailScale = Trail.transform.localScale;
 			trailScale.y += 2 * Time.deltaTime;
@@ -71,7 +83,7 @@ public class Arrow : Projectile {
 		}
 	
 		Vector3 myPos = transform.localPosition;		
-		Vector2 otherPos = other.FeetPosition;
+		Vector2 otherPos = other.FeetPosition;		
 		
 		return Utils.TestRectsHit(
 			myPos.x - ARROW_WIDTH, m_nextY,

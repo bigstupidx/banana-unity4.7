@@ -48,19 +48,28 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Actor.cs" />
      <Compile Include="Assets\Scripts\Arrow.cs" />
+     <Compile Include="Assets\Scripts\Cocktail.cs" />
+     <Compile Include="Assets\Scripts\Dart.cs" />
      <Compile Include="Assets\Scripts\EnemiesManager.cs" />
+     <Compile Include="Assets\Scripts\EnemyCrawl.cs" />
+     <Compile Include="Assets\Scripts\EnemyFlyer.cs" />
+     <Compile Include="Assets\Scripts\EnemyGoblin.cs" />
      <Compile Include="Assets\Scripts\EnemyMelee.cs" />
+     <Compile Include="Assets\Scripts\EnemyRanged.cs" />
+     <Compile Include="Assets\Scripts\EnemyTroll.cs" />
      <Compile Include="Assets\Scripts\GameState.cs" />
      <Compile Include="Assets\Scripts\Global.cs" />
      <Compile Include="Assets\Scripts\ObsecuredInt.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\Projectile.cs" />
      <Compile Include="Assets\Scripts\ProjectilesManager.cs" />
+     <Compile Include="Assets\Scripts\Spark.cs" />
      <Compile Include="Assets\Scripts\StateInGameMenu.cs" />
      <Compile Include="Assets\Scripts\StateMainMenu.cs" />
      <Compile Include="Assets\Scripts\StateManager.cs" />
      <Compile Include="Assets\Scripts\Utils.cs" />
      <None Include="Assets\Externals\NGUI\Resources\Shaders\Unlit - Text 2.shader" />
+     <None Include="Assets\Static\Materials\DoubleSided.shader" />
      <None Include="Assets\Externals\NGUI\Resources\Shaders\Unlit - Text 1.shader" />
      <None Include="Assets\Externals\NGUI\Resources\Shaders\Unlit - Transparent Colored 2.shader" />
      <None Include="Assets\Externals\NGUI\Resources\Shaders\Unlit - Premultiplied Colored 3.shader" />
@@ -68,6 +77,7 @@
      <None Include="Assets\Externals\NGUI\Resources\Shaders\Unlit - Transparent Colored 1.shader" />
      <None Include="Assets\Externals\NGUI\Resources\Shaders\Unlit - Transparent Colored 3.shader" />
      <None Include="Assets\Externals\NGUI\Resources\Shaders\Unlit - Premultiplied Colored 2.shader" />
+     <None Include="Assets\Static\Materials\Unlit.shader" />
      <None Include="Assets\Externals\NGUI\Resources\Shaders\Unlit - Text 3.shader" />
      <None Include="Assets\Externals\NGUI\Resources\Shaders\Unlit - Transparent Packed 2.shader" />
      <None Include="Assets\Externals\NGUI\Resources\Shaders\Unlit - Transparent Packed 1.shader" />

@@ -49,6 +49,7 @@
      <Compile Include="Assets\OnQ Ultimate FX Pack 1 Cartoon\Scripts\ObjectSpin.js" />
      <Compile Include="Assets\OnQ Ultimate FX Pack 1 Cartoon\Scripts\PrefabLooping.js" />
      <None Include="Assets\Externals\NGUI\Resources\Shaders\Unlit - Text 2.shader" />
+     <None Include="Assets\Static\Materials\DoubleSided.shader" />
      <None Include="Assets\Externals\NGUI\Resources\Shaders\Unlit - Text 1.shader" />
      <None Include="Assets\Externals\NGUI\Resources\Shaders\Unlit - Transparent Colored 2.shader" />
      <None Include="Assets\Externals\NGUI\Resources\Shaders\Unlit - Premultiplied Colored 3.shader" />
@@ -56,6 +57,7 @@
      <None Include="Assets\Externals\NGUI\Resources\Shaders\Unlit - Transparent Colored 1.shader" />
      <None Include="Assets\Externals\NGUI\Resources\Shaders\Unlit - Transparent Colored 3.shader" />
      <None Include="Assets\Externals\NGUI\Resources\Shaders\Unlit - Premultiplied Colored 2.shader" />
+     <None Include="Assets\Static\Materials\Unlit.shader" />
      <None Include="Assets\Externals\NGUI\Resources\Shaders\Unlit - Text 3.shader" />
      <None Include="Assets\Externals\NGUI\Resources\Shaders\Unlit - Transparent Packed 2.shader" />
      <None Include="Assets\Externals\NGUI\Resources\Shaders\Unlit - Transparent Packed 1.shader" />

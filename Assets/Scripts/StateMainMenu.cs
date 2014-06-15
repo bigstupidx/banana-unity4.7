@@ -15,7 +15,8 @@ public class StateMainMenu : GameState {
 	{
 		yield return StartCoroutine(Utils.WaitForRealSeconds(0.25f));
 		
-		StateManager.Instance.PushState (StateManager.Instance.InGameMenu);
+		EnemiesManager.Instance.Reset();
+		StateManager.Instance.PushState (StateManager.Instance.InGameMenu);		
 	}
 
 	public override void OnEnter()

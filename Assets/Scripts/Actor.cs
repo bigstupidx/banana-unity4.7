@@ -23,6 +23,13 @@ public abstract class Actor : MonoBehaviour {
 
 	public float MoveSpeed = 1;
 	public float ClimbSpeed = 1;
+	public float AttackRange = 0.0f;
+	public float AttackTriggerTime = 0.4f;
+	public ObsecuredInt MaxHP = 1;
+	public ObsecuredInt AttackStrength = 1;
+	public float MinTimeBeforeCharge = 5.0f;
+	public float MaxTimeBeforeCharge = 10.0f;
+	public int HitEffect = 0;
 	
 	protected Vector3 m_dyingFallRotation;
 	private float m_dyingFallGravity;
@@ -53,39 +60,39 @@ public abstract class Actor : MonoBehaviour {
 	{
 		Quaternion quat = transform.localRotation;
 		Vector3 euler = quat.eulerAngles;
-		euler.y += Utils.shortestAngle (euler.y, rot) * Time.deltaTime * speed;
+		euler.y += Utils.shortestAngle (euler.y, rot) * Time.deltaTime * speed * m_speedFactor;
 		quat.eulerAngles = euler;
 		transform.localRotation = quat;
 	}
 
 	public void FaceTo(Vector3 targetPos, float speed)
 	{
-		Vector3 pos = transform.position;
+		Vector3 pos = transform.localPosition;
 		Vector2 v1 = new Vector2(pos.x, pos.z);
 		Vector2 v2 = new Vector2(targetPos.x, targetPos.z);
 		Vector2 v = v2 - v1;
 		FaceTo(Mathf.Atan2(v.x, v.y) * Mathf.Rad2Deg, speed);
 	}
 
-	public Vector2 FeetPosition
+	public virtual Vector2 FeetPosition
 	{
 		get 
 		{ 
-			Vector3 rootPos = m_animator.rootPosition;
-			return m_animator.isHuman ? (Vector2)rootPos : new Vector2(rootPos.x, rootPos.y - BoundingSize.y * 0.5f);
+			return m_animator.isHuman ? (Vector2)m_animator.rootPosition : new Vector2(transform.localPosition.x, transform.localPosition.y - BoundingSize.y * 0.5f);
 		}
 
 		set
 		{
 			Vector3 pos = (Vector3)value;
-			if( !m_animator.isHuman )
+			if( m_animator.isHuman )
+			{
+				transform.localPosition = pos;
+			}
+			else
 			{
 				pos.y += BoundingSize.y * 0.5f;
+				transform.localPosition = pos;
 			}
-			Vector3 delta = pos - m_animator.rootPosition;
-			delta.z = 0.0f;
-			pos = transform.localPosition + delta;
-			transform.localPosition = pos;
 		}
 	}
 
@@ -115,7 +122,7 @@ public abstract class Actor : MonoBehaviour {
 		Vector2 myFeetPos = (Vector2)transform.localPosition;
 		Vector2 yourFeetPos = (Vector2)other.transform.localPosition;
 		return !(myFeetPos.y > yourFeetPos.y + other.BoundingSize.y || myFeetPos.y + this.BoundingSize.y < yourFeetPos.y)
-			&& (Mathf.Abs(myFeetPos.x - other.FeetPosition.x) < (BoundingSize.x + other.BoundingSize.x));
+			&& (Mathf.Abs(myFeetPos.x - other.FeetPosition.x) < (BoundingSize.x + other.BoundingSize.x + AttackRange));
 	}
 	
 	public bool IsHorizontalOverlapWith(Actor other)
@@ -123,17 +130,27 @@ public abstract class Actor : MonoBehaviour {
 		return (Mathf.Abs(transform.localPosition.x - other.transform.localPosition.x) < (BoundingSize.x + other.BoundingSize.x) * 0.5f);
 	}
 	
+	public bool IsInArcherRange(Actor other)
+	{
+		return (Mathf.Abs(transform.localPosition.x - other.transform.localPosition.x) < (BoundingSize.x + other.BoundingSize.x));
+	}
+	
 	public bool IsOverlapWith(Actor other)
 	{
 		Vector2 myFeet = FeetPosition;
 		Vector2 otherFeet = other.FeetPosition;
-		return (Mathf.Abs(myFeet.x - otherFeet.x) < (BoundingSize.x + other.BoundingSize.x))
-			&& (Mathf.Abs(myFeet.y - otherFeet.y) < (BoundingSize.y + other.BoundingSize.y));
+		
+		return Utils.TestRectsHit(
+			myFeet.x - BoundingSize.x * 0.5f, myFeet.y,
+			myFeet.x + BoundingSize.x * 0.5f, myFeet.y + BoundingSize.y,
+			otherFeet.x - other.BoundingSize.x * 0.5f, otherFeet.y,
+			otherFeet.x + other.BoundingSize.x * 0.5f, otherFeet.y + other.BoundingSize.y
+		);		
 	}
 	
 	public virtual void TakeHit(int damage)
 	{
-		m_HP -= damage;
+		m_HP -= damage;		
 	}
 	
 	public void FallOnDying()
@@ -177,9 +194,9 @@ public abstract class Actor : MonoBehaviour {
 	void OnDrawGizmos() {
 		Gizmos.color = Color.green;
 
-		Vector3 pos = this.transform.position;
+		Vector3 pos = this.transform.localPosition;
 		Animator animator = this.GetComponent<Animator> ();
-		if (animator != null) {
+		if (animator != null && animator.isHuman) {
 			pos = animator.rootPosition;
 		}
 

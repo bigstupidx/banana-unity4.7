@@ -15,18 +15,19 @@ public class EnemyMelee : Actor {
 	protected EState m_state = EState.PATROL;
 	protected float m_climbDecideTimeout = 0.0f;
 
-	private int m_patrolDirection = 0;
-	private bool m_hasAttackDoneDamage;
+	protected int m_patrolDirection = 0;
+	private bool m_hasAttackDoneDamage;	
 
 	protected override void Awake()
 	{
 		base.Awake ();				
-		m_HP = 1;
+		m_HP = MaxHP;
 	}
 	
 	void Start()	
 	{
 		EnemiesManager.Instance.AddEnemy (this);
+		m_climbDecideTimeout = Random.Range(MinTimeBeforeCharge, MaxTimeBeforeCharge);
 	}
 
 	// Update is called once per frame
@@ -83,12 +84,14 @@ public class EnemyMelee : Actor {
 		if (m_state == EState.DYING) {
 			FallOnDying();
 		}
+		
+		m_speedFactor += (1.0f - m_speedFactor) * Time.deltaTime;
 	}
 
 	protected virtual void Patrol()
 	{
 		Vector3 pos = transform.localPosition;
-		pos.z = Global.PATROL_Z;
+		pos.z = Global.PATROL_Z + FeetPosition.y * 10;
 
 		if (m_patrolDirection == 0) {
 			m_patrolDirection = pos.x < 0 ? 1 : -1;
@@ -100,12 +103,9 @@ public class EnemyMelee : Actor {
 			m_patrolDirection = -m_patrolDirection;
 		}
 
-		if (m_climbDecideTimeout <= 0.0f) {
-			if( pos.x >= Global.WALL_MIN_X && pos.x <= Global.WALL_MAX_X )
-			{			
-				m_state = EState.CLIMB;
-				m_animator.SetTrigger(VAR_CLIMB);
-			}
+		if (m_climbDecideTimeout <= 0.0f && pos.x >= Global.WALL_MIN_X && pos.x <= Global.WALL_MAX_X) {
+			m_state = EState.CLIMB;
+			m_animator.SetTrigger(VAR_CLIMB);
 		}
 		else {
 			FaceTo (m_patrolDirection * 90, 5);
@@ -128,6 +128,9 @@ public class EnemyMelee : Actor {
 	
 		FaceTo (0, 5);
 		
+		Vector3 pos = transform.localPosition;
+		pos.z = Global.CLIMB_Z + (FeetPosition.y * 10);
+		
 		bool stopClimbing = false;
 		foreach( Actor ally in EnemiesManager.Instance.Enemies )
 		{
@@ -136,15 +139,27 @@ public class EnemyMelee : Actor {
 				continue;
 			}
 			
-			if( this.IsOverlapWith(ally) && FeetPosition.y < ally.FeetPosition.y )
+			if( (ally.IsOnWall || ally.IsNearWall) && this.IsClimbingReachWall && this.IsHorizontalOverlapWith(ally) )
 			{
 				stopClimbing = true;
 				break;
 			}
-		}
-	
-		Vector3 pos = transform.localPosition;
-		pos.z = Global.CLIMB_Z + (pos.y * 0.1f);
+			
+			if( this.IsOverlapWith(ally) )
+			{
+				if( FeetPosition.y == ally.FeetPosition.y )
+				{
+					pos.y -= 0.00001f;
+					stopClimbing = true;
+					break;
+				}
+				else if( FeetPosition.y < ally.FeetPosition.y )
+				{
+					stopClimbing = true;
+					break;
+				}
+			}
+		}		
 		
 		if( !stopClimbing )
 		{			
@@ -193,9 +208,12 @@ public class EnemyMelee : Actor {
 			if( IsCurrentAnim(ANIM_ATTACK) )
 			{
 				float delta = GetAnimationTime() - m_lastAnimationLoop;
-				if( !m_hasAttackDoneDamage && delta > 0.4f && delta < 0.95f )
+				if( !m_hasAttackDoneDamage && delta > AttackTriggerTime && delta < 0.95f )
 				{
-					Player.Instance.TakeHit(1);					
+					Player.Instance.TakeHit(1);
+					
+					ProjectilesManager.Instance.CreateOnActor(HitEffect, Player.Instance);
+					
 					m_hasAttackDoneDamage = true;
 				}
 				

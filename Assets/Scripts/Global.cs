@@ -20,12 +20,12 @@ public class Global {
 	public static float WALL_MIN_X = WALL_LEFT_X;
 	public static float WALL_MAX_X = WALL_RIGHT_X;
 
-	public const float PROJECTILE_Z = -5;
+	public const float PROJECTILE_Z = -400;
 
 	public const float DYING_FALL_SPEED = 20;
 	public const float DYING_Z = -20;
-	public const float PATROL_Z = -10;
-	public const float CLIMB_Z = -8;
+	public const float PATROL_Z = -350;
+	public const float CLIMB_Z = -300;
 	public const float ON_WALL_Z = 0;
 
 	public static void Init()

@@ -8,6 +8,8 @@ public class StateInGameMenu : GameState {
 	public override void OnEnter()
 	{
 		m_dyingTimeOut = 3.0f;
+		
+		EnemiesManager.Instance.Paused = false;
 	}
 	
 	public override void OnUpdate()
@@ -25,5 +27,6 @@ public class StateInGameMenu : GameState {
 	public override void OnExit()
 	{
 		m_dyingTimeOut = 3.0f;
+		EnemiesManager.Instance.Paused = true;
 	}
 }

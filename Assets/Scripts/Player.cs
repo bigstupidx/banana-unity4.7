@@ -14,7 +14,6 @@ public class Player : Actor {
 	private const int WEAPON_CROSSBOW = 2;
 	private const int WEAPON_AXE = 3;
 	
-	private const float ATTACK_RANGE = 1.0f;
 
 	private static Player g_instance = null;
 
@@ -131,7 +130,7 @@ public class Player : Actor {
 					
 					m_hasAttackDoneDamage = false;
 				}
-				else if( delta >= 0.3f )
+				else if( delta >= AttackTriggerTime )
 				{
 					if( m_holdingArrow != null )
 					{
@@ -145,7 +144,8 @@ public class Player : Actor {
 						{
 							if( TestAttackHit(m_attackDirection, enemy) )
 							{
-								enemy.TakeHit(1);
+								enemy.TakeHit(1);								
+								ProjectilesManager.Instance.CreateOnActor(ProjectilesManager.BAM, enemy);
 							}
 						}
 						
@@ -160,7 +160,7 @@ public class Player : Actor {
 
 				if( delta >= 0.0f && delta <= 0.8f )
 				{
-					if( IsRangeWeapon && delta < 0.3f && m_holdingArrow == null )
+					if( IsRangeWeapon && delta < AttackTriggerTime && m_holdingArrow == null )
 					{
 						m_holdingArrow = ProjectilesManager.Instance.Create<Arrow>(ProjectilesManager.ARROW, RightHand);
 					}
@@ -392,7 +392,7 @@ public class Player : Actor {
 		m_willAttack = true;
 	}
 
-	private bool IsRangeWeapon
+	public bool IsRangeWeapon
 	{
 		get { return m_currentWeapon == WEAPON_BOW || m_currentWeapon == WEAPON_CROSSBOW; }
 	}
@@ -446,6 +446,24 @@ public class Player : Actor {
 		get { return false; }
 	}
 	
+	public override Vector2 FeetPosition
+	{
+		get 
+		{ 			
+			return (Vector2)transform.localPosition;
+		}
+		
+		set
+		{
+			transform.localPosition = (Vector3)value;
+		}
+	}
+	
+	public bool IsAttacking
+	{
+		get { return m_isAttacking; }
+	}
+	
 	public bool TestAttackHit(float dir, Actor other)
 	{
 		if( other.IsDying )
@@ -459,7 +477,7 @@ public class Player : Actor {
 			Vector2 otherPos = other.FeetPosition;
 			
 			float myx1 = myPos.x;
-			float myx2 = myPos.x + dir * (BoundingSize.x + ATTACK_RANGE);
+			float myx2 = myPos.x + dir * (BoundingSize.x + AttackRange);
 			
 			if( myx1 > myx2 )
 			{
@@ -469,7 +487,7 @@ public class Player : Actor {
 			}
 			
 			return Utils.TestRectsHit(
-				myx1, myPos.y + BoundingSize.y * 0.5f,
+				myx1, myPos.y + BoundingSize.y * 0.25f,
 				myx2, myPos.y + BoundingSize.y,
 				otherPos.x - other.BoundingSize.x * 0.5f, otherPos.y,
 				otherPos.x + other.BoundingSize.x * 0.5f, otherPos.y + other.BoundingSize.y);
