@@ -79,7 +79,6 @@ public class Player : Actor {
 		}
 
 		m_HP = 100;
-		m_HP++;
 	}
 
 	void Update()
@@ -335,6 +334,33 @@ public class Player : Actor {
 					gestureId = GESTURE_SWIPE;
 					m_attackDirection = Mathf.Sign(gestureDelta.x);
 				}
+			}
+		}
+		
+		if( Input.GetKey(KeyCode.LeftArrow) )
+		{
+			gestureId = GESTURE_DRAG;
+			gestureDelta.x = -10;	
+			m_attackDirection = -1;
+		}
+		else if( Input.GetKey(KeyCode.RightArrow) )
+		{
+			gestureId = GESTURE_DRAG;
+			gestureDelta.x = 10;	
+			m_attackDirection = 1;
+		}
+		
+		if( Input.GetKey(KeyCode.Space) )
+		{
+			gestureId = GESTURE_SWIPE_DOWN;
+		}
+		
+		if( Input.GetKey(KeyCode.Return) )
+		{
+			gestureId = GESTURE_SWIPE;
+			if( m_attackDirection == 0 )
+			{
+				m_attackDirection = 1;
 			}
 		}
 

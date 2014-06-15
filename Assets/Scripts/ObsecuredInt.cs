@@ -180,7 +180,7 @@ public struct ObsecuredInt {
 	[SerializeField]
 	private string m_gut;
 	
-	private static System.Random m_random = new System.Random((int)(Time.time * 1000));
+	private static System.Random m_random = new System.Random((int)DateTime.Now.Millisecond);
 }
 
 #if UNITY_EDITOR

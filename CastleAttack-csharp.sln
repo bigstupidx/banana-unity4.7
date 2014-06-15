@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 
 Project("{9BAA0070-6E17-6D13-C231-01F9DDFFCD37}") = "CastleAttack", "Assembly-CSharp-vs.csproj", "{1D8F0072-40C7-6267-3032-86BFA26B3579}"
 EndProject
+Project("{9BAA0070-6E17-6D13-C231-01F9DDFFCD37}") = "CastleAttack", "Assembly-CSharp-Editor-vs.csproj", "{4C71DA73-6FFA-F8B0-7D19-B3D398819171}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,11 +15,15 @@ Global
 		{1D8F0072-40C7-6267-3032-86BFA26B3579}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D8F0072-40C7-6267-3032-86BFA26B3579}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D8F0072-40C7-6267-3032-86BFA26B3579}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C71DA73-6FFA-F8B0-7D19-B3D398819171}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C71DA73-6FFA-F8B0-7D19-B3D398819171}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C71DA73-6FFA-F8B0-7D19-B3D398819171}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C71DA73-6FFA-F8B0-7D19-B3D398819171}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																																																																												GlobalSection(MonoDevelopProperties) = preSolution
+																																																																																	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
