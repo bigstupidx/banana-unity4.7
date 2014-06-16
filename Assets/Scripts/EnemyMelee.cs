@@ -17,6 +17,7 @@ public class EnemyMelee : Actor {
 
 	protected int m_patrolDirection = 0;
 	private bool m_hasAttackDoneDamage;	
+	private bool m_isAttacking = false;
 
 	protected override void Awake()
 	{
@@ -47,6 +48,7 @@ public class EnemyMelee : Actor {
 				m_dyingFallRotation = new Vector3(0, Random.Range(-10, 10) * 10, Random.Range(-10, 10) * 10);
 			}
 		
+			SetOnDying();
 			m_state = EState.DYING;
 			m_animator.CrossFade(ANIM_DYING, 0.0f, 0, 0.0f);
 			m_animator.speed = 1.0f;
@@ -103,7 +105,7 @@ public class EnemyMelee : Actor {
 			m_patrolDirection = -m_patrolDirection;
 		}
 
-		if (m_climbDecideTimeout <= 0.0f && pos.x >= Global.WALL_MIN_X && pos.x <= Global.WALL_MAX_X) {
+		if (m_climbDecideTimeout <= 0.0f && pos.x >= (Global.WALL_MIN_X + BoundingSize.x * 0.5f) && pos.x <= (Global.WALL_MAX_X - BoundingSize.x * 0.5f)) {
 			m_state = EState.CLIMB;
 			m_animator.SetTrigger(VAR_CLIMB);
 		}
@@ -192,6 +194,7 @@ public class EnemyMelee : Actor {
 
 		if (IsCurrentAnim (ANIM_IDLE)) {
 			m_state = EState.ON_WALL;
+			m_isAttacking = false;
 		}
 	}
 
@@ -202,7 +205,7 @@ public class EnemyMelee : Actor {
 		Vector3 playerPos = Player.Instance.transform.localPosition;
 		FaceTo (playerPos, 5);
 
-		if (CanAttackMelee (Player.Instance)) {
+		if (m_isAttacking) {
 			m_animator.speed = m_speedFactor;			
 			
 			if( IsCurrentAnim(ANIM_ATTACK) )
@@ -210,16 +213,19 @@ public class EnemyMelee : Actor {
 				float delta = GetAnimationTime() - m_lastAnimationLoop;
 				if( !m_hasAttackDoneDamage && delta > AttackTriggerTime && delta < 0.95f )
 				{
-					Player.Instance.TakeHit(1);
-					
-					ProjectilesManager.Instance.CreateOnActor(HitEffect, Player.Instance);
-					
+					if( IsInDamageRange(Player.Instance) )
+					{
+						Player.Instance.TakeHit(AttackStrength);
+						
+						ProjectilesManager.Instance.CreateOnActor(HitEffect, Player.Instance);
+					}
 					m_hasAttackDoneDamage = true;
 				}
 				
 				if( delta >= 0.95f )
 				{
 					m_hasAttackDoneDamage = false;
+					m_isAttacking = false;
 				}
 			
 				SetAnimationCounter();
@@ -260,6 +266,11 @@ public class EnemyMelee : Actor {
 				m_animator.speed = MoveSpeed * m_speedFactor;
 	
 				transform.localPosition = pos;
+				
+				if( CanAttackMelee(Player.Instance) )
+				{
+					m_isAttacking = true;
+				}
 			}
 			else
 			{

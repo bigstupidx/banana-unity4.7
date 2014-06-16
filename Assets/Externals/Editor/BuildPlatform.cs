@@ -10,7 +10,7 @@ public class BuildPlatform
 	
 	static string m_sBuildPath =  Application.dataPath + "/../Builds/CastleAttack.exe";
 	
-	static string[] m_Scenes = { "Assets/Scenes/Main.unity" };
+	static string[] m_Scenes = { "Assets/Scenes/Splash.unity", "Assets/Scenes/Main.unity" };
 	
 	[MenuItem("Tools/Build StandAlone")]
 	private static void BuildStandAlone()  {

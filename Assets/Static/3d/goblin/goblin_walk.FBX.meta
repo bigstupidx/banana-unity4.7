@@ -243,25 +243,25 @@ ModelImporter:
       - path: Bip01/Bip01 Pelvis/bone_bag_01/goblin_bag
         weight: 1
       - path: Dummy01
-        weight: 1
+        weight: 0
       - path: Dummy01/Dummy_staff
-        weight: 1
+        weight: 0
       - path: Dummy02
-        weight: 1
+        weight: 0
       - path: Dummy03
-        weight: 1
+        weight: 0
       - path: Dummy04
-        weight: 1
+        weight: 0
       - path: goblin_alchemist_geo
-        weight: 1
+        weight: 0
       - path: goblin_alchemist_staff_geo
-        weight: 1
+        weight: 0
       - path: Plane02
-        weight: 1
+        weight: 0
       - path: projectile_node
-        weight: 1
+        weight: 0
       - path: root_camera
-        weight: 1
+        weight: 0
       maskType: 0
       maskSource: {instanceID: 0}
     isReadable: 0

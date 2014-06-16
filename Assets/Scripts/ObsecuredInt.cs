@@ -22,6 +22,11 @@ public struct ObsecuredInt {
 	{
 		return new ObsecuredInt (value);
 	}
+	
+	public static implicit operator int(ObsecuredInt value)
+	{
+		return value.Value;
+	}
 
 	public static ObsecuredInt operator+(ObsecuredInt lhs, int add)
 	{

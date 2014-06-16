@@ -208,13 +208,13 @@ ModelImporter:
           R UpperArm/Bip01 R Forearm/Bip01 R Hand
         weight: 1
       - path: Bip01/Bip01 Pelvis/bone_bag_01
-        weight: 1
+        weight: 0
       - path: Bip01/Bip01 Pelvis/bone_bag_01/bone_bag_02
-        weight: 1
+        weight: 0
       - path: root_camera
-        weight: 1
+        weight: 0
       - path: shadow
-        weight: 1
+        weight: 0
       maskType: 0
       maskSource: {instanceID: 0}
     isReadable: 0

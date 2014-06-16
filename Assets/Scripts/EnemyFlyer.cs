@@ -15,6 +15,7 @@ public class EnemyFlyer : Actor {
 	protected int m_patrolDirection = 0;
 	private bool m_hasAttackDoneDamage;	
 	private bool m_hasDoneAttacking;
+	private bool m_isAttacking = false;
 	
 	protected override void Awake()
 	{
@@ -51,6 +52,7 @@ public class EnemyFlyer : Actor {
 				m_dyingFallRotation = new Vector3(0, Random.Range(-10, 10) * 10, Random.Range(-10, 10) * 10);
 			}
 			
+			SetOnDying();
 			m_state = EState.DYING;
 			m_animator.CrossFade(ANIM_DYING, 0.0f, 0, 0.0f);
 			m_animator.speed = 1.0f;
@@ -101,7 +103,8 @@ public class EnemyFlyer : Actor {
 				m_state = EState.ON_WALL;
 				pos.y = Global.WALL_TOP_Y + Player.Instance.BoundingSize.y * 0.75f + BoundingSize.y * 0.5f;
 				pos.z = Global.ON_WALL_Z;
-				transform.localPosition = pos;				
+				transform.localPosition = pos;	
+				m_isAttacking = false;			
 				return;
 			}
 			
@@ -123,7 +126,7 @@ public class EnemyFlyer : Actor {
 	{
 		Vector3 playerPos = Player.Instance.transform.localPosition;		
 		
-		if (CanAttackMelee (Player.Instance)) {						
+		if (m_isAttacking ) {						
 			FaceTo (playerPos, 5);
 			m_animator.speed = m_speedFactor;			
 			
@@ -132,17 +135,20 @@ public class EnemyFlyer : Actor {
 				float delta = GetAnimationTime() - m_lastAnimationLoop;
 				if( !m_hasAttackDoneDamage && delta > AttackTriggerTime && delta < 0.95f )
 				{
-					Player.Instance.TakeHit(1);
+					if( IsInDamageRange (Player.Instance) )
+					{
+						Player.Instance.TakeHit(AttackStrength);										
+						ProjectilesManager.Instance.CreateOnActor(HitEffect, Player.Instance);
+					}
+					
 					m_hasDoneAttacking = true;
-					
-					ProjectilesManager.Instance.CreateOnActor(HitEffect, Player.Instance);
-					
 					m_hasAttackDoneDamage = true;
 				}
 				
 				if( delta >= 0.95f )
 				{
 					m_hasAttackDoneDamage = false;					
+					m_isAttacking = false;
 				}
 				
 				SetAnimationCounter();
@@ -187,6 +193,11 @@ public class EnemyFlyer : Actor {
 			}	
 			
 			transform.localPosition = pos;	
+			
+			if( CanFlyerAttack (Player.Instance) )
+			{
+				m_isAttacking = true;
+			}
 		}		
 	}
 	
@@ -198,7 +209,7 @@ public class EnemyFlyer : Actor {
 	
 	public override bool IsOnWall
 	{
-		get { return m_state == EState.ON_WALL; }
+		get { return transform.localPosition.y > Global.WALL_TOP_Y; }
 	}
 	
 	public override bool IsNearWall

@@ -44,7 +44,8 @@ public class EnemyRanged : Actor {
 			return;
 		}
 		
-		if (m_HP <= 0) {			
+		if (m_HP <= 0) {		
+			SetOnDying();	
 			m_state = EState.DYING;
 			m_animator.CrossFade(ANIM_DYING, 0.0f, 0, 0.0f);
 			m_animator.speed = 1.0f;
@@ -144,7 +145,7 @@ public class EnemyRanged : Actor {
 						playerPos.y += Player.Instance.BoundingSize.y * 0.5f;
 						
 						Vector3 projPos = m_holdingProjectile.transform.localPosition;
-						projPos.z = playerPos.z -= 4.0f;
+						projPos.z = playerPos.z - 4.0f;
 						
 						Vector3 dir = playerPos - projPos;
 						m_holdingProjectile.SetDirection(dir.normalized);						
@@ -183,6 +184,6 @@ public class EnemyRanged : Actor {
 	
 	protected virtual bool CanDoRangedAttack
 	{
-		get { return ( transform.localPosition.x >= Global.WALL_MIN_X && transform.localPosition.x <= Global.WALL_MAX_X ); }
+		get { return ( transform.localPosition.x >= (Global.WALL_MIN_X + BoundingSize.x * 0.25f) && transform.localPosition.x <= (Global.WALL_MAX_X - BoundingSize.x * 0.25f) ); }
 	}
 }

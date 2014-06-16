@@ -30,6 +30,7 @@ public abstract class Actor : MonoBehaviour {
 	public float MinTimeBeforeCharge = 5.0f;
 	public float MaxTimeBeforeCharge = 10.0f;
 	public int HitEffect = 0;
+	public ObsecuredInt Value = 1;
 	
 	protected Vector3 m_dyingFallRotation;
 	private float m_dyingFallGravity;
@@ -121,8 +122,19 @@ public abstract class Actor : MonoBehaviour {
 	{
 		Vector2 myFeetPos = (Vector2)transform.localPosition;
 		Vector2 yourFeetPos = (Vector2)other.transform.localPosition;
-		return !(myFeetPos.y > yourFeetPos.y + other.BoundingSize.y || myFeetPos.y + this.BoundingSize.y < yourFeetPos.y)
-			&& (Mathf.Abs(myFeetPos.x - other.FeetPosition.x) < (BoundingSize.x + other.BoundingSize.x + AttackRange));
+		return (Mathf.Abs(myFeetPos.x - yourFeetPos.x) < (BoundingSize.x + other.BoundingSize.x + AttackRange));
+	}
+	
+	protected bool IsInDamageRange(Actor other)
+	{
+		Vector2 myFeetPos = (Vector2)transform.localPosition;
+		return (Mathf.Abs(myFeetPos.x - other.FeetPosition.x) < (BoundingSize.x + other.BoundingSize.x + AttackRange) * 1.5f);
+	}
+	
+	protected bool CanFlyerAttack(Actor other)
+	{
+		Vector2 myFeetPos = (Vector2)transform.localPosition;
+		return (Mathf.Abs(myFeetPos.x - other.FeetPosition.x) < (BoundingSize.x + other.BoundingSize.x + AttackRange));
 	}
 	
 	public bool IsHorizontalOverlapWith(Actor other)
@@ -163,12 +175,17 @@ public abstract class Actor : MonoBehaviour {
 		transform.localPosition = pos;
 		
 		if (pos.y < Global.HELL_Y) {
-			GameObject.Destroy (gameObject);
-			EnemiesManager.Instance.RemoveEnemy (this);
+			GameObject.Destroy (gameObject);			
 			return;
 		}
 		
 		transform.Rotate(m_dyingFallRotation * Time.deltaTime);
+	}
+	
+	protected void SetOnDying()
+	{
+		EnemiesManager.Instance.RemoveEnemy (this);
+		PlayerStash.Instance.CurrentScore += this.Value;
 	}
 	
 	public abstract bool IsDying
@@ -189,6 +206,11 @@ public abstract class Actor : MonoBehaviour {
 	public abstract bool IsClimbing
 	{
 		get;
+	}
+	
+	public int HP
+	{
+		get { return m_HP; }
 	}
 
 	void OnDrawGizmos() {

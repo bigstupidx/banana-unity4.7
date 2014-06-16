@@ -33,6 +33,8 @@ public class Player : Actor {
 	private float m_touchBeginTime;
 	private bool m_hasTouchBegan;
 	private Vector2 m_lastTouchPosition;
+	
+	private float m_keyDelta;
 
 	public Transform Spine;
 	public Transform RightHand;
@@ -60,6 +62,7 @@ public class Player : Actor {
 		m_isAttacking = false;
 		m_willAttack = false;
 		m_hasAttackDoneDamage = false;
+		m_keyDelta = 0.0f;
 
 		m_bendSpineTarget = 0.0f;
 		m_currentWeaponTrail = null;
@@ -78,7 +81,7 @@ public class Player : Actor {
 			Weapons[i].SetActive(false);
 		}
 
-		m_HP = 100;
+		m_HP = MaxHP;
 	}
 
 	void Update()
@@ -337,17 +340,36 @@ public class Player : Actor {
 			}
 		}
 		
+		if( m_keyDelta > 0.0f )
+		{
+			m_keyDelta -= Time.deltaTime * 1000;
+			if( m_keyDelta < 0.0f )
+			{
+				m_keyDelta = 0.0f;
+			}
+		}
+		else if( m_keyDelta < 0.0f )
+		{
+			m_keyDelta += Time.deltaTime * 1000;
+			if( m_keyDelta > 0.0f )
+			{
+				m_keyDelta = 0.0f;
+			}
+		}
 		if( Input.GetKey(KeyCode.LeftArrow) )
 		{
-			gestureId = GESTURE_DRAG;
-			gestureDelta.x = -10;	
-			m_attackDirection = -1;
+			m_keyDelta = -1;
 		}
 		else if( Input.GetKey(KeyCode.RightArrow) )
 		{
+			m_keyDelta = 1;
+		}
+		
+		if( Mathf.Abs(m_keyDelta) > 0.1f )
+		{
 			gestureId = GESTURE_DRAG;
-			gestureDelta.x = 10;	
-			m_attackDirection = 1;
+			gestureDelta.x = m_keyDelta * Global.GESTURE_DISTANCE_THRESHOLD;	
+			m_attackDirection = Mathf.Sign(m_keyDelta);
 		}
 		
 		if( Input.GetKey(KeyCode.Space) )
@@ -513,7 +535,7 @@ public class Player : Actor {
 			}
 			
 			return Utils.TestRectsHit(
-				myx1, myPos.y + BoundingSize.y * 0.25f,
+				myx1, myPos.y + BoundingSize.y * 0.1f,
 				myx2, myPos.y + BoundingSize.y,
 				otherPos.x - other.BoundingSize.x * 0.5f, otherPos.y,
 				otherPos.x + other.BoundingSize.x * 0.5f, otherPos.y + other.BoundingSize.y);
