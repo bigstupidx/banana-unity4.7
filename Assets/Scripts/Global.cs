@@ -14,8 +14,8 @@ public class Global {
 	public const float HEAVEN_Y = 25.0f;
 	public const float HELL_Y = -5.0f;
 
-	public const float WALL_LEFT_X = -10.0f;
-	public const float WALL_RIGHT_X = 10.0f;
+	public const float WALL_LEFT_X = -7.0f;
+	public const float WALL_RIGHT_X = 7.0f;
 
 	public static float WALL_MIN_X = WALL_LEFT_X;
 	public static float WALL_MAX_X = WALL_RIGHT_X;

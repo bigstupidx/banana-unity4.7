@@ -18,6 +18,7 @@ public class ProjectilesManager : MonoBehaviour {
 	public const int DART = 6;
 	public const int BOOM1 = 7;
 	public const int ZAP = 8;	
+	public const int EXPLOSIVE = 9;
 
 	public GameObject[] Templates;
 

@@ -19,14 +19,10 @@ public class EnemyMelee : Actor {
 	private bool m_hasAttackDoneDamage;	
 	private bool m_isAttacking = false;
 
-	protected override void Awake()
+	protected virtual void Start()	
 	{
-		base.Awake ();				
-		m_HP = MaxHP;
-	}
-	
-	void Start()	
-	{
+		m_HP = MaxHP + ((EnemiesManager.Instance.SpawnGeneration - 1) * MaxHP);
+		
 		EnemiesManager.Instance.AddEnemy (this);
 		m_climbDecideTimeout = Random.Range(MinTimeBeforeCharge, MaxTimeBeforeCharge);
 	}
@@ -58,6 +54,15 @@ public class EnemyMelee : Actor {
 				m_animator.enabled = false;
 				return;
 			}
+			
+			if( Blizzard.Instance.Duration > 0.0f )
+			{
+				m_speedFactor += (0.01f - m_speedFactor) * Time.deltaTime * 2;
+			}
+			else
+			{
+				m_speedFactor += (1.0f - m_speedFactor) * Time.deltaTime;
+			}
 		
 			switch (m_state) {
 			case EState.PATROL:
@@ -84,6 +89,7 @@ public class EnemyMelee : Actor {
 		}
 
 		if (m_state == EState.DYING) {
+			FaceToImmediate(0);
 			FallOnDying();
 		}
 		
@@ -117,7 +123,7 @@ public class EnemyMelee : Actor {
 			
 			transform.localPosition = pos;
 			
-			m_climbDecideTimeout -= Time.deltaTime;
+			m_climbDecideTimeout -= Time.deltaTime * m_speedFactor;
 		}
 	}
 
@@ -128,7 +134,7 @@ public class EnemyMelee : Actor {
 			return;
 		}
 	
-		FaceTo (0, 5);
+		FaceTo (0, 10);
 		
 		Vector3 pos = transform.localPosition;
 		pos.z = Global.CLIMB_Z + (FeetPosition.y * 10);

@@ -14,6 +14,24 @@ public class EnemiesManager : MonoBehaviour {
 	void Awake()
 	{
 		g_instance = this;
+		
+		Init();
+	}
+	
+	private struct SpawnProgram
+	{
+		public int id;
+		public int level;
+		public int cost;
+		public int chance;
+		
+		public SpawnProgram( int nid, int nlevel, int ncost, int nchance )
+		{
+			id = nid;
+			level = nlevel;
+			cost = ncost;
+			chance = nchance;
+		}
 	}
 
 	private List<Actor> m_enemies = new List<Actor>();
@@ -23,15 +41,37 @@ public class EnemiesManager : MonoBehaviour {
 	
 	public GameObject[] Templates;
 	public Transform Root;
-
-	public void Clear()
+	
+	private SpawnProgram[] m_spawnPrograms;
+	
+	private const int LEVELS_PER_GENERATION = 20;	
+	private const float TIME_PER_LEVEL = 30.0f;
+	private const float TIME_PER_SPAWN = 1.0f;
+	private const int STARTING_BUDGET = 50;
+	private const int BUDGET_PER_LEVEL = 50;
+	private const int BUDGET_INCREASE_PER_LEVEL = 10;
+	
+	public ObsecuredInt SpawnGeneration = 1;
+	private int m_currentLevel;
+	private float m_currentLevelTime;
+	private int m_currentBudget;	
+	
+	public void Start()
 	{
-		m_enemies.Clear ();
+		m_spawnPrograms = new SpawnProgram[7];
+		
+		m_spawnPrograms[0] = new SpawnProgram(0, 0, 10, 500);
+		m_spawnPrograms[1] = new SpawnProgram(1, 3, 30, 450);
+		m_spawnPrograms[2] = new SpawnProgram(2, 5, 40, 400);
+		m_spawnPrograms[3] = new SpawnProgram(3, 8, 60, 350);
+		m_spawnPrograms[4] = new SpawnProgram(4, 10, 80, 300);
+		m_spawnPrograms[5] = new SpawnProgram(5, 14, 100, 250);
+		m_spawnPrograms[6] = new SpawnProgram(6, 17, 150, 200);		
 	}
-
+	
 	public void AddEnemy(Actor enemy)
 	{
-		if (!m_enemies.Contains (enemy)) {
+		if (enemy != null && !m_enemies.Contains (enemy)) {
 			m_enemies.Add (enemy);
 		}
 	}
@@ -59,8 +99,16 @@ public class EnemiesManager : MonoBehaviour {
 			GameObject.Destroy(enemy.gameObject);
 		}
 	
-		m_enemies.Clear();
+		m_enemies.Clear ();		
+	}
+	
+	private void Init()
+	{
+		m_currentLevel = 1;
+		SpawnGeneration = 1;
 		m_spawnTimeout = 0.0f;
+		m_currentLevelTime = TIME_PER_LEVEL;	
+		m_currentBudget = STARTING_BUDGET;
 	}
 	
 	// Update is called once per frame
@@ -70,18 +118,69 @@ public class EnemiesManager : MonoBehaviour {
 			return;
 		}
 		
+		m_currentLevelTime -= Time.deltaTime;
+		if( m_currentLevelTime <= 0.0f )
+		{
+			m_spawnTimeout = 0.0f;
+			m_currentLevelTime = TIME_PER_LEVEL;
+			
+			++m_currentLevel;
+			if( m_currentLevel > LEVELS_PER_GENERATION )
+			{
+				++SpawnGeneration;
+				m_currentLevel = 1;
+			}	
+			
+			m_currentBudget += BUDGET_PER_LEVEL + (BUDGET_INCREASE_PER_LEVEL * m_currentLevel);
+		}		
+		
 		m_spawnTimeout -= Time.deltaTime;
 		if( m_spawnTimeout <= 0.0f )
-		{
-			int temp = Random.Range(0, Templates.Length);
-			if( temp >= Templates.Length )
+		{			
+			int totalChance = 0;
+			foreach( SpawnProgram prog in m_spawnPrograms )
 			{
-				temp = Templates.Length - 1;
+				if( m_currentLevel >= prog.level )
+				{
+					totalChance += prog.chance;
+				}
 			}
 			
-			Spawn(temp);
+			int select = 0;
+			int dice = Random.Range(0, totalChance);
+			foreach( SpawnProgram prog in m_spawnPrograms )
+			{
+				if( m_currentLevel >= prog.level && dice <= prog.chance )
+				{
+					break;
+				}
+				
+				dice -= prog.chance;
+				++select;
+			}
+			
+			if( select >= m_spawnPrograms.Length )
+			{
+				select = m_spawnPrograms.Length - 1;
+			}
+			
+			int cost = m_spawnPrograms[select].cost;
+			if( m_currentBudget >= cost )
+			{
+				m_currentBudget -= cost;			
+				Spawn(select);
+				
+				m_spawnTimeout = TIME_PER_SPAWN;
+			}
+			else
+			{
+				m_spawnTimeout = 0.1f;
+			}			
+		}
 		
-			m_spawnTimeout = 3.0f;
+		if( m_enemies.Count < 1 )
+		{
+			m_currentLevelTime = 0.0f;
 		}
 	}
 	
@@ -92,5 +191,7 @@ public class EnemiesManager : MonoBehaviour {
 		
 		float spawnX = Random.Range(0, 100) < 50 ? Global.WALL_LEFT_X :	Global.WALL_RIGHT_X;
 		obj.transform.localPosition = new Vector3( spawnX, -0.5f - Random.Range(0.0f, 0.25f), 0.0f);
+		
+		AddEnemy(obj.GetComponent<Actor>());
 	}
 }

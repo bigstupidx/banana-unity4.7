@@ -12,20 +12,22 @@ public class Player : Actor {
 	private const int WEAPON_BOW = 0;
 	private const int WEAPON_SWORD = 1;
 	private const int WEAPON_CROSSBOW = 2;
-	private const int WEAPON_AXE = 3;
-	
+	private const int WEAPON_AXE = 3;	
 
 	private static Player g_instance = null;
 
 	private float m_walkAccelerate;
 	private bool m_isAttacking;
 	private bool m_willAttack;
-	private bool m_hasAttackDoneDamage;
+	private int m_hasAttackDoneDamage;
 	private float m_attackDirection;
 	private int m_currentWeapon;
 	private TrailRenderer m_currentWeaponTrail;
 	private Arrow m_holdingArrow;
 	private bool m_isDying;	
+	
+	private int m_equipedRangeWeapon;
+	private int m_equipedMeleeWeapon;
 
 	private float m_originalSpineZRotation;
 	private float m_bendSpineTarget;
@@ -39,7 +41,7 @@ public class Player : Actor {
 	public Transform Spine;
 	public Transform RightHand;
 	public GameObject[] Weapons;
-	public RuntimeAnimatorController[] Animations;
+	public RuntimeAnimatorController[] Animations;	
 
 	public static Player Instance
 	{
@@ -56,12 +58,15 @@ public class Player : Actor {
 
 	public void Reset()
 	{
-		UseWeapon(WEAPON_BOW);
+		m_equipedRangeWeapon = PlayerStash.Instance.PurchasedCrossbow > 0 ? WEAPON_CROSSBOW : WEAPON_BOW;
+		m_equipedMeleeWeapon = PlayerStash.Instance.PurchasedAxe > 0 ? WEAPON_AXE : WEAPON_SWORD;
+	
+		UseWeapon(m_equipedRangeWeapon);
 		m_walkAccelerate = 0.0f;
 		m_attackDirection = 0.0f;
 		m_isAttacking = false;
 		m_willAttack = false;
-		m_hasAttackDoneDamage = false;
+		m_hasAttackDoneDamage = 0;
 		m_keyDelta = 0.0f;
 
 		m_bendSpineTarget = 0.0f;
@@ -75,11 +80,6 @@ public class Player : Actor {
 
 		m_animator.CrossFade (ANIM_IDLE, 0.25f, 0, 0.0f);
 		m_isDying = false;
-
-		Weapons [0].SetActive (true);
-		for (int i=1; i<Weapons.Length; ++i) {
-			Weapons[i].SetActive(false);
-		}
 
 		m_HP = MaxHP;
 	}
@@ -130,42 +130,96 @@ public class Player : Actor {
 						m_isAttacking = false;						
 					}
 					
-					m_hasAttackDoneDamage = false;
+					m_hasAttackDoneDamage = 0;
 				}
-				else if( delta >= AttackTriggerTime )
+				else if( IsRangeWeapon )
 				{
-					if( m_holdingArrow != null )
+					if( delta >= AttackTriggerTime )
 					{
-						m_holdingArrow.Detach();
-					}
-					m_holdingArrow = null;
-					
-					if( !IsRangeWeapon && !m_hasAttackDoneDamage )
-					{
-						foreach( Actor enemy in EnemiesManager.Instance.Enemies )
+						if( m_holdingArrow != null )
 						{
-							if( TestAttackHit(m_attackDirection, enemy) )
+							m_holdingArrow.Detach();
+							
+							if( m_currentWeapon == WEAPON_CROSSBOW )
 							{
-								enemy.TakeHit(1);								
-								ProjectilesManager.Instance.CreateOnActor(ProjectilesManager.BAM, enemy);
+								Arrow leftArrow = ProjectilesManager.Instance.Create<Arrow>(ProjectilesManager.ARROW, RightHand);
+								leftArrow.Detach();
+								leftArrow.DeltaX = -2;
+								
+								Arrow rightArrow = ProjectilesManager.Instance.Create<Arrow>(ProjectilesManager.ARROW, RightHand);
+								rightArrow.Detach();
+								rightArrow.DeltaX = 2;
 							}
 						}
-						
-						m_hasAttackDoneDamage = true;
+						m_holdingArrow = null;						
+					}
+					else
+					{
+						m_willAttack = false;
+						m_hasAttackDoneDamage = 0;
 					}
 				}
 				else
 				{
-					m_willAttack = false;
-					m_hasAttackDoneDamage = false;
-				}
-
-				if( delta >= 0.0f && delta <= 0.8f )
-				{
-					if( IsRangeWeapon && delta < AttackTriggerTime && m_holdingArrow == null )
+					if( m_currentWeapon == WEAPON_SWORD )
 					{
-						m_holdingArrow = ProjectilesManager.Instance.Create<Arrow>(ProjectilesManager.ARROW, RightHand);
+						if( delta >= AttackTriggerTime )
+						{						
+							if( m_hasAttackDoneDamage == 0 )
+							{
+								CheckMeleeHitEnemies();								
+								++m_hasAttackDoneDamage;
+							}						
+						}
+						else
+						{
+							m_willAttack = false;
+							m_hasAttackDoneDamage = 0;
+						}
 					}
+					// WEAPON_AXE
+					else
+					{
+						if( delta >= 0.4f )
+						{
+							if( m_hasAttackDoneDamage == 2 )
+							{
+								CheckMeleeHitEnemies(2);								
+								++m_hasAttackDoneDamage;
+							}		
+						}
+						else if( delta >= 0.3f )
+						{
+							if( m_hasAttackDoneDamage == 1 )
+							{
+								m_attackDirection = -m_attackDirection;
+								++m_hasAttackDoneDamage;
+							}
+						}
+						else if( delta >= 0.1f )
+						{						
+							if( m_hasAttackDoneDamage == 0 )
+							{
+								CheckMeleeHitEnemies(2);
+								
+								++m_hasAttackDoneDamage;								
+							}						
+						}
+						else 
+						{
+							m_hasAttackDoneDamage = 0;
+						}
+							
+						if( delta < 0.5f )
+						{
+							m_willAttack = false;
+						}
+					}
+				}
+				
+				if( m_holdingArrow == null && IsRangeWeapon && delta >= 0.0f && delta < AttackTriggerTime )
+				{
+					m_holdingArrow = ProjectilesManager.Instance.Create<Arrow>(ProjectilesManager.ARROW, RightHand);
 				}
 
 				SetAnimationCounter();
@@ -218,6 +272,18 @@ public class Player : Actor {
 			}
 			m_walkAccelerate *= 0.5f;
 			m_bendSpineTarget += -m_bendSpineTarget * Time.deltaTime * 5;
+		}
+	}
+	
+	private void CheckMeleeHitEnemies(int damage = 1)
+	{
+		foreach( Actor enemy in EnemiesManager.Instance.Enemies )
+		{
+			if( TestAttackHit(m_attackDirection, enemy) )
+			{
+				enemy.TakeHit(damage);								
+				ProjectilesManager.Instance.CreateOnActor(ProjectilesManager.BAM, enemy);
+			}
 		}
 	}
 
@@ -340,6 +406,26 @@ public class Player : Actor {
 			}
 		}
 		
+#if UNITY_EDITOR
+	
+		if( Input.GetKey(KeyCode.Alpha1) )
+		{
+			++PlayerStash.Instance.PurchasedFire;
+		}
+		if( Input.GetKey(KeyCode.Alpha2) )
+		{
+			++PlayerStash.Instance.PurchasedSnow;
+		}
+		if( Input.GetKey(KeyCode.A) )
+		{
+			PlayerStash.Instance.PurchasedAxe = 1;
+		}
+		if( Input.GetKey(KeyCode.C) )
+		{
+			PlayerStash.Instance.PurchasedCrossbow = 1;
+		}
+
+#endif
 		if( m_keyDelta > 0.0f )
 		{
 			m_keyDelta -= Time.deltaTime * 1000;
@@ -410,7 +496,7 @@ public class Player : Actor {
 		case GESTURE_SWIPE_DOWN:
 			if( IsRangeWeapon || !m_isAttacking )
 			{
-				UseWeapon(WEAPON_BOW);
+				UseWeapon(m_equipedRangeWeapon);
 				Attack();
 			}
 			break;
@@ -418,7 +504,7 @@ public class Player : Actor {
 		case GESTURE_SWIPE:
 			if( !IsRangeWeapon || !m_isAttacking )
 			{
-				UseWeapon(WEAPON_SWORD);
+				UseWeapon(m_equipedMeleeWeapon);
 				Attack();
 			}
 			break;
@@ -472,6 +558,8 @@ public class Player : Actor {
 
 		m_animator.runtimeAnimatorController = Animations [m_currentWeapon];
 		m_currentWeaponTrail = Weapons [m_currentWeapon].GetComponentInChildren<TrailRenderer> ();
+		
+		AttackRange = m_currentWeapon == WEAPON_AXE ? 1.25f : 1;		
 	}
 	
 	public override bool IsDying 

@@ -20,14 +20,10 @@ public class EnemyRanged : Actor {
 	
 	public Transform RightHand;
 	
-	protected override void Awake()
-	{
-		base.Awake ();				
-		m_HP = MaxHP;
-	}
-	
 	void Start()	
 	{
+		m_HP = MaxHP + (((EnemiesManager.Instance.SpawnGeneration - 1) * MaxHP) / 2);
+		
 		EnemiesManager.Instance.AddEnemy (this);
 		
 		m_attackDecideTimeout = Random.Range(MinTimeBeforeCharge, MaxTimeBeforeCharge);
@@ -56,6 +52,15 @@ public class EnemyRanged : Actor {
 				return;
 			}
 			
+			if( Blizzard.Instance.Duration > 0.0f )
+			{
+				m_speedFactor += (0.01f - m_speedFactor) * Time.deltaTime * 2;
+			}
+			else
+			{
+				m_speedFactor += (1.0f - m_speedFactor) * Time.deltaTime;
+			}
+			
 			switch (m_state) {
 			case EState.PATROL:
 				Patrol();
@@ -76,6 +81,7 @@ public class EnemyRanged : Actor {
 		}
 		
 		if (m_state == EState.DYING) {
+			FaceToImmediate(0);
 			FallOnDying();
 		}
 		
@@ -115,7 +121,7 @@ public class EnemyRanged : Actor {
 			
 			transform.localPosition = pos;
 			
-			m_attackDecideTimeout -= Time.deltaTime;
+			m_attackDecideTimeout -= Time.deltaTime * m_speedFactor;
 		}
 	}
 	

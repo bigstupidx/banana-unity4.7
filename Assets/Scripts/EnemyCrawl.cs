@@ -7,6 +7,13 @@ public class EnemyCrawl : EnemyMelee {
 	private int m_dodgeDirection = 0;
 	private float m_dodgingSenseTimeout = 0.0f;
 
+	protected override void Start()
+	{
+		base.Start();
+		
+		m_HP = MaxHP + (((EnemiesManager.Instance.SpawnGeneration - 1) * MaxHP) >> 1);
+	}
+
 	protected override void Climb()
 	{
 		// Bend on wall

@@ -9,6 +9,7 @@ public class Arrow : MonoBehaviour {
 	public GameObject Trail;
 
 	private bool m_isDetached = false;
+	public float DeltaX = 0.0f;
 	
 	private float m_nextY;
 
@@ -52,6 +53,7 @@ public class Arrow : MonoBehaviour {
 			}
 			
 			// Fly
+			pos.x += DeltaX * Time.deltaTime;
 			pos.y = m_nextY;
 			transform.localPosition = pos;
 

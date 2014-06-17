@@ -15,7 +15,7 @@ public abstract class Actor : MonoBehaviour {
 	protected Animator m_animator;
 	protected int m_lastAnimationLoop;
 
-	protected ObsecuredInt m_HP;
+	protected ObsecuredInt m_HP = 1;
 
 	protected float m_speedFactor = 1.0f;
 
@@ -56,6 +56,15 @@ public abstract class Actor : MonoBehaviour {
 	{
 		return m_animator.GetCurrentAnimatorStateInfo (0).normalizedTime;
 	}
+	
+	protected void FaceToImmediate(float rot)
+	{
+		Quaternion quat = transform.localRotation;
+		Vector3 euler = quat.eulerAngles;
+		euler.y = rot;
+		quat.eulerAngles = euler;
+		transform.localRotation = quat;
+	}
 
 	protected void FaceTo(float rot, float speed)
 	{
@@ -95,6 +104,24 @@ public abstract class Actor : MonoBehaviour {
 				transform.localPosition = pos;
 			}
 		}
+	}
+	
+	public virtual Vector2 CenterPosition
+	{
+		get 
+		{ 
+			Vector2 pos;
+			if( m_animator.isHuman )
+			{
+				pos = (Vector2)m_animator.rootPosition;
+				pos.y += BoundingSize.y * 0.5f;
+			}
+			else
+			{
+				pos = new Vector2(transform.localPosition.x, transform.localPosition.y);
+			}
+			return pos;
+		}		
 	}
 
 	protected void StandOnWall()
@@ -185,7 +212,7 @@ public abstract class Actor : MonoBehaviour {
 	protected void SetOnDying()
 	{
 		EnemiesManager.Instance.RemoveEnemy (this);
-		PlayerStash.Instance.CurrentScore += this.Value;
+		PlayerStash.Instance.CurrentScore += this.Value + (((EnemiesManager.Instance.SpawnGeneration - 1) * this.Value) >> 1);
 	}
 	
 	public abstract bool IsDying

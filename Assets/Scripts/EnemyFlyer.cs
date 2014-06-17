@@ -17,14 +17,10 @@ public class EnemyFlyer : Actor {
 	private bool m_hasDoneAttacking;
 	private bool m_isAttacking = false;
 	
-	protected override void Awake()
-	{
-		base.Awake ();				
-		m_HP = MaxHP;
-	}
-	
 	void Start()	
 	{
+		m_HP = MaxHP + (((EnemiesManager.Instance.SpawnGeneration - 1) * MaxHP) / 3);
+		
 		EnemiesManager.Instance.AddEnemy (this);
 		m_attackDecideTimeout = Random.Range(MinTimeBeforeCharge, MaxTimeBeforeCharge);
 		
@@ -63,6 +59,15 @@ public class EnemyFlyer : Actor {
 				return;
 			}
 			
+			if( Blizzard.Instance.Duration > 0.0f )
+			{
+				m_speedFactor += (0.01f - m_speedFactor) * Time.deltaTime * 2;
+			}
+			else
+			{
+				m_speedFactor += (1.0f - m_speedFactor) * Time.deltaTime;
+			}
+			
 			switch (m_state) {
 			case EState.PATROL:
 				Patrol();
@@ -82,6 +87,7 @@ public class EnemyFlyer : Actor {
 		}
 		
 		if (m_state == EState.DYING) {
+			FaceToImmediate(0);
 			FallOnDying();
 		}
 	}
@@ -119,7 +125,7 @@ public class EnemyFlyer : Actor {
 		
 		transform.localPosition = pos;
 		
-		m_attackDecideTimeout -= Time.deltaTime;
+		m_attackDecideTimeout -= Time.deltaTime * m_speedFactor;
 	}
 	
 	protected virtual void OnWall()

@@ -17,6 +17,7 @@ public class StateMainMenu : GameState {
 	{
 		yield return StartCoroutine(Utils.WaitForRealSeconds(0.25f));
 		
+		Player.Instance.Reset();
 		EnemiesManager.Instance.Reset();
 		StateManager.Instance.PushState (StateManager.Instance.InGameMenu);		
 	}
