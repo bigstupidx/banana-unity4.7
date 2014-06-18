@@ -1,0 +1,8 @@
+1. Getting Facebook Hash
+========================
+
+Unzip .apk file and extract META-INF\CERT.RSA file
+run keytool -printcert -file CERT.RSA
+notice SHA1 bytes are printed like 29:37:F1:CB:06…
+copy SHA1 bytes into HEX to BASE64 converter
+see your BASE64 key hash in output field

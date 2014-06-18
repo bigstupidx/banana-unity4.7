@@ -29,6 +29,13 @@ public class BuildPlatform
 		
 		//build the file 
 		BuildOptions Options = BuildOptions.None;		
+		PlayerSettings.Android.keystoreName = Application.dataPath + "/../kinoastudios.keystore";
+		PlayerSettings.Android.keystorePass = "123456";
+		PlayerSettings.Android.keyaliasName = "kinoastudios";
+		PlayerSettings.Android.keystorePass = "123456";
+				
+		PlayerSettings.keystorePass = "123456";
+		PlayerSettings.keyaliasPass = "123456";
 		
 		BuildPipeline.BuildPlayer(m_Scenes, Application.dataPath + "/../Builds/CastleAttack.apk", BuildTarget.Android, Options);
 		

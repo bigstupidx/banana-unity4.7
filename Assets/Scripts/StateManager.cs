@@ -8,6 +8,8 @@ public class StateManager : MonoBehaviour {
 
 	public GameState MainMenu;
 	public GameState InGameMenu;
+	public GameState Leaderboard;
+	public GameState Shop;
 
 	private GameState m_currentState;
 	private GameState m_nextState;

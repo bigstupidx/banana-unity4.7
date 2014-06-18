@@ -319,9 +319,17 @@ public class Player : Actor {
 					if( m_hasTouchBegan )
 					{
 						if( Time.realtimeSinceStartup - m_touchBeginTime > Global.GESTURE_TIME )
-						{
-							gestureId = GESTURE_DRAG;
+						{							
 							gestureDelta = touch.position - m_lastTouchPosition;
+							if( Mathf.Abs(gestureDelta.x) >= Global.GESTURE_DRAG_THRESHOLD )
+							{
+								gestureId = GESTURE_SWIPE;
+								m_attackDirection = Mathf.Sign(gestureDelta.x);
+							}
+							else
+							{
+								gestureId = GESTURE_DRAG;
+							}
 							m_lastTouchPosition = touch.position;
 						}
 					}
@@ -359,8 +367,16 @@ public class Player : Actor {
 				{
 					if( Time.realtimeSinceStartup - m_touchBeginTime > Global.GESTURE_TIME )
 					{
-						gestureId = GESTURE_DRAG;
 						gestureDelta = (Vector2)Input.mousePosition - m_lastTouchPosition;
+						if( Mathf.Abs(gestureDelta.x) >= Global.GESTURE_DRAG_THRESHOLD )
+						{
+							gestureId = GESTURE_SWIPE;
+							m_attackDirection = Mathf.Sign(gestureDelta.x);
+						}
+						else
+						{
+							gestureId = GESTURE_DRAG;
+						}
 						m_lastTouchPosition = Input.mousePosition;
 					}
 				}

@@ -21,10 +21,34 @@ public class Blizzard : MonoBehaviour {
 	public float Duration
 	{
 		get { return m_duration; }
-		set
+		set { m_duration = value; }
+	}
+	
+	// Update is called once per frame
+	void Update () {		
+		if( m_duration <= 0.0f )
 		{
-			m_duration = value;
-			if( m_duration > 0.0f )
+			if( Effect.activeSelf )
+			{
+				ParticleSystem ps = Effect.GetComponent<ParticleSystem>();
+				if( ps != null )
+				{
+					ps.Clear(true);
+					ps.Stop(true);
+				}
+				
+				Effect.SetActive(false);
+			}
+		}
+		else if( m_duration > 0.0f )
+		{
+			m_duration -= Time.deltaTime;
+			if( m_duration < 0.0f )
+			{
+				m_duration = 0.0f;
+			}
+			
+			if( !Effect.activeSelf )
 			{
 				Effect.SetActive(true);	
 				
@@ -34,22 +58,6 @@ public class Blizzard : MonoBehaviour {
 					ps.Play(true);
 				}
 			}
-		}
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		m_duration -= Time.deltaTime;
-		if( m_duration <= 0.0f )
-		{
-			ParticleSystem ps = Effect.GetComponent<ParticleSystem>();
-			if( ps != null )
-			{
-				ps.Clear(true);
-				ps.Stop(true);
-			}
-			
-			Effect.SetActive(false);
 		}
 	}
 }

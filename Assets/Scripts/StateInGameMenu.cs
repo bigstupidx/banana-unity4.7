@@ -57,6 +57,7 @@ public class StateInGameMenu : GameState {
 				PlayerStash.Instance.RecordHighScore();
 			
 				StateManager.Instance.SetState(StateManager.Instance.MainMenu);
+				StateManager.Instance.PushState(StateManager.Instance.Leaderboard);
 			}
 			return;
 		}
