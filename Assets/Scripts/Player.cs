@@ -78,7 +78,9 @@ public class Player : Actor {
 
 		m_hasTouchBegan = false;
 
-		m_animator.CrossFade (ANIM_IDLE, 0.25f, 0, 0.0f);
+		m_animator.CrossFade (ANIM_IDLE, 0.1f, 0, 0.0f);
+		m_animator.SetBool(VAR_ATTACK, false);
+		m_animator.SetFloat(VAR_WALK, 0.0f);
 		m_isDying = false;
 
 		m_HP = MaxHP;
@@ -439,6 +441,10 @@ public class Player : Actor {
 		if( Input.GetKey(KeyCode.C) )
 		{
 			PlayerStash.Instance.PurchasedCrossbow = 1;
+		}
+		if( Input.GetKey(KeyCode.K) )
+		{
+			Player.Instance.TakeHit(1000);
 		}
 
 #endif

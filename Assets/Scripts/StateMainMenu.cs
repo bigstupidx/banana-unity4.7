@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class StateMainMenu : GameState {
@@ -20,6 +20,16 @@ public class StateMainMenu : GameState {
 			StartCoroutine (OnPlayButtonClick ());
 		};
 		
+		UIEventListener.Get (FindChild ("ButtonLeaderboard")).onClick += (obj) =>
+		{
+			StartCoroutine (OnLeaderboardButtonClick ());
+		};
+		
+		UIEventListener.Get (FindChild ("ButtonShop")).onClick += (obj) =>
+		{
+			StartCoroutine (OnShopButtonClick ());
+		};
+		
 		UIEventListener.Get(FacebookButton.gameObject).onClick += (obj) =>
 		{
 			FacebookController.Instance.Operate(FacebookController.EOperation.LOG_IN);		
@@ -37,9 +47,26 @@ public class StateMainMenu : GameState {
 	{
 		yield return StartCoroutine(Utils.WaitForRealSeconds(0.25f));
 		
+		PlayerStash.Instance.CurrentScore = 0;
+		Blizzard.Instance.Reset();
+		Apocalypse.Instance.Reset();
 		Player.Instance.Reset();
 		EnemiesManager.Instance.Reset();
 		StateManager.Instance.PushState (StateManager.Instance.InGameMenu);		
+	}
+	
+	private IEnumerator OnLeaderboardButtonClick()
+	{
+		yield return StartCoroutine(Utils.WaitForRealSeconds(0.25f));
+		
+		StateManager.Instance.PushState (StateManager.Instance.Leaderboard);		
+	}
+	
+	private IEnumerator OnShopButtonClick()
+	{
+		yield return StartCoroutine(Utils.WaitForRealSeconds(0.25f));
+		
+		StateManager.Instance.PushState (StateManager.Instance.Shop);		
 	}
 
 	public override void OnEnter()
@@ -52,8 +79,8 @@ public class StateMainMenu : GameState {
 
 	public override void OnUpdate()
 	{
-		FacebookButton.gameObject.SetActive(FacebookController.Instance.IsFunctional && !FacebookController.Instance.IsLoggedIn);
-		InviteButton.gameObject.SetActive(FacebookController.Instance.IsLoggedIn);
+		FacebookButton.gameObject.SetActive(FacebookController.Instance.CanOperateLogIn());
+		InviteButton.gameObject.SetActive(FacebookController.Instance.CanOperateInviteFriends());
 		PlayerStash.Instance.IsSound = ToggleSound.value;
 		
 		Vector3 pos = Camera.main.transform.localPosition;

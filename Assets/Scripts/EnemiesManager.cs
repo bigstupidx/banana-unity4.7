@@ -100,6 +100,8 @@ public class EnemiesManager : MonoBehaviour {
 		}
 	
 		m_enemies.Clear ();		
+		
+		Init();
 	}
 	
 	private void Init()

@@ -24,21 +24,17 @@ public class Blizzard : MonoBehaviour {
 		set { m_duration = value; }
 	}
 	
+	public void Reset()
+	{
+		m_duration = 0.0f;
+		Hide();
+	}
+	
 	// Update is called once per frame
 	void Update () {		
 		if( m_duration <= 0.0f )
 		{
-			if( Effect.activeSelf )
-			{
-				ParticleSystem ps = Effect.GetComponent<ParticleSystem>();
-				if( ps != null )
-				{
-					ps.Clear(true);
-					ps.Stop(true);
-				}
-				
-				Effect.SetActive(false);
-			}
+			Hide();
 		}
 		else if( m_duration > 0.0f )
 		{
@@ -48,16 +44,36 @@ public class Blizzard : MonoBehaviour {
 				m_duration = 0.0f;
 			}
 			
-			if( !Effect.activeSelf )
-			{
-				Effect.SetActive(true);	
-				
-				ParticleSystem ps = Effect.GetComponent<ParticleSystem>();
-				if( ps != null )
-				{			
-					ps.Play(true);
-				}
+			Show();	
+		}
+	}
+	
+	private void Show()
+	{
+		if( !Effect.activeSelf )
+		{
+			Effect.SetActive(true);	
+			
+			ParticleSystem ps = Effect.GetComponent<ParticleSystem>();
+			if( ps != null )
+			{			
+				ps.Play(true);
 			}
+		}
+	}
+	
+	private void Hide()
+	{
+		if( Effect.activeSelf )
+		{
+			ParticleSystem ps = Effect.GetComponent<ParticleSystem>();
+			if( ps != null )
+			{
+				ps.Clear(true);
+				ps.Stop(true);
+			}
+			
+			Effect.SetActive(false);
 		}
 	}
 }

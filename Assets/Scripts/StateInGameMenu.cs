@@ -10,16 +10,18 @@ public class StateInGameMenu : GameState {
 	public UIButton ButtonSnow;
 	public UILabel LabelSnowQuantity;
 	public UIButton ButtonFire;
-	public UILabel LabelFireQuantity;	
-	
-	private int m_fireballsToSpawn = 0;
-	private float m_fireballDelay;
+	public UILabel LabelFireQuantity;		
 	
 	void Awake()
 	{
+		UIEventListener.Get (FindChild ("ButtonPause")).onClick += (obj) =>
+		{
+			StartCoroutine (OnPauseButtonClick ());
+		};
+		
 		UIEventListener.Get (ButtonSnow.gameObject).onClick += (obj) =>
 		{
-			if( PlayerStash.Instance.PurchasedSnow > 0 )
+			if( PlayerStash.Instance.PurchasedSnow > 0 && !Player.Instance.IsDying )
 			{
 				Blizzard.Instance.Duration += 25.0f;
 				--PlayerStash.Instance.PurchasedSnow;
@@ -28,23 +30,28 @@ public class StateInGameMenu : GameState {
 		
 		UIEventListener.Get (ButtonFire.gameObject).onClick += (obj) =>
 		{
-			if( PlayerStash.Instance.PurchasedFire > 0 )
+			if( PlayerStash.Instance.PurchasedFire > 0 && !Player.Instance.IsDying )
 			{
-				m_fireballsToSpawn += 10;		
+				Apocalypse.Instance.RemainingFireballs += 10;		
 				--PlayerStash.Instance.PurchasedFire;
 			}
 		};
 	}
-
+	
+	private IEnumerator OnPauseButtonClick()
+	{
+		yield return StartCoroutine(Utils.WaitForRealSeconds(0.25f));
+		
+		Time.timeScale = 0.0f;
+		StateManager.Instance.PushState(StateManager.Instance.PauseMenu);
+	}
+	
 	public override void OnEnter()
 	{
+		EnemiesManager.Instance.Paused = false;		
+		
 		m_dyingTimeOut = 3.0f;
-		
-		EnemiesManager.Instance.Paused = false;
-		PlayerStash.Instance.CurrentScore = 0;
-		
-		m_fireballsToSpawn = 0;
-		m_fireballDelay = 0.0f;
+		Time.timeScale = 1.0f;
 	}
 	
 	public override void OnUpdate()
@@ -56,8 +63,9 @@ public class StateInGameMenu : GameState {
 			{
 				PlayerStash.Instance.RecordHighScore();
 			
-				StateManager.Instance.SetState(StateManager.Instance.MainMenu);
-				StateManager.Instance.PushState(StateManager.Instance.Leaderboard);
+				Blizzard.Instance.Reset();
+				Apocalypse.Instance.Reset();
+				StateManager.Instance.PushState(StateManager.Instance.GameOver);
 			}
 			return;
 		}
@@ -91,61 +99,12 @@ public class StateInGameMenu : GameState {
 		
 		Vector3 pos = Camera.main.transform.localPosition;
 		pos.y += (9.0f - pos.y) * Time.deltaTime * 2;
-		Camera.main.transform.localPosition = pos;	
-		
-		SpawnFireBalls();	
+		Camera.main.transform.localPosition = pos;			
 	}
 	
 	public override void OnExit()
 	{
-		m_dyingTimeOut = 3.0f;
-		EnemiesManager.Instance.Paused = true;
+		EnemiesManager.Instance.Paused = true;	
 	}
 	
-	private void SpawnFireBalls()	
-	{
-		if( m_fireballsToSpawn > 0 )
-		{
-			m_fireballDelay -= Time.deltaTime;
-			if( m_fireballDelay <= 0.0f )
-			{
-				m_fireballDelay = Random.Range(0.1f, 0.4f);
-				
-				--m_fireballsToSpawn;		
-				
-				Vector3 pos;
-				pos.x = Random.Range( Global.WALL_MIN_X + 1.0f, Global.WALL_MAX_X - 1.0f );
-				pos.y = Random.Range( Global.GROUND_Y + 1.0f, Global.WALL_TOP_Y );				
-				
-				foreach( Actor enemy in EnemiesManager.Instance.Enemies )
-				{
-					if( Random.Range(0, 100) < 50 )
-					{
-						Vector3 enemyPos = (Vector3)enemy.CenterPosition;
-						if( enemyPos.x > Global.WALL_MIN_X && enemyPos.x < Global.WALL_MAX_X )
-						{
-							if( enemyPos.y < Global.GROUND_Y + 1.0f )
-							{
-								enemyPos.y = Global.GROUND_Y + 1.0f;
-							}
-							else if( enemyPos.y > Global.WALL_TOP_Y - 1.0f )
-							{
-								enemyPos.y = Global.WALL_TOP_Y - 1.0f;
-							}
-							pos = enemyPos;
-						}
-						
-					}
-					
-					if( Random.Range(0, 100) < 50 )
-					{
-						break;
-					}
-				}
-				
-				pos.z = Global.PROJECTILE_Z;				
-				ProjectilesManager.Instance.Create(ProjectilesManager.EXPLOSIVE, pos);
-			}
-		}
-	}
 }

@@ -10,9 +10,12 @@ public class StateManager : MonoBehaviour {
 	public GameState InGameMenu;
 	public GameState Leaderboard;
 	public GameState Shop;
+	public GameState GameOver;
+	public GameState PauseMenu;
 
 	private GameState m_currentState;
 	private GameState m_nextState;
+	private GameState m_pendState;
 
 	private Stack<GameState> m_stackStates = new Stack<GameState>();
 
@@ -27,6 +30,10 @@ public class StateManager : MonoBehaviour {
 
 		MainMenu.gameObject.SetActive (false);
 		InGameMenu.gameObject.SetActive (false);
+		Leaderboard.gameObject.SetActive (false);
+		Shop.gameObject.SetActive (false);
+		GameOver.gameObject.SetActive (false);
+		PauseMenu.gameObject.SetActive (false);
 
 		g_instance = this;
 	}
@@ -38,6 +45,7 @@ public class StateManager : MonoBehaviour {
 		m_currentState.OnEnter ();
 
 		m_nextState = m_currentState;
+		m_pendState = null;
 	}
 	
 	// Update is called once per frame
@@ -46,9 +54,16 @@ public class StateManager : MonoBehaviour {
 			m_currentState.OnExit();
 			m_currentState.gameObject.SetActive(false);
 
+			if( m_pendState != null )
+			{
+				m_stackStates.Push (m_nextState);			
+				m_nextState = m_pendState;
+				m_pendState = null;
+			}
+			
 			m_currentState = m_nextState;
 			m_currentState.gameObject.SetActive(true);
-			m_currentState.OnEnter();
+			m_currentState.OnEnter();			
 		}
 
 		m_currentState.OnUpdate ();
@@ -69,5 +84,10 @@ public class StateManager : MonoBehaviour {
 	{
 		m_stackStates.Clear ();
 		m_nextState = state;
+	}
+	
+	public void PendState(GameState state)
+	{
+		m_pendState = state;
 	}
 }

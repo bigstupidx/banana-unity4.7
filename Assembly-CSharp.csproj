@@ -59,6 +59,7 @@
      <Compile Include="Assets\Facebook\Scripts\IOSFacebookLoader.cs" />
      <Compile Include="Assets\Facebook\Scripts\NativeDialogModes.cs" />
      <Compile Include="Assets\Scripts\Actor.cs" />
+     <Compile Include="Assets\Scripts\Apocalypse.cs" />
      <Compile Include="Assets\Scripts\Arrow.cs" />
      <Compile Include="Assets\Scripts\Blizzard.cs" />
      <Compile Include="Assets\Scripts\Cocktail.cs" />
@@ -82,10 +83,12 @@
      <Compile Include="Assets\Scripts\ProjectilesManager.cs" />
      <Compile Include="Assets\Scripts\Spark.cs" />
      <Compile Include="Assets\Scripts\SplashWait.cs" />
+     <Compile Include="Assets\Scripts\StateGameOver.cs" />
      <Compile Include="Assets\Scripts\StateInGameMenu.cs" />
      <Compile Include="Assets\Scripts\StateLeaderboard.cs" />
      <Compile Include="Assets\Scripts\StateMainMenu.cs" />
      <Compile Include="Assets\Scripts\StateManager.cs" />
+     <Compile Include="Assets\Scripts\StatePauseMenu.cs" />
      <Compile Include="Assets\Scripts\StateShop.cs" />
      <Compile Include="Assets\Scripts\Utils.cs" />
      <None Include="Assets\Plugins\Android\facebook\res\values\attrs.xml" />
