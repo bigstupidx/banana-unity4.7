@@ -28,13 +28,16 @@ public class PlayerStash : MonoBehaviour {
 		PlayerPrefs.Save();
 	}
 	
-	public void RecordHighScore()
+	public bool RecordHighScore()
 	{
 		if( CurrentScore > HighScore )
 		{
 			HighScore = CurrentScore;
-		}
-		PlayerPrefs.Save();
+			PlayerPrefs.Save();	
+			return true;
+		}		
+		
+		return false;
 	}
 	
 	public bool IsSound

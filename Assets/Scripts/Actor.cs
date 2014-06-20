@@ -34,6 +34,7 @@ public abstract class Actor : MonoBehaviour {
 	
 	protected Vector3 m_dyingFallRotation;
 	private float m_dyingFallGravity;
+	private int m_templateId;
 
 	protected virtual void Awake()
 	{
@@ -238,6 +239,12 @@ public abstract class Actor : MonoBehaviour {
 	public int HP
 	{
 		get { return m_HP; }
+	}
+	
+	public int TemplateId
+	{
+		get { return m_templateId; }
+		set { m_templateId = value; }
 	}
 
 	void OnDrawGizmos() {

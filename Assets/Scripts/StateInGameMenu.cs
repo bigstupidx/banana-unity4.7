@@ -61,8 +61,6 @@ public class StateInGameMenu : GameState {
 			m_dyingTimeOut -= Time.deltaTime;
 			if( m_dyingTimeOut <= 0.0f )
 			{
-				PlayerStash.Instance.RecordHighScore();
-			
 				Blizzard.Instance.Reset();
 				Apocalypse.Instance.Reset();
 				StateManager.Instance.PushState(StateManager.Instance.GameOver);

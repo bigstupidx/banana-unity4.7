@@ -15,6 +15,9 @@ public class EnemiesManager : MonoBehaviour {
 	{
 		g_instance = this;
 		
+		m_spawnPrograms = new SpawnProgram[7];
+		m_enemiesKilledCount = new int[7];
+		
 		Init();
 	}
 	
@@ -43,6 +46,7 @@ public class EnemiesManager : MonoBehaviour {
 	public Transform Root;
 	
 	private SpawnProgram[] m_spawnPrograms;
+	private int[] m_enemiesKilledCount;
 	
 	private const int LEVELS_PER_GENERATION = 20;	
 	private const float TIME_PER_LEVEL = 30.0f;
@@ -58,8 +62,6 @@ public class EnemiesManager : MonoBehaviour {
 	
 	public void Start()
 	{
-		m_spawnPrograms = new SpawnProgram[7];
-		
 		m_spawnPrograms[0] = new SpawnProgram(0, 0, 10, 500);
 		m_spawnPrograms[1] = new SpawnProgram(1, 3, 30, 450);
 		m_spawnPrograms[2] = new SpawnProgram(2, 5, 40, 400);
@@ -79,6 +81,7 @@ public class EnemiesManager : MonoBehaviour {
 	public void RemoveEnemy(Actor enemy)
 	{		
 		m_enemies.Remove (enemy);	
+		++m_enemiesKilledCount[enemy.TemplateId];
 	}
 	
 	public List<Actor> Enemies
@@ -111,6 +114,11 @@ public class EnemiesManager : MonoBehaviour {
 		m_spawnTimeout = 0.0f;
 		m_currentLevelTime = TIME_PER_LEVEL;	
 		m_currentBudget = STARTING_BUDGET;
+		
+		for (int i=0; i<m_enemiesKilledCount.Length; ++i )
+		{
+			m_enemiesKilledCount[i] = 0;
+		}
 	}
 	
 	// Update is called once per frame
@@ -194,6 +202,18 @@ public class EnemiesManager : MonoBehaviour {
 		float spawnX = Random.Range(0, 100) < 50 ? Global.WALL_LEFT_X :	Global.WALL_RIGHT_X;
 		obj.transform.localPosition = new Vector3( spawnX, -0.5f - Random.Range(0.0f, 0.25f), 0.0f);
 		
-		AddEnemy(obj.GetComponent<Actor>());
+		Actor act = obj.GetComponent<Actor>();
+		act.TemplateId = template;
+		AddEnemy(act);
+	}
+	
+	public int[] KillingStatistics
+	{
+		get { return m_enemiesKilledCount; }
+	}
+	
+	private static string makeCountString(int count, string name)
+	{
+		return count + "  " + name + (count > 0 ? "s" : "" );
 	}
 }
