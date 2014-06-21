@@ -22,6 +22,7 @@ public class FacebookController : MonoBehaviour {
 		LOG_IN,		
 		INVITE_FRIENDS,
 		MY_INFO,
+		POST_TO_WALL,
 	}
 	
 	public enum EWorkingState
@@ -82,6 +83,16 @@ public class FacebookController : MonoBehaviour {
 		get { return m_facebookName.Length > 0; }
 	}
 	
+	public string MyID
+	{
+		get { return FB.UserId; }
+	}
+	
+	public string MyFullName
+	{
+		get { return m_facebookName; }
+	}
+	
 	public void Operate(EOperation op, bool isOneAtATime = true)
 	{
 		if( !isOneAtATime || !IsWorking(op) )
@@ -110,12 +121,17 @@ public class FacebookController : MonoBehaviour {
 	
 	public bool CanOperateLogIn()
 	{
-		return IsFunctional && !IsLoggedIn && !IsWorking(FacebookController.EOperation.LOG_IN);
+		return IsFunctional && !IsLoggedIn && !IsWorking(EOperation.LOG_IN);
 	}
 	
 	public bool CanOperateInviteFriends()
 	{
-		return IsLoggedIn && !IsWorking(FacebookController.EOperation.INVITE_FRIENDS);
+		return IsLoggedIn && !IsWorking(EOperation.INVITE_FRIENDS);
+	}
+	
+	public bool CanOperatePost()
+	{
+		return IsLoggedIn && !IsWorking(EOperation.POST_TO_WALL) && PlayerStash.Instance.CurrentScore > 0;
 	}
 	
 	void Update()
@@ -166,6 +182,10 @@ public class FacebookController : MonoBehaviour {
 			
 		case EOperation.MY_INFO:
 			OpMyInfo(work);
+			break;
+			
+		case EOperation.POST_TO_WALL:
+			OpPostToWall(work);
 			break;
 		}			
 		
@@ -246,6 +266,31 @@ public class FacebookController : MonoBehaviour {
 					work.state = EWorkingState.DONE;
 				}
 				); 
+		}			
+	}
+	
+	void OpPostToWall(WorkThread work)
+	{
+		if( !IsLoggedIn )
+		{
+			work.state = EWorkingState.DONE;
+			return;
+		}
+		
+		if( work.state == EWorkingState.START )
+		{
+			work.state = EWorkingState.ONGOING;
+			
+			FB.Feed(                                                                                                                 
+			        linkCaption: "I scored " + PlayerStash.Instance.CurrentScore + " in Castle Attack! Can you beat it?",               
+			        picture: "http://kinoastudios.com/CastleDefender/logolarge.jpg",
+			        linkName: "Beat me at Castle Attack!",                                                                 
+			        link: "http://www.facebook.com/pages/Kinoastudios/397813703654774",
+			        callback: (result) =>
+			        {
+						work.state = EWorkingState.DONE;
+			        }
+			        );  
 		}			
 	}
 	

@@ -1,26 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\StateGameOver.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Player.cs">
     <Files>
-      <File FileName="Assets\Scripts\Player.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\FacebookController.cs" Line="140" Column="8" />
-      <File FileName="Assets\Scripts\Player.cs" Line="647" Column="24" />
-      <File FileName="Assets\Scripts\StateInGameMenu.cs" Line="63" Column="5" />
-      <File FileName="Assets\Scripts\ProjectilesManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Explosive.cs" Line="1" Column="1" />
-      <File FileName="Assets\Externals\Editor\BuildPlatform.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\StateMainMenu.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Global.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Blizzard.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\EnemiesManager.cs" Line="20" Column="3" />
-      <File FileName="Assets\Scripts\StateLeaderboard.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\StateShop.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\StateManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\StateGameOver.cs" Line="65" Column="12" />
-      <File FileName="Assets\Scripts\StatePauseMenu.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Apocalypse.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PlayerStash.cs" Line="40" Column="16" />
-      <File FileName="Assets\Scripts\Actor.cs" Line="247" Column="32" />
+      <File FileName="Assets\Scripts\StateLeaderboard.cs" Line="77" Column="1" />
+      <File FileName="Assets\Scripts\LeaderboardController.cs" Line="117" Column="80" />
+      <File FileName="Assets\Scripts\Player.cs" Line="451" Column="71" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

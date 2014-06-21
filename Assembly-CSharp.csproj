@@ -76,11 +76,13 @@
      <Compile Include="Assets\Scripts\FacebookController.cs" />
      <Compile Include="Assets\Scripts\GameState.cs" />
      <Compile Include="Assets\Scripts\Global.cs" />
+     <Compile Include="Assets\Scripts\LeaderboardController.cs" />
      <Compile Include="Assets\Scripts\ObsecuredInt.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\PlayerStash.cs" />
      <Compile Include="Assets\Scripts\Projectile.cs" />
      <Compile Include="Assets\Scripts\ProjectilesManager.cs" />
+     <Compile Include="Assets\Scripts\ScoreEntryPrefab.cs" />
      <Compile Include="Assets\Scripts\Spark.cs" />
      <Compile Include="Assets\Scripts\SplashWait.cs" />
      <Compile Include="Assets\Scripts\StateGameOver.cs" />

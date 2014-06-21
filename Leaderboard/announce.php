@@ -1,25 +1,58 @@
 <?php
 	
+	$debug = 0;
+	
 	// Turn off errors reporting
-	error_reporting(0);
+	//error_reporting(0);	
 	
 	$db = mysql_connect('localhost', 'kinoapte_cascore', 'pBhrgva5pGx5zZvW') or die('Could not connect: ' . mysql_error()); 
 	mysql_select_db('kinoapte_castleattack') or die('Could not select database');
-
-    $myBlob = mysql_real_escape_string($_GET['blob'], $db);
-	$myIV = mysql_real_escape_string($_GET['iv'], $db);
+	
+	if( $debug != 1 )
+	{
+		$objEncManager = new DataEncryptor();
+	
+		$myBlob = mysql_real_escape_string($_GET['a'], $db);
+		$myIV = mysql_real_escape_string($_GET['b'], $db);
+		$myKey = mysql_real_escape_string($_GET['c'], $db);
+					
+		$decryptedData = $objEncManager->mcryptDecryptString( $myBlob, $myIV, $myKey );	
 		
-	$objEncManager = new DataEncryptor();
-    $decryptedData = $objEncManager->mcryptDecryptString( $myBlob, $myIV );	
+		$info = explode(' | ', $decryptedData);
+		
+		if( count($info) < 4 )
+		{
+			die("Not enough info!");
+		}		
+		
+		var_dump($info);	
+		
+		// Strings must be escaped to prevent SQL injection attack. 
+		$fbid = mysql_real_escape_string($info[0], $db); 
+		$score = mysql_real_escape_string($info[1], $db); 
+		$name = mysql_real_escape_string($info[2], $db); 		
+		$checkKey = $info[3]; 
+		
+		if( !is_numeric($score) )
+		{
+			die("Wrong score number!");
+		}
+	}		
+	else
+	{
+		$fbid = mysql_real_escape_string($_GET['a'], $db); 
+		$name = mysql_real_escape_string($_GET['b'], $db); 
+		$score = mysql_real_escape_string($_GET['c'], $db);
+	}
+
+	// Check if the salted key matches with the provided facebook id		
+	if( $myKey != $checkKey )
+	{
+		echo $myKey . "<br>";
+		echo $checkKey . "<br>";
 	
-	$info = explode(' | ', $decryptedData);
-	
-	var_dump($info);
-    
-	// Strings must be escaped to prevent SQL injection attack. 
-	$fbid = mysql_real_escape_string($info[0], $db); 
-	$name = mysql_real_escape_string($info[1], $db); 
-	$score = mysql_real_escape_string($info[2], $db); 
+		die("Wrong key!");
+	}
 	
 	if( $score > 0 )
 	{ 	
@@ -41,7 +74,7 @@
     }
 	
 	// Lower 5
-	$query = "SELECT fbid, name, score FROM `scores` WHERE fbid != '$fbid' AND score < '$score' ORDER by `score` DESC LIMIT 10";
+	$query = "SELECT fbid, name, score FROM `scores` WHERE score < '$score' ORDER by `score` DESC LIMIT 10";
     $result = mysql_query($query) or die('Query failed: ' . mysql_error());
 	
 	$num_results = mysql_num_rows($result);  
@@ -84,8 +117,7 @@
 	{
 		const MY_MCRYPT_CIPHER        = MCRYPT_RIJNDAEL_256;
 		const MY_MCRYPT_MODE          = MCRYPT_MODE_CBC;
-		const MY_MCRYPT_KEY_STRING    = "1234567890-abcDEFGHUzyxwvutsrqpo"; // This should be a random string, recommended 32 bytes
-
+		
 		public  $lastIv               = '';
 
 
@@ -98,7 +130,7 @@
 		/**
 		 * Accepts a plaintext string and returns the encrypted version
 		 */
-		public function mcryptEncryptString( $stringToEncrypt, $base64encoded = true )
+		public function mcryptEncryptString( $stringToEncrypt, $key, $base64encoded = true )
 		{
 			// Set the initialization vector
 				$iv_size      = mcrypt_get_iv_size( self::MY_MCRYPT_CIPHER, self::MY_MCRYPT_MODE );
@@ -106,7 +138,7 @@
 				$this->lastIv = $iv;
 
 			// Encrypt the data
-				$encryptedData = mcrypt_encrypt( self::MY_MCRYPT_CIPHER, self::MY_MCRYPT_KEY_STRING, $stringToEncrypt , self::MY_MCRYPT_MODE , $iv );
+				$encryptedData = mcrypt_encrypt( self::MY_MCRYPT_CIPHER, $key, $stringToEncrypt , self::MY_MCRYPT_MODE , $iv );
 
 			// Data may need to be passed through a non-binary safe medium so base64_encode it if necessary. (makes data about 33% larger)
 				if ( $base64encoded ) {
@@ -120,11 +152,10 @@
 				return $encryptedData;
 		}
 
-
 		/**
 		 * Accepts a plaintext string and returns the encrypted version
 		 */
-		public function mcryptDecryptString( $stringToDecrypt, $iv, $base64encoded = true )
+		public function mcryptDecryptString( $stringToDecrypt, $iv, $key, $base64encoded = true )
 		{
 			// Note: the decryption IV must be the same as the encryption IV so the encryption IV must be stored during encryption
 
@@ -132,10 +163,11 @@
 				if ( $base64encoded ) {
 					$stringToDecrypt = base64_decode( $stringToDecrypt );
 					$iv              = base64_decode( $iv );
+					$key			 = base64_decode( $key );
 				}
 								
 			// Decrypt the data
-				$decryptedData = mcrypt_decrypt( self::MY_MCRYPT_CIPHER, self::MY_MCRYPT_KEY_STRING, $stringToDecrypt, self::MY_MCRYPT_MODE, $iv );
+				$decryptedData = mcrypt_decrypt( self::MY_MCRYPT_CIPHER, $key, $stringToDecrypt, self::MY_MCRYPT_MODE, $iv );
 
 			// Return the decrypted data
 				return rtrim( $decryptedData ); // the rtrim is needed to remove padding added during encryption
@@ -143,4 +175,5 @@
 
 
 	}
+	
 ?>

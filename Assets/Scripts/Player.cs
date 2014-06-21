@@ -41,7 +41,7 @@ public class Player : Actor {
 	public Transform Spine;
 	public Transform RightHand;
 	public GameObject[] Weapons;
-	public RuntimeAnimatorController[] Animations;	
+	public RuntimeAnimatorController[] Animations;		
 
 	public static Player Instance
 	{
@@ -445,6 +445,10 @@ public class Player : Actor {
 		if( Input.GetKey(KeyCode.K) )
 		{
 			Player.Instance.TakeHit(1000);
+		}
+		if( Input.GetKeyUp(KeyCode.Q) )
+		{
+			Application.CaptureScreenshot("screenshot_" + (int)(Time.time*1000) + ".png");
 		}
 
 #endif

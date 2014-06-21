@@ -6,6 +6,9 @@ public class StateGameOver : GameState {
 	public UIWidget Container;
 	public UILabel StatisticLabel;
 	
+	public UIButton FacebookButton;
+	public UIButton ShareButton;
+	
 	private string m_originalStatisticLabel;
 
 	void Awake()
@@ -19,6 +22,18 @@ public class StateGameOver : GameState {
 		{
 			StartCoroutine (OnLeaderboardButtonClick ());
 		};
+		
+		UIEventListener.Get(FacebookButton.gameObject).onClick += (obj) =>
+		{
+			FacebookController.Instance.Operate(FacebookController.EOperation.LOG_IN);		
+		};
+		FacebookButton.gameObject.SetActive(false);
+		
+		UIEventListener.Get(ShareButton.gameObject).onClick += (obj) =>
+		{
+			FacebookController.Instance.Operate(FacebookController.EOperation.POST_TO_WALL);		
+		};
+		ShareButton.gameObject.SetActive(false);	
 	}
 	
 	private IEnumerator OnMainMenuButtonClick()
@@ -76,6 +91,8 @@ public class StateGameOver : GameState {
 	
 	public override void OnUpdate()
 	{
+		FacebookButton.gameObject.SetActive(FacebookController.Instance.CanOperateLogIn());
+		ShareButton.gameObject.SetActive(FacebookController.Instance.CanOperatePost());
 	}
 	
 	public override void OnExit()

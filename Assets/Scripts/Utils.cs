@@ -69,4 +69,14 @@ public class Utils {
 	{	
 		return !(ax1 > bx2 || ay1 > by2 || ax2 < bx1 || ay2 < by1);
 	}
+	
+	public static int Max(int a, int b)
+	{
+		return (a > b) ? a : b;
+	}
+	
+	public static int Min(int a, int b)
+	{
+		return (a < b) ? a : b;
+	}
 }
