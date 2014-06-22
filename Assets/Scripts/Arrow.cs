@@ -11,6 +11,8 @@ public class Arrow : MonoBehaviour {
 	private bool m_isDetached = false;
 	public float DeltaX = 0.0f;
 	
+	public AudioClip[] ImpactSounds;
+	
 	private float m_nextY;
 
 	void Update()
@@ -46,8 +48,9 @@ public class Arrow : MonoBehaviour {
 						projectilePos.y = pos.y;
 					}
 					projectilePos.z = Global.PROJECTILE_Z;
-					
-					ProjectilesManager.Instance.Create(ProjectilesManager.POW2, projectilePos);
+										
+					GameObject spark = ProjectilesManager.Instance.Create(ProjectilesManager.POW2, projectilePos);
+					Utils.PlaySoundRandomly(spark.audio, ImpactSounds);
 					return;
 				}
 			}

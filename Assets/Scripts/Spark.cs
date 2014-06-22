@@ -5,7 +5,7 @@ public class Spark : MonoBehaviour {
 
 	public float Duration = 2.0f;
 
-	private float m_timeOut = 0.0f;
+	private float m_timeOut = 0.0f;	
 	
 	// Update is called once per frame
 	void Update () {

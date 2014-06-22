@@ -79,4 +79,27 @@ public class Utils {
 	{
 		return (a < b) ? a : b;
 	}
+	
+	public static AudioClip PickSoundRandomly(AudioClip[] clips)
+	{
+		if( clips == null || clips.Length < 1 )
+		{
+			return null;
+		}
+	
+		int i = Random.Range(0, clips.Length);
+		if( i >= clips.Length )
+		{
+			i = 0;
+		}		
+		return clips[i];
+	}
+	
+	public static void PlaySoundRandomly(AudioSource audio, AudioClip[] clips)
+	{
+		if( audio != null && clips != null && clips.Length > 0 )
+		{
+			audio.PlayOneShot(PickSoundRandomly(clips));
+		}
+	}
 }

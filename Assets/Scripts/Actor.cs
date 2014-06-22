@@ -35,12 +35,19 @@ public abstract class Actor : MonoBehaviour {
 	protected Vector3 m_dyingFallRotation;
 	private float m_dyingFallGravity;
 	private int m_templateId;
+	
+	public AudioClip[] SlashingSounds;
+	public AudioClip[] SlashingImpactSounds;
+	public AudioClip[] KilledSounds;
+	
+	protected int m_hasAttackPlaySound;
 
 	protected virtual void Awake()
 	{
 		m_animator = this.GetComponent<Animator> ();		
 		m_dyingFallRotation = Vector3.zero;
 		m_dyingFallGravity = 0.0f;		
+		m_hasAttackPlaySound = 0;
 	}
 
 	protected void SetAnimationCounter()
@@ -214,6 +221,8 @@ public abstract class Actor : MonoBehaviour {
 	{
 		EnemiesManager.Instance.RemoveEnemy (this);
 		PlayerStash.Instance.CurrentScore += this.Value + (((EnemiesManager.Instance.SpawnGeneration - 1) * this.Value) >> 1);
+		
+		Utils.PlaySoundRandomly(this.audio, KilledSounds);
 	}
 	
 	public abstract bool IsDying

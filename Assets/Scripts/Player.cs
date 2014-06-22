@@ -18,7 +18,7 @@ public class Player : Actor {
 
 	private float m_walkAccelerate;
 	private bool m_isAttacking;
-	private bool m_willAttack;
+	private bool m_willAttack;	
 	private int m_hasAttackDoneDamage;
 	private float m_attackDirection;
 	private int m_currentWeapon;
@@ -42,7 +42,8 @@ public class Player : Actor {
 	public Transform RightHand;
 	public GameObject[] Weapons;
 	public RuntimeAnimatorController[] Animations;		
-
+	public AudioClip[] ShootingSounds;	
+	
 	public static Player Instance
 	{
 		get { return g_instance; }
@@ -54,6 +55,8 @@ public class Player : Actor {
 		g_instance = this;
 
 		Reset ();
+		
+		Time.timeScale = 1.0f;
 	}
 
 	public void Reset()
@@ -67,6 +70,7 @@ public class Player : Actor {
 		m_isAttacking = false;
 		m_willAttack = false;
 		m_hasAttackDoneDamage = 0;
+		m_hasAttackPlaySound = 0;
 		m_keyDelta = 0.0f;
 
 		m_bendSpineTarget = 0.0f;
@@ -99,6 +103,8 @@ public class Player : Actor {
 		
 		if( m_HP <= 0 )
 		{
+			Utils.PlaySoundRandomly(this.audio, KilledSounds);
+		
 			m_isDying = true;
 			m_animator.CrossFade(ANIM_DYING, 0.0f, 0, 0.0f);
 			return;
@@ -132,7 +138,8 @@ public class Player : Actor {
 						m_isAttacking = false;						
 					}
 					
-					m_hasAttackDoneDamage = 0;
+					m_hasAttackDoneDamage = 0;	
+					m_hasAttackPlaySound = 0;	
 				}
 				else if( IsRangeWeapon )
 				{
@@ -151,7 +158,7 @@ public class Player : Actor {
 								Arrow rightArrow = ProjectilesManager.Instance.Create<Arrow>(ProjectilesManager.ARROW, RightHand);
 								rightArrow.Detach();
 								rightArrow.DeltaX = 2;
-							}
+							}							
 						}
 						m_holdingArrow = null;						
 					}
@@ -159,6 +166,12 @@ public class Player : Actor {
 					{
 						m_willAttack = false;
 						m_hasAttackDoneDamage = 0;
+						
+						if( m_hasAttackPlaySound == 0 )
+						{					
+							m_hasAttackPlaySound = 1;
+							Utils.PlaySoundRandomly(this.audio, ShootingSounds);
+						}
 					}
 				}
 				else
@@ -194,6 +207,7 @@ public class Player : Actor {
 						{
 							if( m_hasAttackDoneDamage == 1 )
 							{
+								m_hasAttackPlaySound = 0;
 								m_attackDirection = -m_attackDirection;
 								++m_hasAttackDoneDamage;
 							}
@@ -216,6 +230,12 @@ public class Player : Actor {
 						{
 							m_willAttack = false;
 						}
+					}
+					
+					if( m_hasAttackPlaySound == 0 )
+					{					
+						m_hasAttackPlaySound = 1;
+						Utils.PlaySoundRandomly(this.audio, SlashingSounds);
 					}
 				}
 				
@@ -271,8 +291,21 @@ public class Player : Actor {
 				}
 
 				transform.localPosition = pos;
+				
+				if( !Spine.audio.isPlaying )
+				{
+					Spine.audio.Play();
+				}
+				Spine.audio.pitch = accelerateDist * 0.75f;
 			}
-			m_walkAccelerate *= 0.5f;
+			else			
+			{
+				if( Spine.audio.isPlaying )
+				{
+					Spine.audio.Stop();
+				}
+			}
+			m_walkAccelerate *= 0.9f;
 			m_bendSpineTarget += -m_bendSpineTarget * Time.deltaTime * 5;
 		}
 	}
@@ -285,6 +318,8 @@ public class Player : Actor {
 			{
 				enemy.TakeHit(damage);								
 				ProjectilesManager.Instance.CreateOnActor(ProjectilesManager.BAM, enemy);
+				
+				Utils.PlaySoundRandomly(RightHand.audio, SlashingImpactSounds);
 			}
 		}
 	}
@@ -357,7 +392,8 @@ public class Player : Actor {
 		#if !UNITY_EDITOR
 			gotTouchCycle = m_hasTouchBegan;
 			m_hasTouchBegan = false;
-		#endif
+			m_walkAccelerate = 0.0f;
+		#endif			
 		}
 
 #if UNITY_EDITOR
@@ -397,6 +433,8 @@ public class Player : Actor {
 			currentTouchPosition = Input.mousePosition;
 			gotTouchCycle = m_hasTouchBegan;
 			m_hasTouchBegan = false;
+			
+			m_walkAccelerate = 0.0f;
 		}
 #endif
 
@@ -546,8 +584,10 @@ public class Player : Actor {
 		if (!m_isAttacking) {
 			m_animator.SetBool (VAR_ATTACK, true);
 			m_animator.SetFloat (VAR_WALK, 0.0f);
-			m_isAttacking = true;
-		}
+			m_isAttacking = true;			
+			
+			m_hasAttackPlaySound = 0;
+		}		
 
 		m_willAttack = true;
 	}

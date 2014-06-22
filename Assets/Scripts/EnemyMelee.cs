@@ -18,6 +18,8 @@ public class EnemyMelee : Actor {
 	protected int m_patrolDirection = 0;
 	private bool m_hasAttackDoneDamage;	
 	private bool m_isAttacking = false;
+	
+	public AudioClip[] AggroSounds;
 
 	protected virtual void Start()	
 	{
@@ -177,6 +179,8 @@ public class EnemyMelee : Actor {
 			if (IsClimbingReachWall) {
 				m_state = EState.PUSH_UP;
 				m_animator.SetTrigger(VAR_PUSH_UP);
+				
+				Utils.PlaySoundRandomly(this.audio, AggroSounds);
 			}
 		}
 		else		
@@ -221,6 +225,7 @@ public class EnemyMelee : Actor {
 				{
 					if( IsInDamageRange(Player.Instance) )
 					{
+						Utils.PlaySoundRandomly(this.audio, SlashingImpactSounds);
 						Player.Instance.TakeHit(AttackStrength);
 						
 						ProjectilesManager.Instance.CreateOnActor(HitEffect, Player.Instance);
@@ -232,6 +237,15 @@ public class EnemyMelee : Actor {
 				{
 					m_hasAttackDoneDamage = false;
 					m_isAttacking = false;
+					m_hasAttackPlaySound = 0;
+				}
+				else
+				{
+					if( m_hasAttackPlaySound == 0 )
+					{
+						Utils.PlaySoundRandomly(this.audio, SlashingSounds);
+						m_hasAttackPlaySound = 1;
+					}
 				}
 			
 				SetAnimationCounter();

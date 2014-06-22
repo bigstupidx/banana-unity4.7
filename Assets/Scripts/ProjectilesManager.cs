@@ -40,11 +40,12 @@ public class ProjectilesManager : MonoBehaviour {
 		return obj.GetComponent<T> ();
 	}
 	
-	public void Create(int template, Vector3 position)
+	public GameObject Create(int template, Vector3 position)
 	{
 		GameObject obj = GameObject.Instantiate (Templates[template]) as GameObject;
 		obj.transform.parent = Root;
 		obj.transform.localPosition = position;
+		return obj;
 	}
 	
 	public void CreateOnActor(int template, Actor actor)
