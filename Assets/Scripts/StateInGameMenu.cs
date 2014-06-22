@@ -97,7 +97,12 @@ public class StateInGameMenu : GameState {
 		
 		Vector3 pos = Camera.main.transform.localPosition;
 		pos.y += (9.0f - pos.y) * Time.deltaTime * 2;
-		Camera.main.transform.localPosition = pos;			
+		Camera.main.transform.localPosition = pos;	
+		
+		if( PlayerStash.Instance.CurrentScore >	PlayerStash.Instance.HighScore )
+		{
+			StateGameOver.HasHighscoreBeaten = true;
+		}
 	}
 	
 	public override void OnExit()

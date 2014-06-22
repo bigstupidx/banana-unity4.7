@@ -42,6 +42,7 @@ GameObject:
   - 4: {fileID: 400004}
   - 95: {fileID: 9500000}
   - 114: {fileID: 11400000}
+  - 82: {fileID: 8200000}
   m_Layer: 0
   m_Name: ogre
   m_TagString: Untagged
@@ -87,6 +88,64 @@ Transform:
   - {fileID: 400000}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!82 &8200000
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100004}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!95 &9500000
 Animator:
   serializedVersion: 3
@@ -116,16 +175,29 @@ MonoBehaviour:
   MoveSpeed: .5
   ClimbSpeed: .5
   AttackRange: .5
-  AttackTriggerTime: .5
+  AttackTriggerTime: .600000024
   MaxHP:
-    m_gut: bhjHNSEY40ASRA==
+    m_gut: YZNAuL8QJvL6Et8=
   AttackStrength:
-    m_gut: bSmQeToSzg==
-  MinTimeBeforeCharge: 15
-  MaxTimeBeforeCharge: 25
+    m_gut: bF1NYt46EqI=
+  MinTimeBeforeCharge: 10
+  MaxTimeBeforeCharge: 20
   HitEffect: 4
   Value:
-    m_gut: bv9DSCat8SYSnQ==
+    m_gut: bj8wAqs1y4AS7Q==
+  SlashingSounds:
+  - {fileID: 8300000, guid: 0869e55d93a44bd48b428418bbbf2b8d, type: 3}
+  - {fileID: 8300000, guid: 5b0bf3a1e7a6962439a9f6602a3a6d3d, type: 3}
+  SlashingImpactSounds:
+  - {fileID: 8300000, guid: ff8250fd49df6944dbd3661602b6ad53, type: 3}
+  - {fileID: 8300000, guid: 7f756e4c6b5747d4eac6d5c31e355f6e, type: 3}
+  - {fileID: 8300000, guid: 42f7781ef2f9d0843ab0325f22991816, type: 3}
+  KilledSounds:
+  - {fileID: 8300000, guid: f450fde6097fbee4182513adff7dd767, type: 3}
+  - {fileID: 8300000, guid: 705c53554e4a61d4797c03c2abc897c8, type: 3}
+  AggroSounds:
+  - {fileID: 8300000, guid: 93cbf7f6b82758a458b071b5beafad1b, type: 3}
+  - {fileID: 8300000, guid: 8e2047b38f91d794b88095da4dcf91b4, type: 3}
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

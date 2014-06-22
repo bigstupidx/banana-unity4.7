@@ -14,6 +14,7 @@ public class EnemyMelee : Actor {
 
 	protected EState m_state = EState.PATROL;
 	protected float m_climbDecideTimeout = 0.0f;
+	protected float m_climbDecideX;
 
 	protected int m_patrolDirection = 0;
 	private bool m_hasAttackDoneDamage;	
@@ -26,7 +27,8 @@ public class EnemyMelee : Actor {
 		m_HP = MaxHP + ((EnemiesManager.Instance.SpawnGeneration - 1) * MaxHP);
 		
 		EnemiesManager.Instance.AddEnemy (this);
-		m_climbDecideTimeout = Random.Range(MinTimeBeforeCharge, MaxTimeBeforeCharge);
+		m_climbDecideTimeout = Random.Range(MinTimeBeforeCharge, MaxTimeBeforeCharge);		
+		m_climbDecideX = Random.Range(Global.WALL_MIN_X + BoundingSize.x * 0.5f, Global.WALL_MAX_X - BoundingSize.x * 0.5f);
 	}
 
 	// Update is called once per frame
@@ -113,20 +115,26 @@ public class EnemyMelee : Actor {
 			m_patrolDirection = -m_patrolDirection;
 		}
 
-		if (m_climbDecideTimeout <= 0.0f && pos.x >= (Global.WALL_MIN_X + BoundingSize.x * 0.5f) && pos.x <= (Global.WALL_MAX_X - BoundingSize.x * 0.5f)) {
-			m_state = EState.CLIMB;
-			m_animator.SetTrigger(VAR_CLIMB);
+		if (m_climbDecideTimeout <= 0.0f) {
+			if( ( m_patrolDirection > 0 && pos.x >= m_climbDecideX )
+			   || ( m_patrolDirection < 0 && pos.x <= m_climbDecideX ) )
+			{			
+				m_state = EState.CLIMB;
+				m_animator.SetTrigger(VAR_CLIMB);
+				return;
+			}			
 		}
-		else {
-			FaceTo (m_patrolDirection * 90, 5);
-			pos.x += m_patrolDirection * MoveSpeed * Time.deltaTime * m_speedFactor;	
-			m_animator.SetFloat (VAR_WALK, 1.0f);
-			m_animator.speed = m_speedFactor * MoveSpeed * 0.75f;
-			
-			transform.localPosition = pos;
-			
+		else
+		{
 			m_climbDecideTimeout -= Time.deltaTime * m_speedFactor;
 		}
+		
+		FaceTo (m_patrolDirection * 90, 5);
+		pos.x += m_patrolDirection * MoveSpeed * Time.deltaTime * m_speedFactor;	
+		m_animator.SetFloat (VAR_WALK, 1.0f);
+		m_animator.speed = m_speedFactor * MoveSpeed * 0.75f;
+		
+		transform.localPosition = pos;		
 	}
 
 	protected virtual void Climb()
@@ -256,46 +264,52 @@ public class EnemyMelee : Actor {
 				ResetAnimationCounter();
 				m_hasAttackDoneDamage = false;
 			}
+			
+			m_animator.SetFloat(VAR_WALK, 0.0f);
 		} else {			
 			
-			if( !IsCurrentAnim(ANIM_ATTACK) )
+			if( CanAttackMelee(Player.Instance) )
 			{
-				Vector3 pos = transform.localPosition;
-				m_patrolDirection = pos.x < playerPos.x ? 1 : -1;
-	
-				// Check if being blocked by others ?
-				foreach( Actor ally in EnemiesManager.Instance.Enemies )
-				{				
-					if( ally == this || ally.IsDying || !ally.IsOnWall )
-					{
-						continue;
-					}
-					
-					if( ( ally.IsHorizontalOverlapWith(this) ) &&
-					   (( m_patrolDirection > 0 && ally.transform.localPosition.x > transform.localPosition.x )
-					 || ( m_patrolDirection < 0 && ally.transform.localPosition.x < transform.localPosition.x )) )
-					{
-						m_animator.SetFloat(VAR_WALK, 0.0f);
-						return;
-					}
-				}
-	
-				m_animator.SetFloat (VAR_WALK, 1.0f);
-	
-				pos.x += m_patrolDirection * MoveSpeed * m_speedFactor * Time.deltaTime;
-				m_animator.speed = MoveSpeed * m_speedFactor;
-	
-				transform.localPosition = pos;
-				
-				if( CanAttackMelee(Player.Instance) )
-				{
-					m_isAttacking = true;
-				}
+				m_isAttacking = true;
 			}
 			else
 			{
-				m_animator.SetBool (VAR_ATTACK, false);
-				m_animator.speed = m_speedFactor;
+				if( !IsCurrentAnim(ANIM_ATTACK) )
+				{
+					Vector3 pos = transform.localPosition;
+					m_patrolDirection = pos.x < playerPos.x ? 1 : -1;
+		
+					// Check if being blocked by others ?
+					foreach( Actor ally in EnemiesManager.Instance.Enemies )
+					{				
+						if( ally == this || ally.IsDying || !ally.IsOnWall )
+						{
+							continue;
+						}
+						
+						if( ( ally.IsHorizontalOverlapWith(this) ) &&
+						   (( m_patrolDirection > 0 && ally.transform.localPosition.x > transform.localPosition.x )
+						 || ( m_patrolDirection < 0 && ally.transform.localPosition.x < transform.localPosition.x )) )
+						{
+							m_animator.SetFloat(VAR_WALK, 0.0f);
+							return;
+						}
+					}
+		
+					m_animator.SetFloat (VAR_WALK, 1.0f);
+		
+					pos.x += m_patrolDirection * MoveSpeed * m_speedFactor * Time.deltaTime;
+					m_animator.speed = MoveSpeed * m_speedFactor;
+		
+					transform.localPosition = pos;
+					
+					
+				}
+				else
+				{
+					m_animator.SetBool (VAR_ATTACK, false);
+					m_animator.speed = m_speedFactor;
+				}
 			}
 		}
 	}

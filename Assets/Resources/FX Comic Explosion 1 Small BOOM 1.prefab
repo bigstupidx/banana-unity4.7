@@ -250,7 +250,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 3
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -311,6 +311,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Duration: 2
+  Sounds:
+  - {fileID: 8300000, guid: 85cb143ae4132fd44835bf87e6336b53, type: 3}
+  - {fileID: 8300000, guid: 65f69a9a4d6470a4a9255dfa5124c95f, type: 3}
+  - {fileID: 8300000, guid: d6feaf43ffc0fd24daefd5bf7270a488, type: 3}
 --- !u!198 &19800000
 ParticleSystem:
   m_ObjectHideFlags: 1

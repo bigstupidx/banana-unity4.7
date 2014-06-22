@@ -90,4 +90,14 @@ public class StateManager : MonoBehaviour {
 	{
 		m_pendState = state;
 	}
+	
+	public bool IsInLeaderboard
+	{
+		get { return m_currentState == Leaderboard; }
+	}
+	
+	public bool IsInShop
+	{
+		get { return m_currentState == Shop; }
+	}
 }

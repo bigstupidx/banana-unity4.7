@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 400000}
   - 95: {fileID: 9500000}
   - 114: {fileID: 11400000}
+  - 82: {fileID: 8200000}
   m_Layer: 0
   m_Name: spider
   m_TagString: Untagged
@@ -40,7 +41,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 10, z: .0616436005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400002}
@@ -58,6 +59,64 @@ Transform:
   m_Children: []
   m_Father: {fileID: 400000}
   m_RootOrder: 0
+--- !u!82 &8200000
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!95 &9500000
 Animator:
   serializedVersion: 3
@@ -89,17 +148,22 @@ MonoBehaviour:
   AttackRange: 0
   AttackTriggerTime: .400000006
   MaxHP:
-    m_gut: bbE4Bg8SsQ==
+    m_gut: b7X+CVfLNhLZ
   AttackStrength:
-    m_gut: Ybgpysj+H8z7EnQ=
+    m_gut: b3e/1ccU5hIZ
   MinTimeBeforeCharge: 10
-  MaxTimeBeforeCharge: 30
+  MaxTimeBeforeCharge: 20
   HitEffect: 3
   Value:
-    m_gut: Yejlwezl4zjfEvI=
+    m_gut: bf4NOygS0w==
   SlashingSounds: []
-  SlashingImpactSounds: []
-  KilledSounds: []
+  SlashingImpactSounds:
+  - {fileID: 8300000, guid: 258d29d539d3f5a4db985b15c3b99417, type: 3}
+  - {fileID: 8300000, guid: 472e72655f2a5904080a131b6030d6d6, type: 3}
+  - {fileID: 8300000, guid: 3b8107d798e0b034f8d121a58778169f, type: 3}
+  KilledSounds:
+  - {fileID: 8300000, guid: 904d1099c1c55ab4cae30deb66b66ec1, type: 3}
+  - {fileID: 8300000, guid: 3ce612c952d0eff4f8e5d7d87475f0e1, type: 3}
   AggroSounds: []
 --- !u!137 &13700000
 SkinnedMeshRenderer:

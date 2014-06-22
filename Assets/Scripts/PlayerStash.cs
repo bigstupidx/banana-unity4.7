@@ -28,16 +28,19 @@ public class PlayerStash : MonoBehaviour {
 		PlayerPrefs.Save();
 	}
 	
-	public bool RecordHighScore()
+	void OnApplicationPause()
+	{
+		RecordHighScore();
+	}
+	
+	public void RecordHighScore()
 	{
 		if( CurrentScore > HighScore )
 		{
-			HighScore = CurrentScore;
-			PlayerPrefs.Save();	
-			return true;
+			HighScore = CurrentScore;			
 		}		
 		
-		return false;
+		PlayerPrefs.Save();	
 	}
 	
 	public bool IsSound
@@ -50,6 +53,8 @@ public class PlayerStash : MonoBehaviour {
 				m_isSound = value;
 				PlayerPrefs.SetInt("IsSound", m_isSound ? 1 : 0);
 			}
+			
+			AudioListener.volume = m_isSound ? 1.0f : 0.0f;
 		}
 	}	
 	

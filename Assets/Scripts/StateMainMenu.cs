@@ -53,6 +53,8 @@ public class StateMainMenu : GameState {
 		Player.Instance.Reset();
 		EnemiesManager.Instance.Reset();
 		StateManager.Instance.PushState (StateManager.Instance.InGameMenu);		
+		
+		StateGameOver.HasHighscoreBeaten = false;
 	}
 	
 	private IEnumerator OnLeaderboardButtonClick()

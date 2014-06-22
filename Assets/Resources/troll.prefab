@@ -148,22 +148,22 @@ MonoBehaviour:
   AttackRange: 0
   AttackTriggerTime: .25
   MaxHP:
-    m_gut: b7IPZw2ZXxIj
+    m_gut: YQWeacwBqUb/Eh0=
   AttackStrength:
-    m_gut: bOXzwy3EEg4=
-  MinTimeBeforeCharge: 15
-  MaxTimeBeforeCharge: 25
+    m_gut: bSat8hISWQ==
+  MinTimeBeforeCharge: 10
+  MaxTimeBeforeCharge: 20
   HitEffect: 4
   Value:
-    m_gut: bL16PmkSErA=
+    m_gut: bV9qHeQS/g==
   SlashingSounds: []
   SlashingImpactSounds:
   - {fileID: 8300000, guid: 258d29d539d3f5a4db985b15c3b99417, type: 3}
   - {fileID: 8300000, guid: 472e72655f2a5904080a131b6030d6d6, type: 3}
   - {fileID: 8300000, guid: 3b8107d798e0b034f8d121a58778169f, type: 3}
   KilledSounds:
-  - {fileID: 8300000, guid: c7f13e77df3d6eb4cb421bd10eebacfd, type: 3}
-  - {fileID: 8300000, guid: ab4585d0182237143921879f633530c2, type: 3}
+  - {fileID: 8300000, guid: f450fde6097fbee4182513adff7dd767, type: 3}
+  - {fileID: 8300000, guid: 705c53554e4a61d4797c03c2abc897c8, type: 3}
   AggroSounds:
   - {fileID: 8300000, guid: 93cbf7f6b82758a458b071b5beafad1b, type: 3}
   - {fileID: 8300000, guid: 8e2047b38f91d794b88095da4dcf91b4, type: 3}

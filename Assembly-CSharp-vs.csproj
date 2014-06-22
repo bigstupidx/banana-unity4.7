@@ -59,6 +59,7 @@
      <Compile Include="Assets\Facebook\Scripts\IOSFacebookLoader.cs" />
      <Compile Include="Assets\Facebook\Scripts\NativeDialogModes.cs" />
      <Compile Include="Assets\Scripts\Actor.cs" />
+     <Compile Include="Assets\Scripts\AdsController.cs" />
      <Compile Include="Assets\Scripts\Apocalypse.cs" />
      <Compile Include="Assets\Scripts\Arrow.cs" />
      <Compile Include="Assets\Scripts\Blizzard.cs" />
@@ -83,6 +84,7 @@
      <Compile Include="Assets\Scripts\Projectile.cs" />
      <Compile Include="Assets\Scripts\ProjectilesManager.cs" />
      <Compile Include="Assets\Scripts\ScoreEntryPrefab.cs" />
+     <Compile Include="Assets\Scripts\ShopController.cs" />
      <Compile Include="Assets\Scripts\Spark.cs" />
      <Compile Include="Assets\Scripts\SplashWait.cs" />
      <Compile Include="Assets\Scripts\StateGameOver.cs" />

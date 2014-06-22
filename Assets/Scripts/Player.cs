@@ -339,6 +339,11 @@ public class Player : Actor {
 		if (Mathf.Approximately (Time.timeScale, 0.0f)) {
 			return;
 		}
+		
+		if( StateManager.Instance.IsInLeaderboard || StateManager.Instance.IsInShop )
+		{
+			return;
+		}
 
 		int gestureId = GESTURE_NONE;
 		Vector2 gestureDelta = Vector2.zero;

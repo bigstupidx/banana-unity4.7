@@ -139,10 +139,19 @@ public class EnemyFlyer : Actor {
 			if( IsCurrentAnim(ANIM_ATTACK) )
 			{
 				float delta = GetAnimationTime() - m_lastAnimationLoop;
+				
+				if( m_hasAttackPlaySound == 0 && delta < 0.95f )
+				{
+					m_hasAttackPlaySound = 1;
+					Utils.PlaySoundRandomly(this.audio, SlashingSounds);
+				}
+							
 				if( !m_hasAttackDoneDamage && delta > AttackTriggerTime && delta < 0.95f )
 				{
 					if( IsInDamageRange (Player.Instance) )
 					{
+						Utils.PlaySoundRandomly(this.audio, SlashingImpactSounds);
+					
 						Player.Instance.TakeHit(AttackStrength);										
 						ProjectilesManager.Instance.CreateOnActor(HitEffect, Player.Instance);
 					}
@@ -155,12 +164,14 @@ public class EnemyFlyer : Actor {
 				{
 					m_hasAttackDoneDamage = false;					
 					m_isAttacking = false;
+					m_hasAttackPlaySound = 0;
 				}
 				
 				SetAnimationCounter();
 			}
 			else			
 			{
+				m_hasAttackPlaySound = 0;
 				m_animator.SetBool (VAR_ATTACK, true);
 				ResetAnimationCounter();
 				m_hasAttackDoneDamage = false;

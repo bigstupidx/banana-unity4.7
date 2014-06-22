@@ -145,6 +145,8 @@ public class EnemyRanged : Actor {
 				{
 					if( m_holdingProjectile != null )
 					{
+						Utils.PlaySoundRandomly(this.audio, SlashingSounds);
+					
 						m_holdingProjectile.Detach();
 						
 						Vector3 playerPos = Player.Instance.transform.localPosition;

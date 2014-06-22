@@ -7,6 +7,13 @@ public class Spark : MonoBehaviour {
 
 	private float m_timeOut = 0.0f;	
 	
+	public AudioClip[] Sounds;
+	
+	void Start()
+	{
+		Utils.PlaySoundRandomly(this.audio, Sounds);
+	}	
+	
 	// Update is called once per frame
 	void Update () {
 		m_timeOut += Time.deltaTime;

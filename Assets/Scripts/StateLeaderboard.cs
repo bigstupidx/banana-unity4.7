@@ -110,7 +110,7 @@ public class StateLeaderboard : GameState {
 		}
 		else if( LeaderboardController.Instance.GotError )
 		{
-			ErrorLabel.text = "Could not get the leaderboard. Please check your internet connection.";
+			ErrorLabel.text = "Could not get the leaderboard. Please check your internet connection and try again.";
 		
 			PleaseWaitLabel.gameObject.SetActive(false);
 			ErrorLabel.gameObject.SetActive(true);

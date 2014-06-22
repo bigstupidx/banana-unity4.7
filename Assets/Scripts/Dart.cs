@@ -71,6 +71,8 @@ public class Dart : Projectile {
 	{		
 		transform.parent = ProjectilesManager.Instance.Root;		
 		m_isDetached = true;		
+		
+		this.audio.Play();
 	}	
 	
 	public override void SetDirection(Vector3 dir)

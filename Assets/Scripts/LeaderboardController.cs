@@ -116,7 +116,7 @@ public class LeaderboardController : MonoBehaviour {
 	{	
 		byte[] password = System.Text.ASCIIEncoding.ASCII.GetBytes(FacebookController.Instance.MyID);
 		byte[] salt = new byte[] { 0x6, 0x4, 0x19, 0x89, 0x30, 0x04, 0x19, 0x79};		
-		PasswordDeriveBytes pdb = new PasswordDeriveBytes(password, salt, "SHA1", 1000);
+		Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(password, salt, 1000);
 		byte[] passwordKey = pdb.GetBytes(32);		
 		
 		// Encrypt data blob

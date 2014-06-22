@@ -53,28 +53,36 @@ public class EnemiesManager : MonoBehaviour {
 	private const float TIME_PER_SPAWN = 1.0f;
 	private const int STARTING_BUDGET = 50;
 	private const int BUDGET_PER_LEVEL = 50;
-	private const int BUDGET_INCREASE_PER_LEVEL = 10;
+	private const int BUDGET_INCREASE_PER_LEVEL = 20;
 	
 	public ObsecuredInt SpawnGeneration = 1;
 	private int m_currentLevel;
 	private float m_currentLevelTime;
 	private int m_currentBudget;	
 	
+	public bool IsTestingMode = false;
+	
 	public void Start()
 	{
-		m_spawnPrograms[0] = new SpawnProgram(0, 0, 10, 500);
-		m_spawnPrograms[1] = new SpawnProgram(1, 3, 30, 450);
-		m_spawnPrograms[2] = new SpawnProgram(2, 5, 40, 400);
-		m_spawnPrograms[3] = new SpawnProgram(3, 8, 60, 350);
-		m_spawnPrograms[4] = new SpawnProgram(4, 10, 80, 300);
-		m_spawnPrograms[5] = new SpawnProgram(5, 14, 100, 250);
-		m_spawnPrograms[6] = new SpawnProgram(6, 17, 150, 200);		
+		m_spawnPrograms[0] = new SpawnProgram(0, 0, 10, 400);
+		m_spawnPrograms[1] = new SpawnProgram(1, 3, 15, 380);
+		m_spawnPrograms[2] = new SpawnProgram(2, 5, 20, 360);
+		m_spawnPrograms[3] = new SpawnProgram(3, 8, 25, 320);
+		m_spawnPrograms[4] = new SpawnProgram(4, 10, 30, 300);
+		m_spawnPrograms[5] = new SpawnProgram(5, 14, 35, 280);
+		m_spawnPrograms[6] = new SpawnProgram(6, 15, 40, 260);		
 	}
 	
 	public void AddEnemy(Actor enemy)
 	{
 		if (enemy != null && !m_enemies.Contains (enemy)) {
 			m_enemies.Add (enemy);
+			
+			if( IsTestingMode )
+			{
+				enemy.MinTimeBeforeCharge = 1;
+				enemy.MaxTimeBeforeCharge = 1;
+			}
 		}
 	}
 	
@@ -203,7 +211,8 @@ public class EnemiesManager : MonoBehaviour {
 		obj.transform.localPosition = new Vector3( spawnX, -0.5f - Random.Range(0.0f, 0.25f), 0.0f);
 		
 		Actor act = obj.GetComponent<Actor>();
-		act.TemplateId = template;
+		act.TemplateId = template;		
+		
 		AddEnemy(act);
 	}
 	

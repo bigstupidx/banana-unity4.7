@@ -3,7 +3,7 @@
 	$debug = 0;
 	
 	// Turn off errors reporting
-	//error_reporting(0);	
+	error_reporting(0);	
 	
 	$db = mysql_connect('localhost', 'kinoapte_cascore', 'pBhrgva5pGx5zZvW') or die('Could not connect: ' . mysql_error()); 
 	mysql_select_db('kinoapte_castleattack') or die('Could not select database');

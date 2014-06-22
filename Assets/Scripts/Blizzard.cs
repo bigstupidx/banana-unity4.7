@@ -28,6 +28,8 @@ public class Blizzard : MonoBehaviour {
 	{
 		m_duration = 0.0f;
 		Hide();
+		
+		this.audio.volume = 0.0f;
 	}
 	
 	// Update is called once per frame
@@ -59,6 +61,18 @@ public class Blizzard : MonoBehaviour {
 			{			
 				ps.Play(true);
 			}
+			
+			this.audio.Play();
+		}
+		
+		if( !this.audio.isPlaying )
+		{
+			this.audio.Play();	
+		}
+		
+		if( this.audio.volume < 1.0f )
+		{
+			this.audio.volume += Time.deltaTime;		
 		}
 	}
 	
@@ -74,6 +88,18 @@ public class Blizzard : MonoBehaviour {
 			}
 			
 			Effect.SetActive(false);
+		}		
+		
+		if( this.audio.isPlaying ) 
+		{
+			if( this.audio.volume > 0.1f )
+			{
+				this.audio.volume -= Time.deltaTime;
+			}
+			else
+			{
+				this.audio.Stop();
+			}
 		}
 	}
 }

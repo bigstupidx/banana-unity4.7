@@ -10,6 +10,8 @@ public class StateGameOver : GameState {
 	public UIButton ShareButton;
 	
 	private string m_originalStatisticLabel;
+	
+	public static bool HasHighscoreBeaten = false;
 
 	void Awake()
 	{	
@@ -33,7 +35,9 @@ public class StateGameOver : GameState {
 		{
 			FacebookController.Instance.Operate(FacebookController.EOperation.POST_TO_WALL);		
 		};
-		ShareButton.gameObject.SetActive(false);	
+		ShareButton.gameObject.SetActive(false);
+		
+		HasHighscoreBeaten = false;	
 	}
 	
 	private IEnumerator OnMainMenuButtonClick()
@@ -64,7 +68,8 @@ public class StateGameOver : GameState {
 			label = label.Replace("{count" + i + "}", statistic[i].ToString());
 		}
 		
-		if( PlayerStash.Instance.RecordHighScore() )
+		PlayerStash.Instance.RecordHighScore();		
+		if( HasHighscoreBeaten )
 		{
 			if( PlayerStash.Instance.HighScore > 1000 )
 			{
