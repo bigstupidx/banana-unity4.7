@@ -148,14 +148,14 @@ MonoBehaviour:
   AttackRange: 0
   AttackTriggerTime: .400000006
   MaxHP:
-    m_gut: Yf0l7TbkUEexEnA=
+    m_gut: bYK2RYcSxw==
   AttackStrength:
-    m_gut: YdqKw/6nVyCjEi8=
+    m_gut: YbASe7HmKAN1EuE=
   MinTimeBeforeCharge: 10
   MaxTimeBeforeCharge: 30
   HitEffect: 3
   Value:
-    m_gut: bdBPxOYSiQ==
+    m_gut: bIZ603sHEmc=
   SlashingSounds:
   - {fileID: 8300000, guid: 56586adbeaba1c14bba027b3e54d009a, type: 3}
   - {fileID: 8300000, guid: d3c8efe89bd26e04ba9c6ee650e67c18, type: 3}
@@ -188,7 +188,7 @@ SkinnedMeshRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   serializedVersion: 2
-  m_Quality: 2
+  m_Quality: 1
   m_UpdateWhenOffscreen: 0
   m_Mesh: {fileID: 4300000, guid: 52967e1b75de9b94f87798f499187ccf, type: 3}
   m_Bones: []

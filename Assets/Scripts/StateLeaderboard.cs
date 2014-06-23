@@ -126,6 +126,13 @@ public class StateLeaderboard : GameState {
 				PleaseWaitLabel.gameObject.SetActive(false);
 				ErrorLabel.gameObject.SetActive(true);
 			}
+			else if( !LeaderboardController.Instance.IsWorking )
+			{
+				if( FacebookController.Instance.HasMyInfo )
+				{
+					LeaderboardController.Instance.Request();
+				}
+			}
 			else
 			{
 				PleaseWaitLabel.gameObject.SetActive(true);
@@ -140,5 +147,10 @@ public class StateLeaderboard : GameState {
 	
 	public override void OnExit()
 	{		
+	}
+	
+	public override void OnBackKey()
+	{
+		StateManager.Instance.PopState();
 	}
 }

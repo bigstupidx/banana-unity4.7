@@ -118,4 +118,8 @@ public class StateMainMenu : GameState {
 	{
 	}
 
+	public override void OnBackKey()
+	{
+		Application.Quit();
+	}
 }

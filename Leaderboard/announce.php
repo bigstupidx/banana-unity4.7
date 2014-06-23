@@ -54,7 +54,7 @@
 		die("Wrong key!");
 	}
 	
-	if( $score > 0 )
+	//if( $score > 0 )
 	{ 	
 		// Send variables for the MySQL database class. 
 		$query = "insert into scores(fbid, name, score) values ('$fbid', '$name', '$score') on duplicate key update score = values(score);"; 		

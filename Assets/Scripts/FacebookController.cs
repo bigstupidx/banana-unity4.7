@@ -223,8 +223,10 @@ public class FacebookController : MonoBehaviour {
 		}
 		
 		if( IsLoggedIn )
-		{
+		{			
 			work.state = EWorkingState.DONE;
+			
+			Operate(EOperation.MY_INFO);
 			return;
 		}		
 		

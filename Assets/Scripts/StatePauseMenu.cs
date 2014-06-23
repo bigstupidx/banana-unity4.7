@@ -78,4 +78,9 @@ public class StatePauseMenu : GameState {
 	public override void OnExit()
 	{
 	}
+	
+	public override void OnBackKey()
+	{
+		Application.Quit();
+	}
 }

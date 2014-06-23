@@ -34,7 +34,7 @@ PlayerSettings:
   allowedAutorotateToLandscapeLeft: 1
   useOSAutorotation: 1
   use32BitDisplayBuffer: 0
-  use24BitDepthBuffer: 0
+  use24BitDepthBuffer: 1
   defaultIsFullScreen: 0
   defaultIsNativeResolution: 1
   runInBackground: 1
@@ -64,12 +64,12 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  iPhoneBundleIdentifier: com.kinoastudios.castleattack
+  iPhoneBundleIdentifier: com.kinoastudios.thecastleattack
   metroEnableIndependentInputSource: 0
   metroEnableLowLatencyPresentationAPI: 0
   productGUID: 36ff242f74d6f2e408e9ffa3812d5f9e
-  iPhoneBundleVersion: 1.5
-  AndroidBundleVersionCode: 5
+  iPhoneBundleVersion: 1.0
+  AndroidBundleVersionCode: 10
   AndroidMinSdkVersion: 9
   AndroidPreferredInstallLocation: 1
   aotOptions: 

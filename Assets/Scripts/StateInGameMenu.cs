@@ -110,4 +110,9 @@ public class StateInGameMenu : GameState {
 		EnemiesManager.Instance.Paused = true;	
 	}
 	
+	public override void OnBackKey()
+	{
+		Time.timeScale = 0.0f;
+		StateManager.Instance.PushState(StateManager.Instance.PauseMenu);
+	}
 }

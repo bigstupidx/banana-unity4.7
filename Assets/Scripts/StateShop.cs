@@ -112,4 +112,9 @@ public class StateShop : GameState {
 	{
 		DescriptionLabel.text = m_originalDescriptionText;
 	}
+	
+	public override void OnBackKey()
+	{
+		StateManager.Instance.PopState();
+	}
 }

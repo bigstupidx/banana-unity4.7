@@ -116,8 +116,8 @@ public class EnemyMelee : Actor {
 		}
 
 		if (m_climbDecideTimeout <= 0.0f) {
-			if( ( m_patrolDirection > 0 && pos.x >= m_climbDecideX )
-			   || ( m_patrolDirection < 0 && pos.x <= m_climbDecideX ) )
+			if( ( m_patrolDirection > 0 && pos.x >= m_climbDecideX && pos.x < Global.WALL_MAX_X - 1.0f )
+			   || ( m_patrolDirection < 0 && pos.x <= m_climbDecideX && pos.x > Global.WALL_MIN_X + 1.0f ) )
 			{			
 				m_state = EState.CLIMB;
 				m_animator.SetTrigger(VAR_CLIMB);

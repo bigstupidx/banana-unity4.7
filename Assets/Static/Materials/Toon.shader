@@ -22,13 +22,13 @@
             #include "UnityCG.cginc"
             struct a2v
             {
-                fixed4 vertex : POSITION;
-                fixed3 normal : NORMAL;
+                half4 vertex : POSITION;
+                half3 normal : NORMAL;
             }; 
  
             struct v2f
             {
-                fixed4 pos : POSITION;
+                half4 pos : POSITION;
             };
  
             fixed _Outline;
@@ -36,18 +36,18 @@
             v2f vert (a2v v)
             {
                 v2f o;
-                fixed4 pos = mul( UNITY_MATRIX_MV, v.vertex); 
-                fixed3 normal = mul( (fixed3x3)UNITY_MATRIX_IT_MV, v.normal);  
+                half4 pos = mul( UNITY_MATRIX_MV, v.vertex); 
+                half3 normal = mul( (half3x3)UNITY_MATRIX_IT_MV, v.normal);  
                 normal.z = -0.4;
-                pos = pos + fixed4(normalize(normal),0) * _Outline;
+                pos = pos + half4(normalize(normal),0) * _Outline;
                 o.pos = mul(UNITY_MATRIX_P, pos);
  
                 return o;
             }
  
-            fixed4 frag (v2f IN) : COLOR
+            half4 frag (v2f IN) : COLOR
             {
-                return fixed(0.0);
+                return half(0.0);
             }
  
             ENDCG
@@ -65,12 +65,9 @@
             #pragma fragment frag
  
             #include "UnityCG.cginc"
-            uniform fixed4 _LightColor0;
  
             sampler2D _MainTex;
-            sampler2D _Ramp;
- 
-            fixed4 _MainTex_ST; 
+            sampler2D _Ramp; 
  
             struct a2v
             {
@@ -94,7 +91,7 @@
                 //Transform the vertex to projection space
                 o.pos = mul( UNITY_MATRIX_MVP, v.vertex); 
                 //Get the UV coordinates
-                o.uv = TRANSFORM_TEX (v.texcoord, _MainTex);  
+                o.uv = v.texcoord;  
                 o.normal = v.normal;
                 return o;
             }
@@ -112,7 +109,7 @@
                 //Perform our toon light mapping 
                 diff = tex2D(_Ramp, fixed2(diff, 0.5));
                 //Update the colour
-                fixed3 lightColor = fixed3(0.5, 0.5, 0.5) + _LightColor0.rgb * (diff); 
+                fixed3 lightColor = fixed3(0.5, 0.5, 0.5) + fixed3(0.25, 0.25, 0.25) * (diff); 
                 //Product the final color
                 c.rgb = lightColor * c.rgb * 3;
                 return c; 

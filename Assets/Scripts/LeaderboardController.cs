@@ -49,7 +49,7 @@ public class LeaderboardController : MonoBehaviour {
 	private List<Entry> m_upEntries = new List<Entry>();
 	
 	public void Request()
-	{
+	{		
 		if( m_isWorking )
 		{
 			return;
@@ -64,18 +64,25 @@ public class LeaderboardController : MonoBehaviour {
 		{
 			if( !FacebookController.Instance.HasMyInfo )
 			{
+				FacebookController.Instance.Operate(FacebookController.EOperation.MY_INFO);
+				m_isRequesting = false;
 				return;
 			}	
 			
-			if( PlayerStash.Instance.HighScore < 1 )
+			/*if( PlayerStash.Instance.HighScore < 1 )
 			{
 				m_isRequesting = false;
 				return;
-			}
+			}*/
 			
 			m_isRequesting = false;
 			Refresh();
 		}
+	}
+	
+	public bool IsWorking
+	{
+		get { return m_isRequesting; }
 	}
 	
 	private void Refresh()
@@ -113,7 +120,7 @@ public class LeaderboardController : MonoBehaviour {
 	}
 	
 	public IEnumerator Connect()
-	{	
+	{		
 		byte[] password = System.Text.ASCIIEncoding.ASCII.GetBytes(FacebookController.Instance.MyID);
 		byte[] salt = new byte[] { 0x6, 0x4, 0x19, 0x89, 0x30, 0x04, 0x19, 0x79};		
 		Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(password, salt, 1000);
@@ -121,9 +128,7 @@ public class LeaderboardController : MonoBehaviour {
 		
 		// Encrypt data blob
 		string blob = WWW.EscapeURL(FacebookController.Instance.MyID) + " | " + WWW.EscapeURL(PlayerStash.Instance.HighScore.ToString()) + " | " + WWW.EscapeURL(FacebookController.Instance.MyFullName) + " | " + Convert.ToBase64String(passwordKey) + " | CHECK";	
-		string post_url = "kinoastudios.com/CastleDefender/announce.php?" + EncryptURL(blob, passwordKey);
-		
-		Debug.Log("" + post_url);
+		string post_url = "http://kinoastudios.com/CastleDefender/announce.php?" + EncryptURL(blob, passwordKey);		
 		
 		// Post the URL to the site and create a download object to get the result.
 		WWW hs_post = new WWW(post_url);
@@ -134,7 +139,7 @@ public class LeaderboardController : MonoBehaviour {
 			GotError = true;
 		}
 		else
-		{
+		{		
 			string[] lines = hs_post.text.Split('\n');
 			int proc = -1;
 			foreach( string line in lines )
@@ -300,7 +305,7 @@ public class LeaderboardController : MonoBehaviour {
 			holder[n].Set(m_downEntries[i].rank, m_downEntries[i].name, m_downEntries[i].score);			
 		}
 	}
-	
+			
 	/*public void PopulateTexts(string[] topten, string[] topme)
 	{
 		int i;

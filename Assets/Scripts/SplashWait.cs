@@ -15,7 +15,7 @@ public class SplashWait : MonoBehaviour {
 		
 		if( Input.touchCount > 0 || Input.GetMouseButton(0) )
 		{
-			m_timeout = 0.1f;			
+			m_timeout = 0.0f;			
 		}
 	}
 }

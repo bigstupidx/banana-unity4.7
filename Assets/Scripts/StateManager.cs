@@ -67,6 +67,11 @@ public class StateManager : MonoBehaviour {
 		}
 
 		m_currentState.OnUpdate ();
+		
+		if( Input.GetKeyDown(KeyCode.Escape) )
+		{
+			m_currentState.OnBackKey();			
+		}
 	}
 
 	public void PushState(GameState state)

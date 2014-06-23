@@ -38,7 +38,7 @@ public class StateGameOver : GameState {
 		ShareButton.gameObject.SetActive(false);
 		
 		HasHighscoreBeaten = false;	
-	}
+	}	
 	
 	private IEnumerator OnMainMenuButtonClick()
 	{
@@ -103,5 +103,10 @@ public class StateGameOver : GameState {
 	public override void OnExit()
 	{
 		StatisticLabel.text = m_originalStatisticLabel;
+	}
+	
+	public override void OnBackKey()
+	{
+		StateManager.Instance.SetState(StateManager.Instance.MainMenu);
 	}
 }

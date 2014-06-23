@@ -6,6 +6,7 @@ public abstract class GameState : MonoBehaviour {
 	public abstract void OnEnter();
 	public abstract void OnUpdate();
 	public abstract void OnExit();
+	public abstract void OnBackKey();
 	
 	protected GameObject FindChild(string searchName)
 	{

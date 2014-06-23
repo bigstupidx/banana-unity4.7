@@ -52,8 +52,8 @@ public class EnemiesManager : MonoBehaviour {
 	private const float TIME_PER_LEVEL = 30.0f;
 	private const float TIME_PER_SPAWN = 1.0f;
 	private const int STARTING_BUDGET = 50;
-	private const int BUDGET_PER_LEVEL = 50;
-	private const int BUDGET_INCREASE_PER_LEVEL = 20;
+	private const int BUDGET_PER_LEVEL = 40;
+	private const int BUDGET_INCREASE_PER_LEVEL = 10;
 	
 	public ObsecuredInt SpawnGeneration = 1;
 	private int m_currentLevel;
@@ -64,13 +64,21 @@ public class EnemiesManager : MonoBehaviour {
 	
 	public void Start()
 	{
-		m_spawnPrograms[0] = new SpawnProgram(0, 0, 10, 400);
-		m_spawnPrograms[1] = new SpawnProgram(1, 3, 15, 380);
-		m_spawnPrograms[2] = new SpawnProgram(2, 5, 20, 360);
-		m_spawnPrograms[3] = new SpawnProgram(3, 8, 25, 320);
-		m_spawnPrograms[4] = new SpawnProgram(4, 10, 30, 300);
-		m_spawnPrograms[5] = new SpawnProgram(5, 14, 35, 280);
-		m_spawnPrograms[6] = new SpawnProgram(6, 15, 40, 260);		
+		m_spawnPrograms[0] = new SpawnProgram(0, 0, 7, 400);
+		m_spawnPrograms[1] = new SpawnProgram(1, 3, 12, 380);
+		m_spawnPrograms[2] = new SpawnProgram(2, 5, 16, 360);
+		m_spawnPrograms[3] = new SpawnProgram(3, 8, 20, 320);
+		m_spawnPrograms[4] = new SpawnProgram(4, 10, 25, 300);
+		m_spawnPrograms[5] = new SpawnProgram(5, 14, 30, 280);
+		m_spawnPrograms[6] = new SpawnProgram(6, 15, 35, 260);		
+		
+		/*m_spawnPrograms[0] = new SpawnProgram(0, 0, 7, 400);
+		m_spawnPrograms[1] = new SpawnProgram(1, 0, 12, 380);
+		m_spawnPrograms[2] = new SpawnProgram(2, 0, 16, 360);
+		m_spawnPrograms[3] = new SpawnProgram(3, 0, 20, 320);
+		m_spawnPrograms[4] = new SpawnProgram(4, 0, 25, 300);
+		m_spawnPrograms[5] = new SpawnProgram(5, 0, 30, 280);
+		m_spawnPrograms[6] = new SpawnProgram(6, 0, 35, 260);	*/
 	}
 	
 	public void AddEnemy(Actor enemy)
