@@ -123,6 +123,6 @@ public class StateMainMenu : GameState {
 	public override void OnBackKey()
 	{
 		AdsController.Instance.OnQuit();
-		Application.Quit();
+		//Application.Quit();
 	}
 }

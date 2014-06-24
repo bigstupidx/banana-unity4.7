@@ -13,6 +13,7 @@ public class AdsController : MonoBehaviour {
 	private const int DYING_TIMES_TO_SHOW_ADS = 5;
 	
 	private int m_dyingTimes = 0;	
+	private bool m_willQuit = false;
 	
 	void Awake()	
 	{
@@ -26,10 +27,13 @@ public class AdsController : MonoBehaviour {
 		vservPlugin.DisplayAd("c5c58ba3");
 		
 		m_dyingTimes = 0;
+		m_willQuit = false;
 	}
 	
 	public void OnQuit()
 	{
+		m_willQuit = true;
+		
 		VservPlugin vservPlugin = new VservPlugin();
 		vservPlugin.SetShowAt("end");
 		vservPlugin.DisplayAd("c5c58ba3");
@@ -60,5 +64,13 @@ public class AdsController : MonoBehaviour {
 	
 	void OnApplicationPause()
 	{
+	}
+	
+	void OnApplicationFocus()
+	{
+		if( m_willQuit )
+		{
+			Application.Quit();
+		}
 	}
 }

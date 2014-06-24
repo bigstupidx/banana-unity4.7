@@ -82,6 +82,6 @@ public class StatePauseMenu : GameState {
 	public override void OnBackKey()
 	{
 		AdsController.Instance.OnQuit();
-		Application.Quit();
+		//Application.Quit();
 	}
 }
