@@ -59,6 +59,7 @@
      <Compile Include="Assets\Facebook\Scripts\IOSFacebook.cs" />
      <Compile Include="Assets\Facebook\Scripts\IOSFacebookLoader.cs" />
      <Compile Include="Assets\Facebook\Scripts\NativeDialogModes.cs" />
+     <Compile Include="Assets\OpenIAB-demo\OpenIABTest.cs" />
      <Compile Include="Assets\Scripts\Actor.cs" />
      <Compile Include="Assets\Scripts\AdsController.cs" />
      <Compile Include="Assets\Scripts\Apocalypse.cs" />
@@ -166,6 +167,10 @@
  <Reference Include="IFacebook">
  <HintPath>E:/CastleAttack/Assets/Facebook/Scripts/IFacebook.dll</HintPath>
  </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{8051DAE6-ECA7-A22F-0A71-9F89AE7B69A6}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
