@@ -19,7 +19,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_4_5_0;UNITY_4_5;UNITY_ANDROID;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_WP8SUPPORT;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;UNITY_ANDROID_API;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN;UNITY_PRO_LICENSE</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_4_5_1;UNITY_4_5;UNITY_ANDROID;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_WP8SUPPORT;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;UNITY_ANDROID_API;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN;UNITY_PRO_LICENSE</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -39,13 +39,14 @@
 	<Reference Include="System.Core" />
 	<Reference Include="System.Xml.Linq" />
 	<Reference Include="UnityEngine">
-	  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Externals\VservPlugin.cs" />
      <Compile Include="Assets\Facebook\Scripts\AndroidFacebook.cs" />
      <Compile Include="Assets\Facebook\Scripts\AndroidFacebookLoader.cs" />
      <Compile Include="Assets\Facebook\Scripts\CanvasFacebookLoader.cs" />
@@ -99,6 +100,7 @@
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_picker_activity_circle_row.xml" />
      <None Include="Assets\Externals\NGUI\Resources\Shaders\Unlit - Text 2.shader" />
      <None Include="Assets\Static\Materials\DoubleSided.shader" />
+     <None Include="Assets\Plugins\Android\res\values\vserv_styles.xml" />
      <None Include="Assets\Plugins\Android\facebook\res\values-iw\strings.xml" />
      <None Include="Assets\Plugins\Android\facebook\res\drawable\com_facebook_picker_top_button.xml" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_picker_search_box.xml" />
@@ -108,16 +110,16 @@
      <None Include="Assets\Plugins\Android\facebook\res\values\colors.xml" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_friendpickerfragment.xml" />
      <None Include="Assets\Externals\NGUI\Resources\Shaders\Unlit - Premultiplied Colored 3.shader" />
-     <None Include="Assets\Plugins\Android\facebook\bin\proguard.txt" />
      <None Include="Assets\Plugins\Android\facebook\res\drawable\com_facebook_top_button.xml" />
      <None Include="Assets\Static\Materials\Toon.shader" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_usersettingsfragment.xml" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_picker_checkbox.xml" />
-     <None Include="Assets\Plugins\Android\facebook\bin\R.txt" />
+     <None Include="Assets\Plugins\Android\res\layout\vserv_dialog_layout.xml" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_picker_title_bar_stub.xml" />
      <None Include="Assets\Plugins\Android\facebook\res\values\strings.xml" />
      <None Include="Assets\Plugins\Android\facebook\res\drawable\com_facebook_picker_item_background.xml" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_picker_image.xml" />
+     <None Include="Assets\Plugins\Android\res\values\version.xml" />
      <None Include="Assets\Externals\NGUI\Resources\Shaders\Unlit - Transparent Colored 1.shader" />
      <None Include="Assets\Plugins\Android\facebook\res\drawable\com_facebook_top_background.xml" />
      <None Include="Assets\Plugins\Android\facebook\res\values-hdpi\dimens.xml" />
@@ -133,8 +135,8 @@
      <None Include="Assets\Plugins\Android\facebook\res\drawable\com_facebook_picker_list_selector.xml" />
      <None Include="Assets\Externals\NGUI\Resources\Shaders\Unlit - Premultiplied Colored.shader" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_search_bar_layout.xml" />
-     <None Include="Assets\Plugins\Android\facebook\bin\AndroidManifest.xml" />
      <None Include="Assets\Externals\NGUI\Resources\Shaders\Unlit - Transparent Colored.shader" />
+     <None Include="Assets\Plugins\Android\res\layout\vserv_web_layout.xml" />
      <None Include="Assets\Plugins\Android\facebook\res\layout\com_facebook_login_activity_layout.xml" />
      <None Include="Assets\Externals\NGUI\Resources\Shaders\Unlit - Text.shader" />
      <None Include="Assets\Plugins\Android\facebook\res\values-mdpi\dimens.xml" />
@@ -150,6 +152,7 @@
      <None Include="Assets\Plugins\Android\facebook\proguard-project.txt" />
      <None Include="Assets\Plugins\Android\facebook\res\drawable\com_facebook_loginbutton_silver.xml" />
      <None Include="Assets\Plugins\Android\facebook\res\drawable\com_facebook_picker_list_selector_background_transition.xml" />
+     <None Include="Assets\Plugins\Android\res\drawable\vserv_progress_bar_horizontal.xml" />
      <None Include="Assets\Plugins\Android\facebook\res\values-he\strings.xml" />
      <None Include="Assets\Plugins\Android\facebook\AndroidManifest.xml" />
      <None Include="Assets\Plugins\Android\facebook\res\values-es\strings.xml" />
@@ -158,10 +161,10 @@
      <None Include="Assets\Plugins\Android\facebook\res\values\styles.xml" />
      <None Include="Assets\Plugins\Android\facebook\res\values-xhdpi\dimens.xml" />
  <Reference Include="NGUI">
- <HintPath>D:/CastleAttack/Assets/Externals/NGUI/NGUI.dll</HintPath>
+ <HintPath>E:/CastleAttack/Assets/Externals/NGUI/NGUI.dll</HintPath>
  </Reference>
  <Reference Include="IFacebook">
- <HintPath>D:/CastleAttack/Assets/Facebook/Scripts/IFacebook.dll</HintPath>
+ <HintPath>E:/CastleAttack/Assets/Facebook/Scripts/IFacebook.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

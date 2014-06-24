@@ -73,6 +73,8 @@ public class StateMainMenu : GameState {
 
 	public override void OnEnter()
 	{
+		AdsController.Instance.OnMiddle();
+	
 		ToggleSound.value = PlayerStash.Instance.IsSound;
 		
 		m_currentTutorial = 0;
@@ -120,6 +122,7 @@ public class StateMainMenu : GameState {
 
 	public override void OnBackKey()
 	{
+		AdsController.Instance.OnQuit();
 		Application.Quit();
 	}
 }

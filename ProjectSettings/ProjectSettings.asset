@@ -97,7 +97,7 @@ PlayerSettings:
   iPadHighResLandscapeSplashScreen: {fileID: 0}
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
-  AndroidKeystoreName: D:/CastleAttack/Assets/../kinoastudios.keystore
+  AndroidKeystoreName: E:/CastleAttack/Assets/../kinoastudios.keystore
   AndroidKeyaliasName: kinoastudios
   resolutionDialogBanner: {fileID: 0}
   m_BuildTargetIcons:

@@ -17,5 +17,26 @@
     <activity android:name="com.facebook.unity.FBUnityDeepLinkingActivity" android:exported="true">
     </activity>
     <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="\ 717266484998791" />
+	
+	<activity
+            android:name="mobi.vserv.android.ads.VservAdManager"
+            android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize"
+            android:launchMode="singleTop"
+            android:process=":vserv"
+            android:windowSoftInputMode="adjustPan" />
+	<activity
+		android:name="mobi.vserv.org.ormma.view.Browser"
+		android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize"
+		android:windowSoftInputMode="adjustPan" >
+	</activity>
+		
+	<activity
+		android:name="mobi.vserv.org.ormma.view.OrmmaActionHandler"
+		android:configChanges="touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize"
+		android:windowSoftInputMode="adjustPan" >
+	</activity>
   </application>
+  
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 </manifest>

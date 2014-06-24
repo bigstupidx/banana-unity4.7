@@ -64,6 +64,8 @@ public class StateInGameMenu : GameState {
 				Blizzard.Instance.Reset();
 				Apocalypse.Instance.Reset();
 				StateManager.Instance.PushState(StateManager.Instance.GameOver);
+				
+				AdsController.Instance.OnDying();
 			}
 			return;
 		}
