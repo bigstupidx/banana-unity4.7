@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using OnePF;
 
 public class ShopController : MonoBehaviour {
 
@@ -23,10 +25,10 @@ public class ShopController : MonoBehaviour {
 		Items = new Item[ITEM_NUM];
 		
 		// TODO - add more items to be done here
-		Items[0] = new Item(0, "The ultimate range weapon crossbow can shoot 3 arrows at a time!");
-		Items[1] = new Item(1, "The axe wielder can do attack on both sides.");
-		Items[2] = new Item(2, "Buy a combo of [00ff00]10[-] blizzard spells. The blizzard can freeze up all enemies for a long while.");
-		Items[3] = new Item(3, "Buy a combo of [00ff00]5[-] apocalypse spells. The spell can virtually hurt all enemies on sight.");
+		Items[ITEM_CROSSBOW] = new Item(ITEM_CROSSBOW, "crossbow", "The ultimate range weapon crossbow can shoot 3 arrows at a time!");
+		Items[ITEM_AXE] = new Item(ITEM_AXE, "axe", "The axe wielder can do attack on both sides.");
+		Items[ITEM_SNOW] = new Item(ITEM_SNOW, "blizzard", "Buy a combo of [00ff00]10[-] blizzard spells. The blizzard can freeze up all enemies for a long while.");
+		Items[ITEM_FIRE] = new Item(ITEM_FIRE, "apocalypse", "Buy a combo of [00ff00]5[-] apocalypse spells. The spell can virtually hurt all enemies on sight.");
 	}
 	
 	public class Item	
@@ -36,14 +38,16 @@ public class ShopController : MonoBehaviour {
 		public string pricetag;
 		public int purchased;	
 		public bool isBuyable;	
+		public string sku;
 		
-		public Item(int nid, string desc)
+		public Item(int nid, string nsku, string desc)
 		{
 			id = nid;
 			description = desc;
 			pricetag = "";
 			purchased = 0;
 			isBuyable = true;
+			sku = nsku;
 		}
 	}
 	
@@ -59,6 +63,12 @@ public class ShopController : MonoBehaviour {
 		m_isWorking = false;
 		m_isRequesting = false;
 		RequestInfo();
+		
+		// Map sku for different stores
+		foreach( Item item in Items )
+		{
+			OpenIAB.mapSku(item.sku, OpenIAB_Android.STORE_GOOGLE, item.sku);
+		}
 	}
 	
 	public void RequestInfo()
@@ -137,6 +147,21 @@ public class ShopController : MonoBehaviour {
 		}
 		
 		PlayerPrefs.Save();
+	}
+	
+	void InitIAP()
+	{
+		// Application public key
+		string public_key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApMbAFbkq2Fgpom0l/MXvSySmDqGLI8br4Puw3LXHuYuygRYN++5hWIBiRc704HVB7DZrLhxSNQ52EuYtGuDWBXpAP7ExIk9HzMT3BhoXI1WU8UtK+TQwqvTkNhJUKKgXRXf9hpAxLGZo7KaAsF3X6MwWYcZygCwbWEZzh9O9csSIM2ISosmODkJN1/T6lYU1yiYTO2SKSv9SWJYxt14E4+g4HsVE09z8zb95NODnD4MZsoz5qYS+7PnFvQby32W+z+pz5WIIQYhA/IDfkv44fljmKT9i/QAGubjW44UyArqX3iqhtOWZr3z2NVTwwnJ+kPZGcFA8uUt+MQuAp7SAUwIDAQAB";
+		
+		Options options = new Options();
+		options.verifyMode = OptionsVerifyMode.VERIFY_SKIP;
+		options.storeKeys = new Dictionary<string, string> {
+			{OpenIAB_Android.STORE_GOOGLE, public_key}
+		};
+		
+		// Transmit options and start the service
+		OpenIAB.init(options);
 	}
 	
 	void OnApplicationQuit()
