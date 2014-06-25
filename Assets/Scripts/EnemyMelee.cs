@@ -119,9 +119,26 @@ public class EnemyMelee : Actor {
 			if( ( m_patrolDirection > 0 && pos.x >= m_climbDecideX && pos.x < Global.WALL_MAX_X - 1.0f )
 			   || ( m_patrolDirection < 0 && pos.x <= m_climbDecideX && pos.x > Global.WALL_MIN_X + 1.0f ) )
 			{			
-				m_state = EState.CLIMB;
-				m_animator.SetTrigger(VAR_CLIMB);
-				return;
+				if( pos.y < 0.0f )
+				{
+					pos.y += Time.deltaTime * MoveSpeed * m_speedFactor;
+					if( pos.y > 0.0f )
+					{
+						pos.y = 0.0f;
+					}
+					FaceTo (0, 5);
+					
+					m_animator.SetFloat (VAR_WALK, 1.0f);
+					m_animator.speed = m_speedFactor * MoveSpeed * 0.75f;					
+					transform.localPosition = pos;	
+					return;
+				}
+				else
+				{			
+					m_state = EState.CLIMB;
+					m_animator.SetTrigger(VAR_CLIMB);
+					return;
+				}
 			}			
 		}
 		else

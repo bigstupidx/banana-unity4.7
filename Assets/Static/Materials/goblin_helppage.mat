@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: goblin
+  m_Name: goblin_helppage
   m_Shader: {fileID: 4800000, guid: 228fb844901015f46b2ddfc33f841648, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
@@ -31,7 +31,7 @@ Material:
       data:
         first:
           name: _Outline
-        second: .0455357172
+        second: .005357143
     m_Colors:
       data:
         first:
