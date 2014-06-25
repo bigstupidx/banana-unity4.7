@@ -3211,7 +3211,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &266181851
 Transform:
   m_ObjectHideFlags: 0
@@ -7099,8 +7099,7 @@ MonoBehaviour:
   keepCrispWhenShrunk: 0
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11400000, guid: d08721cee7d94a9459554a39e0bb9b45, type: 2}
-  mText: Could not get items information. Please check your internet connection and
-    try again.
+  mText: There was some error. Please check your internet connection and try again.
   mFontSize: 36
   mFontStyle: 0
   mAlignment: 2
@@ -8613,7 +8612,10 @@ MonoBehaviour:
   keepCrispWhenShrunk: 0
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11400000, guid: d08721cee7d94a9459554a39e0bb9b45, type: 2}
-  mText: '{Description}
+  mText: '[ff0000]{Title}[-]
+
+
+    {Description}
 
 
     [ffff00]Purchased:[-] {Quantity}
@@ -14469,13 +14471,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 62
+  mWidth: 66
   mHeight: 36
   mDepth: 7
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.72222221
+  aspectRatio: 1.83333337
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11400000, guid: d08721cee7d94a9459554a39e0bb9b45, type: 2}
@@ -14553,7 +14555,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1616708175}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.52587891e-05, y: 180.001801, z: 0}
+  m_LocalPosition: {x: 0, y: 180.001816, z: 0}
   m_LocalScale: {x: .999910176, y: .999910176, z: .999910176}
   m_Children:
   - {fileID: 1370138119}

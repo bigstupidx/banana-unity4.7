@@ -44,7 +44,7 @@ public class StateShop : GameState {
 			ShopController.Item item = ShopController.Instance.Items[m_currentSelectedItem];
 			if( item.isBuyable )
 			{			
-				ShopController.Instance.Commit(item);
+				ShopController.Instance.Request(item);
 				m_currentSelectedItem = -1;
 			}
 		}
@@ -54,6 +54,8 @@ public class StateShop : GameState {
 	{
 		m_originalDescriptionText = DescriptionLabel.text;
 		m_currentSelectedItem = -1;		
+		
+		ShopController.Instance.Retry();
 	}
 	
 	public override void OnUpdate()
@@ -90,6 +92,7 @@ public class StateShop : GameState {
 				{
 					ShopController.Item item = ShopController.Instance.Items[m_currentSelectedItem];
 					string desc = m_originalDescriptionText.Replace("{Description}", item.description);
+					desc = desc.Replace("{Title}", item.title);
 					desc = desc.Replace("{Quantity}", item.purchased.ToString());
 					desc = desc.Replace("{Price_tag}", item.pricetag);
 					DescriptionLabel.text = desc;
