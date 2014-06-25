@@ -9,6 +9,9 @@ public class StateGameOver : GameState {
 	public UIButton FacebookButton;
 	public UIButton ShareButton;
 	
+	public UIWidget MonstersPanel;
+	public UILabel[] ResultLabels;
+	
 	private string m_originalStatisticLabel;
 	
 	public static bool HasHighscoreBeaten = false;
@@ -65,19 +68,21 @@ public class StateGameOver : GameState {
 		int[] statistic = EnemiesManager.Instance.KillingStatistics;
 		for( int i=0; i<statistic.Length; ++i )
 		{
-			label = label.Replace("{count" + i + "}", statistic[i].ToString());
+			ResultLabels[i].text = statistic[i].ToString();
 		}
+				
+		MonstersPanel.gameObject.SetActive(true);
 		
 		PlayerStash.Instance.RecordHighScore();		
 		if( HasHighscoreBeaten )
 		{
 			if( PlayerStash.Instance.HighScore > 1000 )
 			{
-				label = label.Replace("{comment}", "Awesome !");
+				label = label.Replace("{comment}", "New highscore! Awesome!");
 			}
 			else
 			{
-				label = label.Replace("{comment}", "Well done !");
+				label = label.Replace("{comment}", "New highscore! Well done!");
 			}
 		}
 		else
@@ -98,11 +103,15 @@ public class StateGameOver : GameState {
 	{
 		FacebookButton.gameObject.SetActive(FacebookController.Instance.CanOperateLogIn());
 		ShareButton.gameObject.SetActive(FacebookController.Instance.CanOperatePost());
+		
+		Vector3 pos = new Vector3(Container.transform.localPosition.x, 70, 0);
+		MonstersPanel.transform.localPosition = pos;
 	}
 	
 	public override void OnExit()
 	{
 		StatisticLabel.text = m_originalStatisticLabel;
+		MonstersPanel.gameObject.SetActive(false);
 	}
 	
 	public override void OnBackKey()

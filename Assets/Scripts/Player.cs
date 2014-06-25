@@ -340,7 +340,7 @@ public class Player : Actor {
 			return;
 		}
 		
-		if( StateManager.Instance.IsInLeaderboard || StateManager.Instance.IsInShop )
+		if( StateManager.Instance.IsInLeaderboard || StateManager.Instance.IsInShop || StateManager.Instance.IsInHelp)
 		{
 			return;
 		}

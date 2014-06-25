@@ -12,6 +12,7 @@ public class StateManager : MonoBehaviour {
 	public GameState Shop;
 	public GameState GameOver;
 	public GameState PauseMenu;
+	public GameState Help;
 
 	private GameState m_currentState;
 	private GameState m_nextState;
@@ -34,16 +35,30 @@ public class StateManager : MonoBehaviour {
 		Shop.gameObject.SetActive (false);
 		GameOver.gameObject.SetActive (false);
 		PauseMenu.gameObject.SetActive (false);
+		Help.gameObject.SetActive(false);
 
 		g_instance = this;
 	}
 
 	void Start()
-	{
-		m_currentState = MainMenu;
-		m_currentState.gameObject.SetActive (true);
-		m_currentState.OnEnter ();
-
+	{			
+		if( PlayerStash.Instance.IsFirstTime )
+		{
+			PlayerStash.Instance.IsFirstTime = false;
+			
+			m_stackStates.Push (MainMenu);	
+			
+			m_currentState = Help;
+			m_currentState.gameObject.SetActive (true);
+			m_currentState.OnEnter ();
+		}
+		else
+		{
+			m_currentState = MainMenu;
+			m_currentState.gameObject.SetActive (true);
+			m_currentState.OnEnter ();
+		}
+		
 		m_nextState = m_currentState;
 		m_pendState = null;
 	}
@@ -104,5 +119,10 @@ public class StateManager : MonoBehaviour {
 	public bool IsInShop
 	{
 		get { return m_currentState == Shop; }
+	}
+	
+	public bool IsInHelp
+	{
+		get { return m_currentState == Help; }
 	}
 }

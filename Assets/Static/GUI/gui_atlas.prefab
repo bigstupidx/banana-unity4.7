@@ -42,8 +42,8 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: 513d875416a2cb24aa00cc42a2372c44, type: 2}
   mSprites:
   - name: axe
-    x: 1279
-    y: 385
+    x: 233
+    y: 670
     width: 84
     height: 84
     borderLeft: 0
@@ -56,7 +56,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: banner
     x: 699
-    y: 821
+    y: 1845
     width: 923
     height: 203
     borderLeft: 0
@@ -68,8 +68,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: blue_bar
-    x: 0
-    y: 1
+    x: 695
+    y: 1387
     width: 256
     height: 40
     borderLeft: 32
@@ -82,7 +82,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: button
     x: 699
-    y: 588
+    y: 1612
     width: 462
     height: 232
     borderLeft: 32
@@ -94,8 +94,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_back
-    x: 1630
-    y: 472
+    x: 1053
+    y: 1470
     width: 117
     height: 116
     borderLeft: 0
@@ -107,8 +107,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_back_hover
-    x: 1630
-    y: 237
+    x: 463
+    y: 296
     width: 116
     height: 116
     borderLeft: 0
@@ -120,8 +120,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_back_on
-    x: 1748
-    y: 472
+    x: 1525
+    y: 1470
     width: 117
     height: 116
     borderLeft: 0
@@ -133,8 +133,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_facebook
-    x: 832
-    y: 16
+    x: 0
+    y: 19
     width: 117
     height: 117
     borderLeft: 0
@@ -146,8 +146,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_facebook_hover
-    x: 1162
-    y: 352
+    x: 463
+    y: 1116
     width: 116
     height: 117
     borderLeft: 0
@@ -159,8 +159,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_facebook_on
-    x: 1395
-    y: 354
+    x: 236
+    y: 137
     width: 116
     height: 117
     borderLeft: 0
@@ -171,9 +171,48 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: button_help
+    x: 0
+    y: 137
+    width: 117
+    height: 117
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: button_help_hover
+    x: 463
+    y: 1234
+    width: 116
+    height: 117
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: button_help_on
+    x: 234
+    y: 537
+    width: 117
+    height: 117
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: button_invite
-    x: 1162
-    y: 235
+    x: 236
+    y: 20
     width: 117
     height: 116
     borderLeft: 0
@@ -185,8 +224,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_invite_hover
-    x: 1864
-    y: 354
+    x: 463
+    y: 413
     width: 116
     height: 116
     borderLeft: 0
@@ -198,8 +237,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_invite_on
-    x: 1747
-    y: 354
+    x: 463
+    y: 647
     width: 116
     height: 116
     borderLeft: 0
@@ -211,8 +250,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_leaderboard
-    x: 1162
-    y: 118
+    x: 463
+    y: 1470
     width: 117
     height: 116
     borderLeft: 0
@@ -224,8 +263,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_leaderboard_hover
-    x: 1513
-    y: 3
+    x: 463
+    y: 881
     width: 116
     height: 116
     borderLeft: 0
@@ -237,8 +276,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_leaderboard_on
-    x: 1162
-    y: 1
+    x: 581
+    y: 1470
     width: 117
     height: 116
     borderLeft: 0
@@ -250,8 +289,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_menu
-    x: 1629
-    y: 704
+    x: 699
+    y: 1470
     width: 117
     height: 116
     borderLeft: 0
@@ -263,8 +302,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_menu_hover
-    x: 1513
-    y: 354
+    x: 1877
+    y: 1470
     width: 116
     height: 116
     borderLeft: 0
@@ -276,8 +315,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_menu_on
-    x: 1747
-    y: 704
+    x: 1407
+    y: 1470
     width: 117
     height: 116
     borderLeft: 0
@@ -289,8 +328,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_on
-    x: 699
-    y: 355
+    x: 0
+    y: 1354
     width: 462
     height: 232
     borderLeft: 26
@@ -302,8 +341,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_play
-    x: 1866
-    y: 472
+    x: 1760
+    y: 1470
     width: 116
     height: 116
     borderLeft: 0
@@ -315,8 +354,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_play_hover
-    x: 1865
-    y: 704
+    x: 817
+    y: 1470
     width: 117
     height: 116
     borderLeft: 0
@@ -328,8 +367,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_play_on
-    x: 1630
-    y: 3
+    x: 1643
+    y: 1470
     width: 116
     height: 116
     borderLeft: 0
@@ -341,8 +380,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_share
-    x: 1395
-    y: 472
+    x: 935
+    y: 1470
     width: 117
     height: 116
     borderLeft: 0
@@ -354,8 +393,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_share_hover
-    x: 1630
-    y: 120
+    x: 463
+    y: 179
     width: 116
     height: 116
     borderLeft: 0
@@ -367,8 +406,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_share_on
-    x: 1513
-    y: 237
+    x: 463
+    y: 62
     width: 116
     height: 116
     borderLeft: 0
@@ -380,8 +419,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_shop
-    x: 1395
-    y: 237
+    x: 1171
+    y: 1470
     width: 117
     height: 116
     borderLeft: 0
@@ -393,8 +432,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_shop_hover
-    x: 1513
-    y: 120
+    x: 463
+    y: 764
     width: 116
     height: 116
     borderLeft: 0
@@ -406,8 +445,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_shop_on
-    x: 1630
-    y: 354
+    x: 463
+    y: 530
     width: 116
     height: 116
     borderLeft: 0
@@ -419,8 +458,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: castle attack title - 400x220
-    x: 699
-    y: 134
+    x: 1162
+    y: 1624
     width: 400
     height: 220
     borderLeft: 0
@@ -432,8 +471,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: crossbow
-    x: 1965
-    y: 944
+    x: 318
+    y: 674
     width: 80
     height: 80
     borderLeft: 0
@@ -445,8 +484,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: FB-f-Logo__blue_114
-    x: 1280
-    y: 473
+    x: 580
+    y: 1355
     width: 114
     height: 114
     borderLeft: 0
@@ -458,8 +497,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: fire_icon
-    x: 1623
-    y: 844
+    x: 233
+    y: 1173
     width: 180
     height: 180
     borderLeft: 0
@@ -471,8 +510,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: fireball_2
-    x: 1280
-    y: 287
+    x: 394
+    y: 983
     width: 64
     height: 64
     borderLeft: 0
@@ -484,8 +523,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: hand
-    x: 1068
-    y: 48
+    x: 366
+    y: 802
     width: 89
     height: 85
     borderLeft: 0
@@ -498,7 +537,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: health_bar
     x: 0
-    y: 42
+    y: 336
     width: 375
     height: 86
     borderLeft: 0
@@ -510,8 +549,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: health_bar_on
-    x: 1747
-    y: 312
+    x: 695
+    y: 1428
     width: 257
     height: 41
     borderLeft: 0
@@ -523,8 +562,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: Ice_Shards_icon
-    x: 1804
-    y: 864
+    x: 233
+    y: 960
     width: 160
     height: 160
     borderLeft: 0
@@ -536,8 +575,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: pause
-    x: 950
-    y: 16
+    x: 118
+    y: 137
     width: 117
     height: 117
     borderLeft: 0
@@ -549,8 +588,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: pause_hover
-    x: 1395
-    y: 119
+    x: 463
+    y: 998
     width: 116
     height: 117
     borderLeft: 0
@@ -562,8 +601,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: pause_on
-    x: 1395
-    y: 2
+    x: 1289
+    y: 1470
     width: 117
     height: 116
     borderLeft: 0
@@ -575,8 +614,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: score_box
-    x: 417
-    y: 16
+    x: 0
+    y: 255
     width: 268
     height: 80
     borderLeft: 24
@@ -588,8 +627,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: smallbutton
-    x: 1513
-    y: 471
+    x: 463
+    y: 1352
     width: 116
     height: 117
     borderLeft: 0
@@ -601,8 +640,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: smallbutton_on
-    x: 1162
-    y: 470
+    x: 118
+    y: 19
     width: 117
     height: 117
     borderLeft: 0
@@ -614,8 +653,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: snowflake
-    x: 699
-    y: 1
+    x: 233
+    y: 755
     width: 132
     height: 132
     borderLeft: 0
@@ -627,8 +666,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: sound
-    x: 1162
-    y: 588
+    x: 0
+    y: 1121
     width: 232
     height: 232
     borderLeft: 0
@@ -640,8 +679,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: sound_hover
-    x: 417
-    y: 97
+    x: 0
+    y: 888
     width: 232
     height: 232
     borderLeft: 0
@@ -653,8 +692,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: sound_off
-    x: 1395
-    y: 589
+    x: 0
+    y: 423
     width: 233
     height: 231
     borderLeft: 0
@@ -666,8 +705,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: sound_on
-    x: 417
-    y: 330
+    x: 0
+    y: 655
     width: 232
     height: 232
     borderLeft: 0
@@ -679,8 +718,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: spark1
-    x: 1965
-    y: 871
+    x: 394
+    y: 1048
     width: 60
     height: 72
     borderLeft: 0
@@ -692,8 +731,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: trail
-    x: 257
-    y: 6
+    x: 1162
+    y: 1588
     width: 111
     height: 35
     borderLeft: 0
@@ -705,8 +744,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: window1
-    x: 0
-    y: 129
+    x: 1623
+    y: 1615
     width: 414
     height: 85
     borderLeft: 16
@@ -718,8 +757,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: window2
-    x: 0
-    y: 215
+    x: 1623
+    y: 1701
     width: 416
     height: 347
     borderLeft: 64
@@ -732,7 +771,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: window3
     x: 0
-    y: 563
+    y: 1587
     width: 698
     height: 461
     borderLeft: 64

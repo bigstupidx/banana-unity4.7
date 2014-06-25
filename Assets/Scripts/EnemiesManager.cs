@@ -49,7 +49,7 @@ public class EnemiesManager : MonoBehaviour {
 	private int[] m_enemiesKilledCount;
 	
 	private const int LEVELS_PER_GENERATION = 20;	
-	private const float TIME_PER_LEVEL = 30.0f;
+	private const float TIME_PER_LEVEL = 10.0f;
 	private const float TIME_PER_SPAWN = 1.0f;
 	private const int STARTING_BUDGET = 50;
 	private const int BUDGET_PER_LEVEL = 40;
@@ -65,12 +65,12 @@ public class EnemiesManager : MonoBehaviour {
 	public void Start()
 	{
 		m_spawnPrograms[0] = new SpawnProgram(0, 0, 7, 400);
-		m_spawnPrograms[1] = new SpawnProgram(1, 3, 12, 380);
-		m_spawnPrograms[2] = new SpawnProgram(2, 5, 16, 360);
-		m_spawnPrograms[3] = new SpawnProgram(3, 8, 20, 320);
-		m_spawnPrograms[4] = new SpawnProgram(4, 10, 25, 300);
-		m_spawnPrograms[5] = new SpawnProgram(5, 14, 30, 280);
-		m_spawnPrograms[6] = new SpawnProgram(6, 15, 35, 260);		
+		m_spawnPrograms[1] = new SpawnProgram(1, 3, 20, 380);
+		m_spawnPrograms[2] = new SpawnProgram(2, 5, 24, 360);
+		m_spawnPrograms[3] = new SpawnProgram(3, 8, 28, 320);
+		m_spawnPrograms[4] = new SpawnProgram(4, 10, 32, 300);
+		m_spawnPrograms[5] = new SpawnProgram(5, 14, 36, 280);
+		m_spawnPrograms[6] = new SpawnProgram(6, 15, 40, 260);		
 		
 		/*m_spawnPrograms[0] = new SpawnProgram(0, 0, 7, 400);
 		m_spawnPrograms[1] = new SpawnProgram(1, 0, 12, 380);

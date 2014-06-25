@@ -58,6 +58,8 @@ public class StateInGameMenu : GameState {
 	{
 		if( Player.Instance.IsDying )
 		{
+			HealthBar.value = 0.0f;
+			
 			m_dyingTimeOut -= Time.deltaTime;
 			if( m_dyingTimeOut <= 0.0f )
 			{
@@ -98,7 +100,7 @@ public class StateInGameMenu : GameState {
 		}
 		
 		Vector3 pos = Camera.main.transform.localPosition;
-		pos.y += (9.0f - pos.y) * Time.deltaTime * 2;
+		pos.y += (8.5f - pos.y) * Time.deltaTime * 2;
 		Camera.main.transform.localPosition = pos;	
 		
 		if( PlayerStash.Instance.CurrentScore >	PlayerStash.Instance.HighScore )

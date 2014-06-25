@@ -30,6 +30,11 @@ public class StateMainMenu : GameState {
 			StartCoroutine (OnShopButtonClick ());
 		};
 		
+		UIEventListener.Get (FindChild ("ButtonHelp")).onClick += (obj) =>
+		{
+			StartCoroutine (OnHelpButtonClick ());
+		};
+		
 		UIEventListener.Get(FacebookButton.gameObject).onClick += (obj) =>
 		{
 			FacebookController.Instance.Operate(FacebookController.EOperation.LOG_IN);		
@@ -69,6 +74,13 @@ public class StateMainMenu : GameState {
 		yield return StartCoroutine(Utils.WaitForRealSeconds(0.25f));
 		
 		StateManager.Instance.PushState (StateManager.Instance.Shop);		
+	}
+	
+	private IEnumerator OnHelpButtonClick()
+	{
+		yield return StartCoroutine(Utils.WaitForRealSeconds(0.25f));
+		
+		StateManager.Instance.PushState (StateManager.Instance.Help);		
 	}
 
 	public override void OnEnter()

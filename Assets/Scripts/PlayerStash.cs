@@ -15,12 +15,14 @@ public class PlayerStash : MonoBehaviour {
 		g_instance = this;
 		
 		m_isSound = PlayerPrefs.GetInt("IsSound", 1) != 0;
+		m_isFirstTime = PlayerPrefs.GetInt("IsFirstTime", 1) != 0;
+		
 		m_currentScore = new ObsecuredInt(PlayerPrefs.GetString("d64148fac8fb5fc0d1847723e5741e6c"));
 		m_highScore = new ObsecuredInt(PlayerPrefs.GetString("5f3bf5b30938ae565eaa5ffeff1babe3"));
 		m_purchasedAxe = new ObsecuredInt(PlayerPrefs.GetString("684c19d5b68aa835dc7444240d9bb309"));
 		m_purchasedCossbow = new ObsecuredInt(PlayerPrefs.GetString("3a327194ca41d8ee1ceb4779da0200c8"));
 		m_purchasedSnow = new ObsecuredInt(PlayerPrefs.GetString("cffd8be9288fab9d702c845368980cec"));
-		m_purchasedFire = new ObsecuredInt(PlayerPrefs.GetString("7b0eacc9164c3e63ba470262763bc771"));
+		m_purchasedFire = new ObsecuredInt(PlayerPrefs.GetString("7b0eacc9164c3e63ba470262763bc771"));		
 	}
 	
 	void OnApplicationQuit() 
@@ -57,6 +59,19 @@ public class PlayerStash : MonoBehaviour {
 			AudioListener.volume = m_isSound ? 1.0f : 0.0f;
 		}
 	}	
+	
+	public bool IsFirstTime
+	{
+		get { return m_isFirstTime; }
+		set
+		{
+			if( m_isFirstTime != value )
+			{
+				m_isFirstTime = value;
+				PlayerPrefs.SetInt("IsFirstTime", m_isFirstTime ? 1 : 0);
+			}
+		}
+	}
 	
 	public int CurrentScore
 	{
@@ -118,6 +133,7 @@ public class PlayerStash : MonoBehaviour {
 		}
 	}
 	
+	private bool m_isFirstTime = true;
 	private bool m_isSound;
 	private ObsecuredInt m_highScore;
 	private ObsecuredInt m_currentScore;
@@ -125,5 +141,5 @@ public class PlayerStash : MonoBehaviour {
 	private ObsecuredInt m_purchasedAxe;
 	private ObsecuredInt m_purchasedCossbow;
 	private ObsecuredInt m_purchasedSnow;
-	private ObsecuredInt m_purchasedFire;
+	private ObsecuredInt m_purchasedFire;	
 }
