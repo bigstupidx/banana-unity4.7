@@ -7,8 +7,6 @@ Shader "HIDDEN/Unlit/Text 1"
 
 	SubShader
 	{
-		LOD 200
-
 		Tags
 		{
 			"Queue" = "Transparent"
@@ -58,24 +56,29 @@ Shader "HIDDEN/Unlit/Text 1"
 				o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
 				o.color = v.color;
 				o.texcoord = v.texcoord;
-				o.worldPos = v.vertex.xy * _ClipRange0.zw + _ClipRange0.xy;
+				
+				float2 temp = v.vertex.xy * _ClipRange0.zw;
+				o.worldPos = temp + _ClipRange0.xy;
 				return o;
 			}
 
 			half4 frag (v2f IN) : COLOR
 			{
 				// Softness factor
-				float2 factor = (float2(1.0, 1.0) - abs(IN.worldPos)) * _ClipArgs0;
+				float worldPosY = abs(IN.worldPos.y);
+				float worldPosX = abs(IN.worldPos.x);
+				float2 factorX = (1.0 - worldPosX) * _ClipArgs0.x;
+				float2 factorY = (1.0 - worldPosY) * _ClipArgs0.y;
+				float factor = min(factorX, factorY);
 			
 				// Sample the texture
 				half4 col = IN.color;
 				col.a *= tex2D(_MainTex, IN.texcoord).a;
-				col.a *= clamp( min(factor.x, factor.y), 0.0, 1.0);
+				col.a *= clamp( factor, 0.0, 1.0);
 
 				return col;
 			}
 			ENDCG
 		}
 	}
-	Fallback "Unlit/Text"
 }
