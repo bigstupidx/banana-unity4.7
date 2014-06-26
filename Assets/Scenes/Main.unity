@@ -5037,7 +5037,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 412076129}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -59.5, y: 311, z: -499.840027}
+  m_LocalPosition: {x: -82.5000305, y: 355.000031, z: -499.840027}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1097156856}
@@ -5078,7 +5078,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1.81818187
+  aspectRatio: 30.7692299
   mAtlas: {fileID: 11400000, guid: 250af99d163f6a740943f0ae261fdf86, type: 2}
   mSpriteName: castle attack title - 400x220
   mType: 0
@@ -11570,9 +11570,9 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  showInPanelTool: 1
+  showInPanelTool: 0
   generateNormals: 0
-  widgetsAreStatic: 0
+  widgetsAreStatic: 1
   cullWhileDragging: 0
   alwaysOnScreen: 0
   anchorOffset: 0
@@ -11583,7 +11583,7 @@ MonoBehaviour:
   mClipRange: {x: 0, y: 0, z: 300, w: 200}
   mClipSoftness: {x: 4, y: 4}
   mDepth: 100
-  mSortingOrder: 2
+  mSortingOrder: 100
   mClipOffset: {x: 0, y: 0}
 --- !u!1 &1099563216
 GameObject:
@@ -18520,7 +18520,7 @@ Transform:
   m_GameObject: {fileID: 1736729536}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00249999994, y: .00249999994, z: .00249999994}
+  m_LocalScale: {x: .00210526306, y: .00210526306, z: .00210526306}
   m_Children:
   - {fileID: 24136178}
   m_Father: {fileID: 0}
@@ -18717,14 +18717,14 @@ MonoBehaviour:
     target: {fileID: 1883784920}
     relative: 1
     absolute: -10
-  updateAnchors: 1
+  updateAnchors: 0
   showInPanelTool: 0
   generateNormals: 0
-  widgetsAreStatic: 0
+  widgetsAreStatic: 1
   cullWhileDragging: 0
   alwaysOnScreen: 0
   anchorOffset: 0
-  renderQueue: 2
+  renderQueue: 0
   startingRenderQueue: 3002
   mAlpha: 1
   mClipping: 3
@@ -22876,7 +22876,7 @@ MonoBehaviour:
   alwaysOnScreen: 0
   anchorOffset: 0
   renderQueue: 0
-  startingRenderQueue: 3001
+  startingRenderQueue: 3000
   mAlpha: 1
   mClipping: 0
   mClipRange: {x: 0, y: 0, z: 300, w: 200}
