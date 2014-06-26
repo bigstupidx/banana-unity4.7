@@ -67,6 +67,8 @@ public class StateShop : GameState {
 			DescriptionLabel.gameObject.SetActive(false);
 			ErrorLabel.gameObject.SetActive(true);
 			ButtonBuy.gameObject.SetActive(false);
+			
+			ErrorLabel.text = "[ff0000]Error:[-]\n\n" + ShopController.Instance.ErrorMessage;
 		}
 		else if( ShopController.Instance.HasInfo )
 		{
@@ -114,6 +116,7 @@ public class StateShop : GameState {
 	public override void OnExit()
 	{
 		DescriptionLabel.text = m_originalDescriptionText;
+		Player.Instance.Reset();
 	}
 	
 	public override void OnBackKey()

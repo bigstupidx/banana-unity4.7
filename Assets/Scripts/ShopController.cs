@@ -59,6 +59,7 @@ public class ShopController : MonoBehaviour {
 	
 	public Item[] Items;
 	
+	public string ErrorMessage = "";
 	public bool GotError = false;
 	public bool HasInfo = false;		
 	
@@ -72,7 +73,7 @@ public class ShopController : MonoBehaviour {
 			OpenIAB.mapSku(item.sku, OpenIAB_Android.STORE_GOOGLE, item.sku);
 		}
 		
-		m_initStep = 0;
+		m_initStep = -1;
 		GotError = false;
 		HasInfo = false;	
 	}
@@ -87,12 +88,12 @@ public class ShopController : MonoBehaviour {
 		break;
 		
 		case 2:
-			OpenIAB.queryInventory();
+			QueryInventory();
 			++m_initStep;
 		break;		
-		}
+		}		
 	}
-	
+		
 	// Update is called once per frame
 	void LateUpdate () {
 	
@@ -144,8 +145,18 @@ public class ShopController : MonoBehaviour {
 		PlayerPrefs.Save();
 	}
 	
-	private void InitIAP()
+	private void QueryInventory()	
 	{
+		string[] skus = new string[Items.Length];
+		for( int i=0; i<Items.Length; ++i )
+		{
+			skus[i] = Items[i].sku;
+		}
+		OpenIAB.queryInventory(skus);
+	}
+	
+	private void InitIAP()
+	{		
 		// Application public key
 		string public_key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApMbAFbkq2Fgpom0l/MXvSySmDqGLI8br4Puw3LXHuYuygRYN++5hWIBiRc704HVB7DZrLhxSNQ52EuYtGuDWBXpAP7ExIk9HzMT3BhoXI1WU8UtK+TQwqvTkNhJUKKgXRXf9hpAxLGZo7KaAsF3X6MwWYcZygCwbWEZzh9O9csSIM2ISosmODkJN1/T6lYU1yiYTO2SKSv9SWJYxt14E4+g4HsVE09z8zb95NODnD4MZsoz5qYS+7PnFvQby32W+z+pz5WIIQYhA/IDfkv44fljmKT9i/QAGubjW44UyArqX3iqhtOWZr3z2NVTwwnJ+kPZGcFA8uUt+MQuAp7SAUwIDAQAB";
 		
@@ -153,9 +164,10 @@ public class ShopController : MonoBehaviour {
 		options.storeKeys = new Dictionary<string, string> {
 			{OpenIAB_Android.STORE_GOOGLE, public_key}
 		};
+		options.verifyMode = OptionsVerifyMode.VERIFY_SKIP;
 		
 		// Transmit options and start the service
-		OpenIAB.init(options);
+		OpenIAB.init(options);		
 	}
 	
 	void OnApplicationQuit()
@@ -172,7 +184,7 @@ public class ShopController : MonoBehaviour {
 		OpenIABEventManager.purchaseSucceededEvent += purchaseSucceededEvent;
 		OpenIABEventManager.purchaseFailedEvent += purchaseFailedEvent;
 		OpenIABEventManager.consumePurchaseSucceededEvent += consumePurchaseSucceededEvent;
-		OpenIABEventManager.consumePurchaseFailedEvent += consumePurchaseFailedEvent;
+		OpenIABEventManager.consumePurchaseFailedEvent += consumePurchaseFailedEvent;		
 	}
 	
 	private void OnDisable() {
@@ -194,6 +206,8 @@ public class ShopController : MonoBehaviour {
 	
 	private void billingNotSupportedEvent(string error) {
 		Debug.Log("billingNotSupportedEvent: " + error);
+		
+		ErrorMessage = error;
 		GotError = true;		
 		m_initStep = -1;
 	}
@@ -251,6 +265,9 @@ public class ShopController : MonoBehaviour {
 	
 	private void queryInventoryFailedEvent(string error) {
 		Debug.Log("queryInventoryFailedEvent: " + error);
+		
+		ErrorMessage = error;
+		GotError = true;
 		m_initStep = -3;
 	}
 	
@@ -279,6 +296,8 @@ public class ShopController : MonoBehaviour {
 	
 	private void purchaseFailedEvent(string error) {
 		Debug.Log("purchaseFailedEvent: " + error);
+		
+		ErrorMessage = error;
 		GotError = true;
 		m_initStep = -5;
 	}

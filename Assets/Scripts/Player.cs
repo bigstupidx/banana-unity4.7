@@ -453,7 +453,7 @@ public class Player : Actor {
 			{
 				gestureId = GESTURE_TAP;
 			}
-			else if( distY > distX && gestureDelta.y <= 0 )
+			else if( distY > distX && gestureDelta.y <= Global.GESTURE_DISTANCE_THRESHOLD )
 			{
 				gestureId = GESTURE_SWIPE_DOWN;
 			}
