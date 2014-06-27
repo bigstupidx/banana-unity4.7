@@ -26,9 +26,17 @@ public class ShopController : MonoBehaviour {
 		
 		// TODO - add more items to be done here
 		Items[ITEM_CROSSBOW] = new Item(ITEM_CROSSBOW, "crossbow", "Crossbow", "The ultimate range weapon crossbow can shoot 3 arrows at a time!", false, 1);
+		Items[ITEM_CROSSBOW].skuGooglePlay = "crossbow";
+		Items[ITEM_CROSSBOW].skuNokia = "1254489";
 		Items[ITEM_AXE] = new Item(ITEM_AXE, "axe", "Axe", "The axe wielder can do attack on both sides.", false, 1);
+		Items[ITEM_AXE].skuGooglePlay = "axe";
+		Items[ITEM_AXE].skuNokia = "1254488";
 		Items[ITEM_SNOW] = new Item(ITEM_SNOW, "blizzard", "Blizzard spells", "Buy a combo of [00ff00]10[-] blizzard spells. The blizzard can freeze up all enemies for a long while.", true, 10);
+		Items[ITEM_SNOW].skuGooglePlay = "blizzard";
+		Items[ITEM_SNOW].skuNokia = "1254492";
 		Items[ITEM_FIRE] = new Item(ITEM_FIRE, "apocalypse", "Apocalypse spells", "Buy a combo of [00ff00]5[-] apocalypse spells. The spell can virtually hurt all enemies on sight.", true, 5);
+		Items[ITEM_FIRE].skuGooglePlay = "apocalypse";
+		Items[ITEM_FIRE].skuNokia = "1254491";
 	}
 	
 	public class Item	
@@ -41,6 +49,8 @@ public class ShopController : MonoBehaviour {
 		public int quantity;
 		public bool isBuyable;	
 		public string sku;
+		public string skuGooglePlay;
+		public string skuNokia;
 		public bool isConsumable;
 		
 		public Item(int nid, string nsku, string ntitle, string desc, bool isCon, int nquantity)
@@ -70,7 +80,8 @@ public class ShopController : MonoBehaviour {
 		// Map sku for different stores
 		foreach( Item item in Items )
 		{
-			OpenIAB.mapSku(item.sku, OpenIAB_Android.STORE_GOOGLE, item.sku);
+			OpenIAB.mapSku(item.sku, OpenIAB_Android.STORE_GOOGLE, item.skuGooglePlay);
+			OpenIAB.mapSku(item.sku, OpenIAB_Android.STORE_NOKIA, item.skuNokia);
 		}
 		
 		m_initStep = -1;
