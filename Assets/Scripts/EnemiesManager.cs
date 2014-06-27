@@ -160,9 +160,8 @@ public class EnemiesManager : MonoBehaviour {
 			
 			m_currentBudget += BUDGET_PER_LEVEL + (BUDGET_INCREASE_PER_LEVEL * m_currentLevel) + (BUDGET_INCREASE_PER_GENERATION * (SpawnGeneration-1));
 		}		
-		
-		m_spawnTimeout -= Time.deltaTime;
-		if( m_spawnTimeout <= 0.0f )
+				
+		if( m_spawnTimeout <= 0.0f && m_enemies.Count < 30 )
 		{			
 			int totalChance = 0;
 			foreach( SpawnProgram prog in m_spawnPrograms )
@@ -203,6 +202,10 @@ public class EnemiesManager : MonoBehaviour {
 			{
 				m_spawnTimeout = 0.1f;
 			}			
+		}
+		else
+		{
+			m_spawnTimeout -= Time.deltaTime;
 		}
 		
 		if( m_enemies.Count < 1 )
