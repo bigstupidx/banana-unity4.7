@@ -50,6 +50,8 @@ public class LeaderboardController : MonoBehaviour {
 	
 	public void Request()
 	{		
+		GotError = false;
+		
 		if( m_isWorking )
 		{
 			return;
@@ -128,7 +130,7 @@ public class LeaderboardController : MonoBehaviour {
 		
 		// Encrypt data blob
 		string blob = WWW.EscapeURL(FacebookController.Instance.MyID) + " | " + WWW.EscapeURL(PlayerStash.Instance.HighScore.ToString()) + " | " + WWW.EscapeURL(FacebookController.Instance.MyFullName) + " | " + Convert.ToBase64String(passwordKey) + " | CHECK";	
-		string post_url = "http://kinoastudios.com/CastleDefender/announce.php?" + EncryptURL(blob, passwordKey);		
+		string post_url = "http://kinoastudios.com/CastleDefender/announce.php?" + EncryptURL(blob, passwordKey) + "&d=" + WWW.EscapeURL(FacebookController.Instance.MyFullName);		
 		
 		// Post the URL to the site and create a download object to get the result.
 		WWW hs_post = new WWW(post_url);
@@ -139,7 +141,10 @@ public class LeaderboardController : MonoBehaviour {
 			GotError = true;
 		}
 		else
-		{		
+		{
+			
+			Debug.Log(hs_post.text);
+			
 			string[] lines = hs_post.text.Split('\n');
 			int proc = -1;
 			foreach( string line in lines )

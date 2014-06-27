@@ -25,12 +25,12 @@
 			die("Not enough info!");
 		}		
 		
-		var_dump($info);	
+		//var_dump($info);	
 		
 		// Strings must be escaped to prevent SQL injection attack. 
 		$fbid = mysql_real_escape_string($info[0], $db); 
 		$score = mysql_real_escape_string($info[1], $db); 
-		$name = mysql_real_escape_string($info[2], $db); 		
+		$name = mysql_real_escape_string($_GET['d'], $db);
 		$checkKey = $info[3]; 
 		
 		if( !is_numeric($score) )
@@ -48,8 +48,8 @@
 	// Check if the salted key matches with the provided facebook id		
 	if( $myKey != $checkKey )
 	{
-		echo $myKey . "<br>";
-		echo $checkKey . "<br>";
+		//echo $myKey . "<br>";
+		//echo $checkKey . "<br>";
 	
 		die("Wrong key!");
 	}
