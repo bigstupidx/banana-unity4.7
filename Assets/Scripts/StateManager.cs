@@ -13,6 +13,7 @@ public class StateManager : MonoBehaviour {
 	public GameState GameOver;
 	public GameState PauseMenu;
 	public GameState Help;
+	public GameState About;
 
 	private GameState m_currentState;
 	private GameState m_nextState;

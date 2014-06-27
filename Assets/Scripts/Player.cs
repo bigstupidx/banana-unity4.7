@@ -336,7 +336,7 @@ public class Player : Actor {
 
 	void FixedUpdate()
 	{
-		if (Mathf.Approximately (Time.timeScale, 0.0f)) {
+		if (Mathf.Approximately (Time.timeScale, 0.0f) || m_isDying || m_HP <= 0) {
 			return;
 		}
 		

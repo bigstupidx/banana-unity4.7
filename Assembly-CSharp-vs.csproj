@@ -66,6 +66,7 @@
      <Compile Include="Assets\Scripts\Arrow.cs" />
      <Compile Include="Assets\Scripts\Blizzard.cs" />
      <Compile Include="Assets\Scripts\Cocktail.cs" />
+     <Compile Include="Assets\Scripts\CurrentBundleVersion.cs" />
      <Compile Include="Assets\Scripts\Dart.cs" />
      <Compile Include="Assets\Scripts\EnemiesManager.cs" />
      <Compile Include="Assets\Scripts\EnemyCrawl.cs" />
@@ -89,6 +90,7 @@
      <Compile Include="Assets\Scripts\ShopController.cs" />
      <Compile Include="Assets\Scripts\Spark.cs" />
      <Compile Include="Assets\Scripts\SplashWait.cs" />
+     <Compile Include="Assets\Scripts\StateAbout.cs" />
      <Compile Include="Assets\Scripts\StateGameOver.cs" />
      <Compile Include="Assets\Scripts\StateHelp.cs" />
      <Compile Include="Assets\Scripts\StateInGameMenu.cs" />

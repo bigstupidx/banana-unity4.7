@@ -6,7 +6,8 @@ public class StateMainMenu : GameState {
 	public UIToggle ToggleSound;
 	public UIButton FacebookButton;
 	public UIButton InviteButton;	
-	public UIWidget[] WidgetTutorials;
+	public UIWidget[] WidgetTutorials;	
+	public UILabel VersionLabel;
 	
 	private const float TIME_PER_TUTORIAL = 7.5f;
 	
@@ -33,6 +34,11 @@ public class StateMainMenu : GameState {
 		UIEventListener.Get (FindChild ("ButtonHelp")).onClick += (obj) =>
 		{
 			StartCoroutine (OnHelpButtonClick ());
+		};
+		
+		UIEventListener.Get (FindChild ("ButtonInfo")).onClick += (obj) =>
+		{
+			StartCoroutine (OnInfoButtonClick ());
 		};
 		
 		UIEventListener.Get(FacebookButton.gameObject).onClick += (obj) =>
@@ -82,6 +88,13 @@ public class StateMainMenu : GameState {
 		
 		StateManager.Instance.PushState (StateManager.Instance.Help);		
 	}
+	
+	private IEnumerator OnInfoButtonClick()
+	{
+		yield return StartCoroutine(Utils.WaitForRealSeconds(0.25f));
+		
+		StateManager.Instance.PushState (StateManager.Instance.About);		
+	}
 
 	public override void OnEnter()
 	{
@@ -91,6 +104,8 @@ public class StateMainMenu : GameState {
 		
 		m_currentTutorial = 0;
 		m_tutorialTimeout = TIME_PER_TUTORIAL;
+		
+		VersionLabel.text = "Version " + CurrentBundleVersion.version;
 	}
 
 	public override void OnUpdate()
