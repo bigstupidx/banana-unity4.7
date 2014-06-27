@@ -58,7 +58,7 @@ public class EditorUtilities
 	/// </param>
 	static string GenerateCode (string bundleVersion) {
 		string code = "public static class " + ClassName + "\n{\n";
-		code += System.String.Format ("\tpublic static readonly string version = \"Version {0}\";", bundleVersion);
+		code += System.String.Format ("\tpublic static readonly string version = \"{0}\";", bundleVersion);
 		code += "\n}\n";
 		return code;
 	}
