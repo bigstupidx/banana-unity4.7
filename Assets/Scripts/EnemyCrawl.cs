@@ -11,7 +11,7 @@ public class EnemyCrawl : EnemyMelee {
 	{
 		base.Start();
 		
-		m_HP = MaxHP + (((EnemiesManager.Instance.SpawnGeneration - 1) * MaxHP) >> 1);
+		m_HP = MaxHP + ((EnemiesManager.Instance.SpawnGeneration - 1) * MaxHP);
 	}
 
 	protected override void Climb()

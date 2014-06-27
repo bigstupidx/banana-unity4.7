@@ -48,12 +48,13 @@ public class EnemiesManager : MonoBehaviour {
 	private SpawnProgram[] m_spawnPrograms;
 	private int[] m_enemiesKilledCount;
 	
-	private const int LEVELS_PER_GENERATION = 20;	
-	private const float TIME_PER_LEVEL = 10.0f;
+	private const int LEVELS_PER_GENERATION = 15;	
+	private const float TIME_PER_LEVEL = 8.0f;
 	private const float TIME_PER_SPAWN = 1.0f;
-	private const int STARTING_BUDGET = 50;
-	private const int BUDGET_PER_LEVEL = 40;
+	private const int STARTING_BUDGET = 20;
+	private const int BUDGET_PER_LEVEL = 20;
 	private const int BUDGET_INCREASE_PER_LEVEL = 10;
+	private const int BUDGET_INCREASE_PER_GENERATION = 10;
 	
 	public ObsecuredInt SpawnGeneration = 1;
 	private int m_currentLevel;
@@ -65,12 +66,12 @@ public class EnemiesManager : MonoBehaviour {
 	public void Start()
 	{
 		m_spawnPrograms[0] = new SpawnProgram(0, 0, 7, 400);
-		m_spawnPrograms[1] = new SpawnProgram(1, 3, 20, 380);
-		m_spawnPrograms[2] = new SpawnProgram(2, 5, 24, 360);
-		m_spawnPrograms[3] = new SpawnProgram(3, 8, 28, 320);
-		m_spawnPrograms[4] = new SpawnProgram(4, 10, 32, 300);
-		m_spawnPrograms[5] = new SpawnProgram(5, 14, 36, 280);
-		m_spawnPrograms[6] = new SpawnProgram(6, 15, 40, 260);		
+		m_spawnPrograms[1] = new SpawnProgram(1, 2, 20, 380);
+		m_spawnPrograms[2] = new SpawnProgram(2, 4, 24, 360);
+		m_spawnPrograms[3] = new SpawnProgram(3, 6, 28, 320);
+		m_spawnPrograms[4] = new SpawnProgram(4, 8, 32, 300);
+		m_spawnPrograms[5] = new SpawnProgram(5, 10, 36, 280);
+		m_spawnPrograms[6] = new SpawnProgram(6, 12, 40, 260);		
 		
 		/*m_spawnPrograms[0] = new SpawnProgram(0, 0, 7, 400);
 		m_spawnPrograms[1] = new SpawnProgram(1, 0, 12, 380);
@@ -157,7 +158,7 @@ public class EnemiesManager : MonoBehaviour {
 				m_currentLevel = 1;
 			}	
 			
-			m_currentBudget += BUDGET_PER_LEVEL + (BUDGET_INCREASE_PER_LEVEL * m_currentLevel);
+			m_currentBudget += BUDGET_PER_LEVEL + (BUDGET_INCREASE_PER_LEVEL * m_currentLevel) + (BUDGET_INCREASE_PER_GENERATION * (SpawnGeneration-1));
 		}		
 		
 		m_spawnTimeout -= Time.deltaTime;

@@ -70,6 +70,7 @@ public class StateGameOver : GameState {
 		{
 			ResultLabels[i].text = statistic[i].ToString();
 		}
+		EnemiesManager.Instance.Reset();
 				
 		MonstersPanel.gameObject.SetActive(true);
 		

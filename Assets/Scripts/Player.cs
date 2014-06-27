@@ -336,7 +336,7 @@ public class Player : Actor {
 
 	void FixedUpdate()
 	{
-		if (Mathf.Approximately (Time.timeScale, 0.0f)) {
+		if (Mathf.Approximately (Time.timeScale, 0.0f) || m_isDying || m_HP <= 0) {
 			return;
 		}
 		
@@ -453,7 +453,7 @@ public class Player : Actor {
 			{
 				gestureId = GESTURE_TAP;
 			}
-			else if( distY > distX && gestureDelta.y <= 0 )
+			else if( distY > distX && gestureDelta.y <= Global.GESTURE_DISTANCE_THRESHOLD )
 			{
 				gestureId = GESTURE_SWIPE_DOWN;
 			}

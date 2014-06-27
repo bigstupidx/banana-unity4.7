@@ -49,6 +49,7 @@ public class ShopController : MonoBehaviour {
 	
 	public Item[] Items;
 	
+	public string ErrorMessage = "";
 	public bool GotError = false;
 	public bool HasInfo = false;		
 	private bool m_isRequesting = false;

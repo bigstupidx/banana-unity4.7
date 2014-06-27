@@ -64,7 +64,7 @@ public class StateInGameMenu : GameState {
 			if( m_dyingTimeOut <= 0.0f )
 			{
 				Blizzard.Instance.Reset();
-				Apocalypse.Instance.Reset();
+				Apocalypse.Instance.Reset();												
 				StateManager.Instance.PushState(StateManager.Instance.GameOver);
 			}
 			return;

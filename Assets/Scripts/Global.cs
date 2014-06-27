@@ -5,7 +5,7 @@ public class Global {
 	public static int UI_LAYER_MASK = 1 << LayerMask.NameToLayer( "UI" );
 
 	public const float GESTURE_TIME = 0.25f;
-	public const float GESTURE_DISTANCE_THRESHOLD = 6;
+	public const float GESTURE_DISTANCE_THRESHOLD = 4;
 	public const float GESTURE_DRAG_THRESHOLD = 200;
 
 	public const float PLAYER_WALK_SPEED = 4;

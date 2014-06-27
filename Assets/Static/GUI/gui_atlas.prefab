@@ -68,7 +68,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: blue_bar
-    x: 695
+    x: 1046
     y: 1387
     width: 256
     height: 40
@@ -94,7 +94,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_back
-    x: 1053
+    x: 1289
     y: 1470
     width: 117
     height: 116
@@ -108,7 +108,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: button_back_hover
     x: 463
-    y: 296
+    y: 294
     width: 116
     height: 116
     borderLeft: 0
@@ -120,7 +120,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_back_on
-    x: 1525
+    x: 1643
     y: 1470
     width: 117
     height: 116
@@ -133,8 +133,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_facebook
-    x: 0
-    y: 19
+    x: 118
+    y: 137
     width: 117
     height: 117
     borderLeft: 0
@@ -147,7 +147,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: button_facebook_hover
     x: 463
-    y: 1116
+    y: 998
     width: 116
     height: 117
     borderLeft: 0
@@ -159,8 +159,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_facebook_on
-    x: 236
-    y: 137
+    x: 463
+    y: 880
     width: 116
     height: 117
     borderLeft: 0
@@ -172,8 +172,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_help
-    x: 0
-    y: 137
+    x: 118
+    y: 19
     width: 117
     height: 117
     borderLeft: 0
@@ -185,8 +185,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_help_hover
-    x: 463
-    y: 1234
+    x: 236
+    y: 19
     width: 116
     height: 117
     borderLeft: 0
@@ -198,6 +198,19 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_help_on
+    x: 236
+    y: 137
+    width: 117
+    height: 117
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: button_info
     x: 234
     y: 537
     width: 117
@@ -210,9 +223,35 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: button_info_hover
+    x: 463
+    y: 1116
+    width: 116
+    height: 117
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: button_info_on
+    x: 463
+    y: 1234
+    width: 116
+    height: 117
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: button_invite
-    x: 236
-    y: 20
+    x: 463
+    y: 1470
     width: 117
     height: 116
     borderLeft: 0
@@ -225,7 +264,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: button_invite_hover
     x: 463
-    y: 413
+    y: 528
     width: 116
     height: 116
     borderLeft: 0
@@ -238,7 +277,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: button_invite_on
     x: 463
-    y: 647
+    y: 645
     width: 116
     height: 116
     borderLeft: 0
@@ -250,32 +289,6 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_leaderboard
-    x: 463
-    y: 1470
-    width: 117
-    height: 116
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: button_leaderboard_hover
-    x: 463
-    y: 881
-    width: 116
-    height: 116
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: button_leaderboard_on
     x: 581
     y: 1470
     width: 117
@@ -288,7 +301,20 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: button_menu
+  - name: button_leaderboard_hover
+    x: 1878
+    y: 1470
+    width: 116
+    height: 116
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: button_leaderboard_on
     x: 699
     y: 1470
     width: 117
@@ -301,8 +327,21 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: button_menu
+    x: 817
+    y: 1470
+    width: 117
+    height: 116
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: button_menu_hover
-    x: 1877
+    x: 1761
     y: 1470
     width: 116
     height: 116
@@ -315,7 +354,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_menu_on
-    x: 1407
+    x: 935
     y: 1470
     width: 117
     height: 116
@@ -341,8 +380,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_play
-    x: 1760
-    y: 1470
+    x: 814
+    y: 1353
     width: 116
     height: 116
     borderLeft: 0
@@ -354,7 +393,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_play_hover
-    x: 817
+    x: 1053
     y: 1470
     width: 117
     height: 116
@@ -367,8 +406,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_play_on
-    x: 1643
-    y: 1470
+    x: 697
+    y: 1353
     width: 116
     height: 116
     borderLeft: 0
@@ -380,7 +419,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_share
-    x: 935
+    x: 1171
     y: 1470
     width: 117
     height: 116
@@ -393,8 +432,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_share_hover
-    x: 463
-    y: 179
+    x: 580
+    y: 1353
     width: 116
     height: 116
     borderLeft: 0
@@ -407,7 +446,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: button_share_on
     x: 463
-    y: 62
+    y: 411
     width: 116
     height: 116
     borderLeft: 0
@@ -419,7 +458,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_shop
-    x: 1171
+    x: 1407
     y: 1470
     width: 117
     height: 116
@@ -433,7 +472,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: button_shop_hover
     x: 463
-    y: 764
+    y: 177
     width: 116
     height: 116
     borderLeft: 0
@@ -446,7 +485,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: button_shop_on
     x: 463
-    y: 530
+    y: 60
     width: 116
     height: 116
     borderLeft: 0
@@ -484,7 +523,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: FB-f-Logo__blue_114
-    x: 580
+    x: 931
     y: 1355
     width: 114
     height: 114
@@ -549,7 +588,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: health_bar_on
-    x: 695
+    x: 1046
     y: 1428
     width: 257
     height: 41
@@ -575,7 +614,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: pause
-    x: 118
+    x: 0
     y: 137
     width: 117
     height: 117
@@ -589,7 +628,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: pause_hover
     x: 463
-    y: 998
+    y: 762
     width: 116
     height: 117
     borderLeft: 0
@@ -601,7 +640,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: pause_on
-    x: 1289
+    x: 1525
     y: 1470
     width: 117
     height: 116
@@ -640,7 +679,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: smallbutton_on
-    x: 118
+    x: 0
     y: 19
     width: 117
     height: 117
@@ -667,7 +706,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: sound
     x: 0
-    y: 1121
+    y: 888
     width: 232
     height: 232
     borderLeft: 0
@@ -680,7 +719,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: sound_hover
     x: 0
-    y: 888
+    y: 1121
     width: 232
     height: 232
     borderLeft: 0

@@ -14,6 +14,8 @@ public class BuildPlatform
 	
 	[MenuItem("Tools/Build StandAlone")]
 	private static void BuildStandAlone()  {
+		EditorUtilities.GenerateVersion();
+		
 		UseBuildDLLs();
 		
 		//build the file 
@@ -25,6 +27,8 @@ public class BuildPlatform
 
 	[MenuItem("Tools/Build Android")]
 	private static void BuildAndroid()  {
+		EditorUtilities.GenerateVersion();
+	
 		UseBuildDLLs();
 		
 		//build the file 

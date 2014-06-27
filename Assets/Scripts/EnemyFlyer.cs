@@ -19,7 +19,7 @@ public class EnemyFlyer : Actor {
 	
 	void Start()	
 	{
-		m_HP = MaxHP + (((EnemiesManager.Instance.SpawnGeneration - 1) * MaxHP) / 3);
+		m_HP = MaxHP + ((EnemiesManager.Instance.SpawnGeneration - 1) * MaxHP);
 		
 		EnemiesManager.Instance.AddEnemy (this);
 		m_attackDecideTimeout = Random.Range(MinTimeBeforeCharge, MaxTimeBeforeCharge);

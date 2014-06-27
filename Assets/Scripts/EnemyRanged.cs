@@ -22,7 +22,7 @@ public class EnemyRanged : Actor {
 	
 	void Start()	
 	{
-		m_HP = MaxHP + (((EnemiesManager.Instance.SpawnGeneration - 1) * MaxHP) / 2);
+		m_HP = MaxHP + ((EnemiesManager.Instance.SpawnGeneration - 1) * MaxHP);
 		
 		EnemiesManager.Instance.AddEnemy (this);
 		
