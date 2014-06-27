@@ -234,7 +234,7 @@ public class FacebookController : MonoBehaviour {
 		{
 			work.state = EWorkingState.ONGOING;
 			
-			FB.Login("publish_actions", (result) => 
+			FB.Login("", (result) => 
 			{
 				if( FB.IsLoggedIn )
 				{
