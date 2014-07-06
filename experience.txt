@@ -6,3 +6,43 @@ run keytool -printcert -file CERT.RSA
 notice SHA1 bytes are printed like 29:37:F1:CB:06…
 copy SHA1 bytes into HEX to BASE64 converter
 see your BASE64 key hash in output field
+
+2. Generate Android key
+=======================
+keytool -genkey -v -keystore my-release-key.keystore -alias alias_name -keyalg RSA -keysize 2048 -validity 10000
+
+
+3. iOS development log
+======================
+1. Register Apple Developer ID for iOS development. ($99/year)
+
+2. Add the Apple ID to Xcode:
+a. Choose Xcode > Preferences.
+b. Click Accounts at the top of the window.
+c. Click the Add button (+) in the lower-left corner.
+d. Choose Add Apple ID from the pop-up menu.
+
+3. Use a device for development
+a. Connect the device, make sure to ÒTrustÓ
+b. Choose Xcode > Windows > Organizer > Devices
+c. Select the device
+d. Click Use for Development, request the certificate (make sure to select the right account).
+e. Go to Member page of Apple Account, download a Provisioning Profiles.
+f. Drag the downloaded profile to the device in the Organizer window.
+
+4. Error with Facebook unity SDK on Mac:
+a. The error is just that the source code file of Facebook SDK is not found.
+b. Simple copy the source file to where Xcode error indicates.
+c. This is simply a bug, just hack to overcome it.
+
+5. Generate Distribution certificate
+a. Create a new App ID on Member Center.
+b. Manually generate the provisioning profile for distribution.
+
+6. Facebook Setup
+It is very simple, just add the iOS app to the Facebook App Settings page and fill in correct bundle id.
+
+7. iTunes Connect
+a. Go to itunesconnect.apple.com and create new app.
+b. Setup IAP there.
+c. Setup contracts, tax and banking information.

@@ -27,7 +27,7 @@ public class Global {
 	public const float DYING_Z = -20;
 	public const float PATROL_Z = -350;
 	public const float CLIMB_Z = -300;
-	public const float ON_WALL_Z = 0;	
+	public const float ON_WALL_Z = 0;
 
 	public static void Init()
 	{

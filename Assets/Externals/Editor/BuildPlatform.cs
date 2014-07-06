@@ -45,6 +45,19 @@ public class BuildPlatform
 		
 		RestoreWorkDLLs();
 	}	
+
+	[MenuItem("Tools/Build iOS")]
+	private static void BuildIOS()  {
+		EditorUtilities.GenerateVersion();
+		
+		UseBuildDLLs();
+		
+		//build the file 
+		EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTarget.iPhone);
+		BuildPipeline.BuildPlayer(m_Scenes, Application.dataPath + "/../Builds/iOS", BuildTarget.iPhone, BuildOptions.None);
+		
+		RestoreWorkDLLs();
+	}	
 	
 	private static void UseBuildDLLs()
 	{
