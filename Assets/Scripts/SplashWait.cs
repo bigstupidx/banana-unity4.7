@@ -3,7 +3,12 @@ using System.Collections;
 
 public class SplashWait : MonoBehaviour {
 
-	private float m_timeout = 1.0f;
+	private float m_timeout = 3.0f;
+
+	void Start()
+	{
+		AdsController.RequestInterstitial();
+	}
 
 	// Update is called once per frame
 	void Update () {

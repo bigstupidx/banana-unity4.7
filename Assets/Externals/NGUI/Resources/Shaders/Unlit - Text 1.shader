@@ -32,8 +32,8 @@ Shader "HIDDEN/Unlit/Text 1"
 			#include "UnityCG.cginc"
 
 			sampler2D _MainTex;
-			float4 _ClipRange0 = float4(0.0, 0.0, 1.0, 1.0);
-			float2 _ClipArgs0 = float2(1000.0, 1000.0);
+			float4 _ClipRange0;
+			float2 _ClipArgs0;
 
 			struct appdata_t
 			{

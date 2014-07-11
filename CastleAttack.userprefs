@@ -1,8 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\LeaderboardController.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\AdsController.cs">
     <Files>
-      <File FileName="Assets\Scripts\LeaderboardController.cs" Line="132" Column="206" />
+      <File FileName="Assets\Scripts\AdsController.cs" Line="86" Column="5" />
+      <File FileName="Assets\GoogleMobileAds\Api\InterstitialAd.cs" Line="40" Column="36" />
+      <File FileName="Assets\Externals\NGUI\Resources\Shaders\Unlit - Text 1.shader" Line="85" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

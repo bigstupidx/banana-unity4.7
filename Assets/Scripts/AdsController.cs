@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using GoogleMobileAds.Api;
 
 public class AdsController : MonoBehaviour {
 
@@ -15,28 +16,54 @@ public class AdsController : MonoBehaviour {
 	private int m_dyingTimes = 0;	
 	private bool m_willQuit = false;
 	
+	private static InterstitialAd interstitial;
+	
 	void Awake()	
 	{
-		g_instance = this;
+		g_instance = this;		
+	}
+	
+	public static void RequestInterstitial()
+	{
+		// Initialize an InterstitialAd.
+		interstitial = new InterstitialAd("ca-app-pub-9930885820523333/5093352206");
+		// Create an empty ad request.
+		AdRequest request = new AdRequest.Builder().Build();				
+		// Load the interstitial with the request.
+		interstitial.LoadAd(request);
 	}
 
 	// Use this for initialization
-	void Start () {
-		VservPlugin vservPlugin = new VservPlugin();
-		vservPlugin.SetShowAt("start");
-		vservPlugin.DisplayAd("c5c58ba3");
-		
+	void Start () {		
 		m_dyingTimes = 0;
 		m_willQuit = false;
+		
+		if( interstitial != null && interstitial.IsLoaded() )
+		{
+			interstitial.Show();
+					
+			// Initialize an InterstitialAd.
+			interstitial = new InterstitialAd("ca-app-pub-9930885820523333/5093352206");
+			
+			// Create an empty ad request.
+			AdRequest request = new AdRequest.Builder().Build();				
+			
+			// Load the interstitial with the request.
+			interstitial.LoadAd(request);
+		}
 	}
 	
 	public void OnQuit()
 	{
-		m_willQuit = true;
-		
-		VservPlugin vservPlugin = new VservPlugin();
-		vservPlugin.SetShowAt("end");
-		vservPlugin.DisplayAd("c5c58ba3");
+		if( interstitial.IsLoaded() )
+		{
+			m_willQuit = true;
+			interstitial.Show();
+		}
+		else
+		{
+			Application.Quit();
+		}
 	}
 	
 	public void OnDying()
@@ -50,16 +77,25 @@ public class AdsController : MonoBehaviour {
 		{	
 			m_dyingTimes = 0;
 			
-			VservPlugin vservPlugin = new VservPlugin();
-			vservPlugin.SetShowAt("in");
-			vservPlugin.DisplayAd("c5c58ba3");
+			if( interstitial.IsLoaded() )
+			{
+				interstitial.Show();
+				
+				// Initialize an InterstitialAd.
+				interstitial = new InterstitialAd("ca-app-pub-9930885820523333/5093352206");
+				
+				// Create an empty ad request.
+				AdRequest request = new AdRequest.Builder().Build();				
+				
+				// Load the interstitial with the request.
+				interstitial.LoadAd(request);
+			}
 		}
 	}
 	
 	void OnApplicationQuit()
 	{
-		VservPlugin vservPlugin = new VservPlugin();
-		vservPlugin.DestroyApp();
+		
 	}
 	
 	void OnApplicationPause()
