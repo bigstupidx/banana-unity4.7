@@ -45,9 +45,9 @@
                 return o;
             }
  
-            half4 frag (v2f IN) : COLOR
+            fixed4 frag (v2f IN) : COLOR
             {
-                return half(0.0);
+                return fixed4(0.0, 0.0, 0.0, 1.0);
             }
  
             ENDCG

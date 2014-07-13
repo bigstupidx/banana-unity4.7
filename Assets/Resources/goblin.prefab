@@ -148,14 +148,14 @@ MonoBehaviour:
   AttackRange: 0
   AttackTriggerTime: .400000006
   MaxHP:
-    m_gut: bAD+APkXEiE=
+    m_gut: bJb77ELyEgA=
   AttackStrength:
-    m_gut: btjNsc0RGOQStQ==
+    m_gut: be5ky3QSBA==
   MinTimeBeforeCharge: 10
   MaxTimeBeforeCharge: 20
   HitEffect: 3
   Value:
-    m_gut: b2GszgJfOhJV
+    m_gut: YaX3EBU4Kvj0Eng=
   SlashingSounds:
   - {fileID: 8300000, guid: 336fede6d01b7ff4bb55215fee8ad132, type: 3}
   - {fileID: 8300000, guid: 08c584b248d07b941bd5af34c438b7ea, type: 3}
