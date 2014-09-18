@@ -488,12 +488,8 @@ public class Player : Actor {
 		if( Input.GetKey(KeyCode.K) )
 		{
 			Player.Instance.TakeHit(1000);
-		}
-		if( Input.GetKeyUp(KeyCode.Q) )
-		{
-			Application.CaptureScreenshot("screenshot_" + (int)(Time.time*1000) + ".png");
-		}
-
+		}		
+		
 #endif
 		if( m_keyDelta > 0.0f )
 		{
